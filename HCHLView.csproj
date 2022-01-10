@@ -80,6 +80,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\AccesoBDViewModel.cs" />
+    <Compile Include="Views\AccesoBD.xaml.cs">
+      <DependentUpon>AccesoBD.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,6 +96,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AccesoBD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -121,9 +129,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="Data\Data.csproj">
       <Project>{a11893be-3f49-4da0-b32b-8b9725621491}</Project>
       <Name>Data</Name>
@@ -131,6 +136,10 @@
     <ProjectReference Include="Model\Model.csproj">
       <Project>{abc579db-04f1-4bb2-9e13-584f5f75172c}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="Servicio\Servicio.csproj">
+      <Project>{fa55d85e-5a78-4955-a9f6-01d5bc39ee42}</Project>
+      <Name>Servicio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

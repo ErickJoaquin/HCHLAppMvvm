@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ABC579DB-04F1-4BB2-9E13-584F5F75172C}</ProjectGuid>
+    <ProjectGuid>{1A7238A0-8BAB-4C33-91CC-B4593DE5889D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Model</RootNamespace>
-    <AssemblyName>Model</AssemblyName>
+    <RootNamespace>ViewModel</RootNamespace>
+    <AssemblyName>ViewModel</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.2.0.78\lib\net461\Dapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Dapper.Contrib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Dapper.Contrib.2.0.78\lib\net461\Dapper.Contrib.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
@@ -76,47 +70,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainModel\BaseInstalada.cs" />
-    <Compile Include="DomainModel\BU.cs" />
-    <Compile Include="DomainModel\Carpeta.cs" />
-    <Compile Include="DomainModel\Cliente.cs" />
-    <Compile Include="DomainModel\EquiposCRM.cs" />
-    <Compile Include="DomainModel\Item.cs" />
-    <Compile Include="DomainModel\Marca.cs" />
-    <Compile Include="DomainModel\Mercado.cs" />
-    <Compile Include="DomainModel\MercadoProceso.cs" />
-    <Compile Include="DomainModel\OC.cs" />
-    <Compile Include="DomainModel\OfertaBaseInstalada.cs" />
-    <Compile Include="DomainModel\Oferta\Oferta.cs" />
-    <Compile Include="DomainModel\Oferta\OfertaClientes.cs" />
-    <Compile Include="DomainModel\Oferta\OfertaMonedas.cs" />
-    <Compile Include="DomainModel\Oferta\OfertaValores.cs" />
-    <Compile Include="DomainModel\Pago.cs" />
-    <Compile Include="DomainModel\Pais.cs" />
-    <Compile Include="DomainModel\Persona.cs" />
-    <Compile Include="DomainModel\Proceso.cs" />
-    <Compile Include="DomainModel\Repuesto.cs" />
-    <Compile Include="DomainModel\Servicio\Servicio.cs" />
-    <Compile Include="DomainModel\Servicio\ServicioCantidades.cs" />
-    <Compile Include="DomainModel\Servicio\ServicioCostos.cs" />
-    <Compile Include="DomainModel\Servicio\ServicioOtros.cs" />
-    <Compile Include="DomainModel\Venta.cs" />
-    <Compile Include="Enumeraciones\BUEnum.cs" />
-    <Compile Include="Enumeraciones\CarpetasEnum.cs" />
-    <Compile Include="Enumeraciones\MonedasEnum.cs" />
-    <Compile Include="Enumeraciones\TipoClienteEnum.cs" />
-    <Compile Include="Enumeraciones\TipoContactoEnum.cs" />
-    <Compile Include="Enumeraciones\TipoEntregaEnum.cs" />
-    <Compile Include="Enumeraciones\TipoItemEnum.cs" />
-    <Compile Include="Enumeraciones\TipoOfertaEnum.cs" />
-    <Compile Include="Enumeraciones\VendorEUEnum.cs" />
+    <Compile Include="AccesoBDViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReadModel\EquiposLinkeadosCRM.cs" />
-    <Compile Include="ReadModel\TablasBD.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{a11893be-3f49-4da0-b32b-8b9725621491}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{abc579db-04f1-4bb2-9e13-584f5f75172c}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Servicio\Servicio.csproj">
+      <Project>{fa55d85e-5a78-4955-a9f6-01d5bc39ee42}</Project>
+      <Name>Servicio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

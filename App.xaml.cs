@@ -1,8 +1,7 @@
 ﻿using System.Windows;
 using Prism.Ioc;
 using Prism.Unity;
-using Data;
-using Model;
+using HCHLView.Views;
 
 namespace HCHLView
 {
@@ -13,7 +12,7 @@ namespace HCHLView
     {
         protected override Window CreateShell()
         {
-            var w = Container.Resolve<MainWindow>();
+            var w = Container.Resolve<AccesoBD>();
             return w;
         }
 

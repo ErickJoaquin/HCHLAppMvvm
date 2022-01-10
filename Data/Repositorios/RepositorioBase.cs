@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class RepositorioBase<T> where T : class, IRepositorioBase<T>, new()
+    public class RepositorioBase<T> where T : class, new()
     {
         private readonly string RutaBBDD = @"Server=LCLSCLW10X0059\SQLEXPRESS; Database=BDHCHLApp; Integrated Security=True;";
         protected Type _typeOfProperty = typeof(T);
