@@ -2,6 +2,9 @@
 using Prism.Ioc;
 using Prism.Unity;
 using HCHLView.Views;
+using Data;
+using Model;
+using HCHLView.Views.CalculoNomina;
 
 namespace HCHLView
 {
@@ -18,7 +21,8 @@ namespace HCHLView
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //containerRegistry.Register<IRepositorioBase<Usuario>>(provider => new RepositorioBase<Usuario>("connectionString"));
+            containerRegistry.Register<RepositorioTablasBD>();
+            containerRegistry.Register<IRepositorioBase<Usuario>, RepositorioBase<Usuario>>();
         }
 
     }

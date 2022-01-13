@@ -1,9 +1,9 @@
-﻿<Window x:Class="HCHLView.Views.AccesoBD"
+﻿<Window x:Class="HCHLView.Views.CalculoNomina.AccesoBD"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
-        xmlns:local="clr-namespace:HCHLView.Views"
+        xmlns:local="clr-namespace:HCHLView.Views.CalculoNomina"
         xmlns:viewmodels="clr-namespace:HCHLView.ViewModels"
         mc:Ignorable="d"
         Title="Acceso Base de Datos" Height="450" Width="800" Background="#FF00648B" Foreground="White" WindowStartupLocation="CenterScreen">

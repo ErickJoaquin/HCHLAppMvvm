@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public interface IRepositorioBase<T> where T : class
+    public interface IRepositorioBase<T> where T : class, new()
     {
         Task<T> GetByIdAsync(int id);
         Task<List<T>> GetMultiIdAsync(List<int> list);

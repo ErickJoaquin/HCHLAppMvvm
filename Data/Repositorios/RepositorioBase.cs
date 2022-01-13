@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class RepositorioBase<T> where T : class, new()
+    public class RepositorioBase<T> : IRepositorioBase<T> where T : class, new()
     {
         private readonly string RutaBBDD = @"Server=LCLSCLW10X0059\SQLEXPRESS; Database=BDHCHLApp; Integrated Security=True;";
         protected Type _typeOfProperty = typeof(T);
@@ -45,14 +45,16 @@ namespace Data
 
         public async Task<List<T>> GetAllAsync()
         {
-            using (var connection = new SqlConnection(RutaBBDD))
-            {
-                connection.Open();
+            return await Task.Run(() => new List<T> { new T() });
 
-                IEnumerable<T> value = await connection.QueryAsync<T>($"SELECT * FROM {_typeOfProperty.Name}");
+            //using (var connection = new SqlConnection(RutaBBDD))
+            //{
+            //    connection.Open();
 
-                return (List<T>)value;
-            }
+            //    IEnumerable<T> value = await connection.QueryAsync<T>($"SELECT * FROM {_typeOfProperty.Name}");
+
+            //    return (List<T>)value;
+            //}
         }
 
         public async Task<int> AddAsync(T modelToInsert)

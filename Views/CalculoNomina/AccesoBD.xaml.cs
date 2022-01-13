@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HCHLView.Views
+namespace HCHLView.Views.CalculoNomina
 {
     /// <summary>
     /// Lógica de interacción para AccesoBD.xaml
