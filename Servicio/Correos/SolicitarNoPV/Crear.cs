@@ -2,10 +2,9 @@
 using System.Linq;
 using Servicios.Utilidades;
 using Model;
-using Data;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Servicios.Hedge.Utilidades;
-
+using Data.Interfaces;
 
 namespace Servicios.Correos.SolicitarNoPV
 {
@@ -15,12 +14,24 @@ namespace Servicios.Correos.SolicitarNoPV
         private readonly InformacionCliente _infoCliente;
         private readonly IRepositorioBase<Usuario> _repUser;
 
+        public List<int> _users;
+        public object selectedObject;
+        public Outlook.MailItem mailSelected;
+        public Outlook.MailItem mailReply;
+        public Microsoft.Office.Interop.Outlook.Application app;
+
         public Crear(Aplica hedge, InformacionCliente infoCliente, IRepositorioBase<Usuario> repUser)
         {
             this._hedge = hedge;
             this._infoCliente = infoCliente;
             this._repUser = repUser;
-        }
+
+            _users = new List<int>();
+            selectedObject = new object();
+            mailSelected = new Outlook.MailItem();
+            mailReply = new Outlook.MailItem();
+            app = new Microsoft.Office.Interop.Outlook.Application();
+    }
 
         public void Nuevo(Oferta Oferta, Pago Pago, OfertaClientes ofertaClientes, OfertaValores ofValores, OfertaMonedas Moneda, OC OC, Mercado Mercado)
         {
@@ -37,13 +48,9 @@ namespace Servicios.Correos.SolicitarNoPV
             body += "Saludos a todos, ";
             body += "</ FONT ></ BODY ></ HTML >";
 
-            List<int> _users = new List<int>() { Mercado.IdKAM, Mercado.IdKA};
+            int[] intTraer = { Mercado.IdKAM, Mercado.IdKA};
+            _users.AddRange(intTraer);
             List<Usuario> ListaUsuarios = _repUser.GetMultiIdAsync(_users).Result;
-
-            object selectedObject = null;
-            Outlook.MailItem mailSelected = null;
-            Outlook.MailItem mailReply = null;
-            Microsoft.Office.Interop.Outlook.Application app = new Microsoft.Office.Interop.Outlook.Application();
 
             selectedObject = app.ActiveExplorer().Selection[1];
             mailSelected = selectedObject as Outlook.MailItem;
@@ -57,8 +64,6 @@ namespace Servicios.Correos.SolicitarNoPV
             if (Oferta.IdBU == (int)BUEnum.HSA) { return; }
             else if (Oferta.IdBU == (int)BUEnum.HCHL) { mailReply.Subject = $"Solicitud de CA para OC {OC.Nombre} - Oferta {Oferta.NCRM}-R{Oferta.Rev}"; }
             else if (Oferta.IdBU == (int)BUEnum.HPU) { mailReply.Subject = $"Solicitud de PA para OC {OC.Nombre} - Oferta {Oferta.NCRM}-R{Oferta.Rev}"; }
-
-            //mail.Attachments.Add(@"c:\sales reports\fy06q4.xlsx", Outlook.OlAttachmentType.olByValue, Type.Missing, Type.Missing); //Ver Drag&Drop option
 
             mailReply.HTMLBody = body + mailReply.HTMLBody + mailSelected.HTMLBody;
 

@@ -1,5 +1,6 @@
 ﻿using Dapper.Contrib.Extensions;
 using System;
+using Model;
 
 namespace Model
 {
@@ -22,10 +23,10 @@ namespace Model
         public string IdTributario { get; set; }
         public string Documento { get; set; }
         public double ValorDocumento { get; set; }
-        public string IdMonedaDocumento { get; set; }
+        public int IdMonedaDocumento { get; set; }
         [Computed]
         public string DocumentoInfo { get { 
-                return String.IsNullOrEmpty(Documento) ? "N/A" : $"{Documento}, {IdMonedaDocumento} {ValorDocumento}"; 
+                return String.IsNullOrEmpty(Documento) ? "N/A" : $"{Documento}, {(MonedasEnum)IdMonedaDocumento} {ValorDocumento}"; 
             } }
     }
 }

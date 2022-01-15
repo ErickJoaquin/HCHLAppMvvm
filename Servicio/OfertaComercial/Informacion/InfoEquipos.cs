@@ -22,12 +22,12 @@ namespace Servicios.OfertaComercial.Informacion
         {
             List<BaseInstalada> EquiposLinkeados = _repEq.GetByOfferIdAsync(Oferta.Id).Result;
 
-            string cambio = crearString(EquiposLinkeados);
+            string cambio = CrearString(EquiposLinkeados);
 
             _reemplazar.TextoGeneral("Equipos", cambio, docof);
         }
 
-        public static string crearString(List<BaseInstalada> EquiposLinkeados)
+        private string CrearString(List<BaseInstalada> EquiposLinkeados)
         {
             string value = "";
             if (EquiposLinkeados.Count() <= 0)

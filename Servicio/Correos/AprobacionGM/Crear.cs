@@ -6,6 +6,7 @@ using Data;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Servicios.Utilidades;
 using Utilidades.Correos.AprobacionGM.Utilidades;
+using Data.Interfaces;
 
 namespace Utilidades.Correos.AprobacionGM
 {
@@ -15,11 +16,19 @@ namespace Utilidades.Correos.AprobacionGM
         private readonly InformacionCliente _infoCliente;
         private readonly IRepositorioBase<Usuario> _repUser;
 
+        public Outlook.Application app { get; set; }
+        Outlook.MailItem mailReply { get; set; }
+        public List<int> VendedoresAObtener { get; set; }
+
         public Crear(Cuerpo cuerpo, InformacionCliente infoCliente, IRepositorioBase<Usuario> repUser)
         {
             this._cuerpo = cuerpo;
             this._infoCliente = infoCliente;
             this._repUser = repUser;
+
+            app = new Outlook.Application();
+            mailReply = new Outlook.MailItem();
+            VendedoresAObtener = new List<int>();
         }
 
         public void Nuevo(Oferta Oferta, OfertaClientes ofClientes, OfertaValores ofValores, Mercado Mercado, double Comisiones, bool Consolidando, OC OC = null)
@@ -28,22 +37,16 @@ namespace Utilidades.Correos.AprobacionGM
 
             string body = _cuerpo.Agregar(Oferta, ofClientes, ofValores, Cliente, Comisiones, Consolidando, OC);
 
-            string mailkam = "";
-            string mailka = "";
+            VendedoresAObtener.Add(Mercado.IdKAM);
+            VendedoresAObtener.Add(Mercado.IdKA);
+            List<Usuario> vendedoresOferta = _repUser.GetMultiIdAsync(VendedoresAObtener).Result;
 
-            List<int> vendedoresAObtener = new List<int>(){ Mercado.IdKAM, Mercado.IdKA };
-            List<Usuario> vendedoresOferta = _repUser.GetMultiIdAsync(vendedoresAObtener).Result;
-            
-            mailkam = vendedoresOferta.ElementAt(0).Mail;
+            string mailkam = vendedoresOferta.ElementAt(0).Mail;
+            string mailka = "";
             if (vendedoresOferta.Count > 1) { mailka = vendedoresOferta.ElementAt(1).Mail; }
 
-            object selectedObject = null;
-            Outlook.MailItem mailSelected = null;
-            Outlook.MailItem mailReply = null;
-            Outlook.Application app = new Outlook.Application();
-
-            selectedObject = app.ActiveExplorer().Selection[1];
-            mailSelected = selectedObject as Outlook.MailItem;
+            object selectedObject = app.ActiveExplorer().Selection[1];
+            Outlook.MailItem mailSelected = selectedObject as Outlook.MailItem;
             if (mailSelected == null) { mailReply = app.CreateItem(Outlook.OlItemType.olMailItem); }
             else { mailReply = mailSelected.Forward(); }
 

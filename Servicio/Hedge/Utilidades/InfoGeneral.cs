@@ -3,6 +3,7 @@ using Model;
 using Data;
 using Servicios.Utilidades;
 using Excel = Microsoft.Office.Interop.Excel;
+using Data.Interfaces;
 
 namespace Servicios.Hedge.Utilidades
 {
@@ -10,17 +11,22 @@ namespace Servicios.Hedge.Utilidades
     {
         private readonly InformacionCliente _infoCliente;
         private readonly IRepositorioBase<Usuario> _repUser;
+        public Usuario User;
+        public Cliente Cliente;
         public InfoGeneral(InformacionCliente infoCliente, IRepositorioBase<Usuario> repUser)
         {
             this._infoCliente = infoCliente;
             this._repUser = repUser;
+
+            Cliente = new Cliente();
+            User = new Usuario();
         }
 
         public void Agregar(Excel.Worksheet HojaHedge, Oferta Oferta, OfertaClientes ofClientes, OC OC, double monto, string curr)
         {
             var entrega = (TipoEntregaEnum)Oferta.IdTipoEntrega;
 
-            Cliente Cliente = _infoCliente.Obtener(ofClientes);
+            Cliente = _infoCliente.Obtener(ofClientes);
 
             if (Oferta.IdBU == (int)BUEnum.HCHL)
             {
@@ -66,7 +72,7 @@ namespace Servicios.Hedge.Utilidades
             HojaHedge.Range["H34"].Value = OC.FechaEmision;
             HojaHedge.Range["G45"].Value = curr;
 
-            Usuario User = _repUser.GetByIdAsync(Oferta.IdAplicador).Result;
+            User = _repUser.GetByIdAsync(Oferta.IdAplicador).Result;
 
             HojaHedge.Range["B58"].Value = $"{User.NombreCompleto} - {DateTime.Now.ToString("dd-MM-yyyy")}";
         }

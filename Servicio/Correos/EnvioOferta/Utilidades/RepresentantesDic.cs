@@ -10,12 +10,17 @@ using System.Windows.Forms;
 namespace Servicios.Correos.EnvioOferta.Utilidades
 {
     public class RepresentantesDic
-    {     
+    {
+        public Dictionary<string, string> DicRepresentantes;
+
+        public RepresentantesDic()
+        {
+            DicRepresentantes = new Dictionary<string, string>();
+        }
+
         public Dictionary<string, string> TraerInformacion(List<ContactoCliente> CctosRepresentantes)
         {
-            string representantemail = "";
-            string nombrerep = ""; string mailrep = ""; string telefonorep = ""; string celularrep = "";
-            Dictionary<string, string> DicRepresentantes = new Dictionary<string, string>();
+            string representantemail = ""; string nombrerep = ""; string mailrep = ""; string telefonorep = ""; string celularrep = "";
 
             for (int i = 0; i < CctosRepresentantes.Count(); i++)
             {

@@ -1,6 +1,6 @@
 ﻿using System;
 using Model;
-using Data;
+using Data.Interfaces;
 
 namespace Servicios.Utilidades
 {
@@ -8,16 +8,17 @@ namespace Servicios.Utilidades
     {
         private readonly IRepositorioBase<EndUser> _repEU;
         private readonly IRepositorioBase<Vendor> _repVendor;
+        public Cliente Cliente;
         public InformacionCliente(IRepositorioBase<EndUser> repEU, IRepositorioBase<Vendor> repVendor)
         {
             this._repEU = repEU;
             this._repVendor = repVendor;
+
+            Cliente = new Cliente();
         }
 
         public Cliente Obtener(OfertaClientes ofCliente)
         {
-            Cliente Cliente = new Cliente();
-
             if (String.IsNullOrEmpty(ofCliente.IdVendor.ToString()))
             {
                 Cliente = _repEU.GetByIdAsync(ofCliente.IdEndUser).Result;

@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Data.Interfaces;
 
 namespace Data
 {
-    public class RepositorioPorOferta<T> where T : class, new()
+    public class RepositorioPorOferta<T> : IRepositorioPorOferta<T> where T : class, new()
     {
         private readonly string RutaBBDD = @"Server=LCLSCLW10X0059\SQLEXPRESS; Database=BDHCHLApp; Integrated Security=True;";
         protected Type _typeOfProperty = typeof(T);

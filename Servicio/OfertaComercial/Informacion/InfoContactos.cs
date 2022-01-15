@@ -11,17 +11,22 @@ namespace Servicios.OfertaComercial.Informacion
     {
         private readonly ReemplazarEnWord _reemplazar;
         private readonly RepositorioPorOferta<Mercado> _repMer;
+        public List<Usuario> ListaVendedor;
+        public Usuario Edson;
+
         public InfoContactos(RepositorioPorOferta<Mercado> repMer, ReemplazarEnWord reemplazar)
         {
             this._repMer = repMer;
             this._reemplazar = reemplazar;
+
+            ListaVendedor = new List<Usuario>();
+            Edson = new Usuario();
         }
 
         public void Agregar(Oferta Oferta, List<Usuario> Usuarios, Word.Document docof)
         {;
             Mercado Mercado = _repMer.GetByOfferIdAsync(Oferta.Id).Result;
 
-            List<Usuario> ListaVendedor = new List<Usuario>();
             ListaVendedor.Add(Usuarios.Where(n => n.Id.Equals(Mercado.IdVendedor1)).FirstOrDefault());
             ListaVendedor.Add(Usuarios.Where(n => n.Id.Equals(Mercado.IdVendedor2)).FirstOrDefault());
             ListaVendedor.Add(Usuarios.Where(n => n.Id.Equals(Mercado.IdVendedor3)).FirstOrDefault());
@@ -40,7 +45,7 @@ namespace Servicios.OfertaComercial.Informacion
                 }
             }
 
-            Usuario Edson = ListaVendedor.Where(n => n.Apellidos.Equals("Geraldini")).ElementAt(0);
+            Edson = ListaVendedor.Where(n => n.Apellidos.Equals("Geraldini")).ElementAt(0);
             ajustarTabla(Edson, docof, uso);
         }
 

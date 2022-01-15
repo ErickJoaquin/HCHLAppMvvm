@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Model;
-using Data;
-using Outlook = Microsoft.Office.Interop.Outlook;
-using System.IO;
-using System.Windows.Forms;
 
 namespace Servicios.Correos.EnvioOferta.Utilidades
 {

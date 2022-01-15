@@ -21,6 +21,7 @@ namespace Servicios.Pricing
         private readonly RepositorioItem _repItem;
         private readonly Guardar _guardar;
         private readonly MoverRevisiones _moverRevs;
+        public Excel.Application ExcDoc;
 
         public Crear(InfoGeneral infoGral, InfoItems infoItems, InfoValores infoVals, InfoConsolidacion infoCons, RepositorioCarpetas repCarpetas, RepositorioItem repItem,
             Guardar guardar, MoverRevisiones moverRevs)
@@ -33,6 +34,8 @@ namespace Servicios.Pricing
             this._repItem = repItem;
             this._guardar = guardar;
             this._moverRevs = moverRevs;
+
+            ExcDoc = new Excel.Application();
         }
 
         public void NuevoDocumento(Oferta Oferta, OfertaClientes ofClientes, OfertaValores ofValores, Mercado Mercado, OfertaMonedas Monedas,
@@ -48,7 +51,6 @@ namespace Servicios.Pricing
 
                 string rutaprctemplate = _repCarpetas.GetPathAsync((int)BUEnum.HCHL, CarpetasEnum.templates.ToString()).Result;
 
-                Excel.Application ExcDoc = new Excel.Application();
                 Excel.Workbook Prcg = ExcDoc.Workbooks.Open(rutaprctemplate);
 
                 HojaCostos = Prcg.Worksheets["Costos"];

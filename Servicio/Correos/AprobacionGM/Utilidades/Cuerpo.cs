@@ -5,6 +5,7 @@ using Model;
 using Data;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using Servicios.Utilidades;
+using Data.Interfaces;
 
 namespace Utilidades.Correos.AprobacionGM.Utilidades
 {
@@ -14,7 +15,7 @@ namespace Utilidades.Correos.AprobacionGM.Utilidades
         private readonly IRepositorioBase<Pago> _repPago;
         private readonly IRepositorioBase<Vendor> _repVendor;
 
-        public Cuerpo(IRepositorioBase<BU> repBU, RepositorioBase<Pago> repPago, RepositorioBase<Vendor> repVendor)
+        public Cuerpo(IRepositorioBase<BU> repBU,IRepositorioBase<Pago> repPago, IRepositorioBase<Vendor> repVendor)
         {
             this._repBU = repBU;
             this._repPago = repPago;
@@ -34,11 +35,11 @@ namespace Utilidades.Correos.AprobacionGM.Utilidades
             string datosRepresentante = "";
             if (Representante != null)
             {
-                datosRepresentante = (Representante.Comision <= 0) ? "No aplica" : Representante.Nombre + "; comisión: " + Representante.Comision.ToString("P2");
+                datosRepresentante = (Representante.Comision <= 0) ? "No aplica" : $"{Representante.Nombre}; comisión: {Representante.Comision.ToString("P2")}";
             }
 
             string body = "<HTML><BODY><FONT face=Arial color=#1F497D size=2>Edson, muy buenos días <br/> <br/>";
-            body += "Por favor, aprobar pricing y GM de para " + Cliente.Nombre + " <br/> <br/>";
+            body += $"Por favor, aprobar pricing y GM de para {Cliente.Nombre} <br/> <br/>";
             body += "Detalles:" + " <br/>";
             body += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      - Tipo: <b> Repuestos - AFM </b> <br/>";
             body += $"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      - Comisiones: <b>{Comisiones.ToString("P2")} - Representante: {datosRepresentante} </b> <br/>";

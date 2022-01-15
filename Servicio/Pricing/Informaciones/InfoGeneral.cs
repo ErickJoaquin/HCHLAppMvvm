@@ -1,5 +1,6 @@
 ﻿using Model;
 using Model.ReadModel;
+using Data.Interfaces;
 using Data;
 using Excel = Microsoft.Office.Interop.Excel;
 using System;
@@ -19,6 +20,9 @@ namespace Servicios.Pricing.Informaciones
         private readonly RepositorioBase<Pago> _repPagos;
         private readonly RepositorioEquiposLinkeados _repBILinkes;
 
+        public EndUser EU;
+        public Vendor Representante;
+
         public InfoGeneral(IRepositorioBase<BU> repBU, IRepositorioBase<EndUser> repEU, IRepositorioBase<ContactoCliente> repCtos, RepositorioBase<Pago> repPagos,
             IRepositorioBase<Usuario> repUser, IRepositorioBase<Vendor> repRep, InformacionCliente infoCliente, RepositorioEquiposLinkeados repBILinkes)
         {
@@ -30,6 +34,9 @@ namespace Servicios.Pricing.Informaciones
             this._repRep = repRep;
             this._repBILinkes = repBILinkes;
             this._infoCliente = infoCliente;
+
+            EU = new EndUser();
+            Representante = new Vendor();
         }
 
         public void Agregar(Excel.Worksheet HojaPricing, Excel.Worksheet HojaPersonal, Oferta Oferta, OfertaClientes ofClientes, 
@@ -38,7 +45,6 @@ namespace Servicios.Pricing.Informaciones
             BU BU = _repBU.GetByIdAsync(Oferta.IdBU).Result;
             Cliente Cliente = _infoCliente.Obtener(ofClientes);
 
-            EndUser EU = new EndUser();
             if (Cliente.IdTipoCliente == (int)VendorEUEnum.EU) { EU = Cliente as EndUser; }
             else { EU = _repEU.GetByIdAsync(ofClientes.IdEndUser).Result; }
 
@@ -46,8 +52,7 @@ namespace Servicios.Pricing.Informaciones
             Pago Pago = _repPagos.GetByIdAsync(Oferta.IdTipoPago).Result;
             List<EquiposLinkeadosCRM> EquiposLinkeados = _repBILinkes.GetEquiposConInfoCRMByOfferIdAsync(Oferta.Id).Result;
             Usuario User = _repUser.GetByIdAsync(Oferta.IdAplicador).Result;
-
-            Vendor Representante = new Vendor();
+                        
             if (incluyeRep)
             {
                 Representante = _repRep.GetByIdAsync(ofClientes.IdRep1).Result;

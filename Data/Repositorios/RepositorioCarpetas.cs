@@ -6,10 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Model;
 using Dapper;
+using Data.Interfaces;
 
 namespace Data
 {
-    public class RepositorioCarpetas
+    public class RepositorioCarpetas : IRepositorioCarpetas
     {
         private readonly string RutaBBDD = @"Server=LCLSCLW10X0059\SQLEXPRESS; Database=BDHCHLApp; Integrated Security=True;";
 
@@ -32,7 +33,7 @@ namespace Data
             string sqlQuery = $"SELECT Ruta FROM Carpeta WHERE (IdBU = {list[0].Item1} AND Nombre LIKE '{list[0].Item2}') ";
             if (list.Count() > 1)
             {
-                for(int i = 1; i < list.Count(); i++)
+                for (int i = 1; i < list.Count(); i++)
                 {
                     sqlQuery += $" OR (IdBU = {list[i].Item1} AND Nombre LIKE '{list[i].Item2}') ";
                 }
@@ -51,7 +52,7 @@ namespace Data
                 }
 
                 return listaRutas;
-            }            
+            }
         }
     }
 }

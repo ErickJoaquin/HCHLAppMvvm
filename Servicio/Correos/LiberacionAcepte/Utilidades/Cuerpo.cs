@@ -20,7 +20,7 @@ namespace Servicios.Correos.LiberacionAcepte.Utilidades
 
             string body = "<HTML><BODY><FONT face=Arial color=#1F497D size=2><b>Samanta</b>,  <br/> Espero que estés bien <br/> <br/>";
             body += "Sigue: <br/>";
-            body += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✓ &nbsp;&nbsp;  Liberar Acepte del pedido <b>" + Oferta.NPV + "</b> <br/>"; //+ NPV +
+            body += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✓ &nbsp;&nbsp;  Liberar Acepte del pedido <b>" + Oferta.NPV + "</b> <br/>";
             body += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✓ &nbsp;&nbsp;  Pricing - Aprobado <br/>";
             body += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✓ &nbsp;&nbsp;  Propuesta consolidada en la carpeta de ventas <br/>";
             if (aplicaHedge) { body += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✓ &nbsp;&nbsp;  Hedge creado y guardado en la carpeta de Financiero <br/><br/><br/>"; }

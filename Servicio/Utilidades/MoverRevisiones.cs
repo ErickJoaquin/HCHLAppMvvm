@@ -8,6 +8,13 @@ namespace Servicios.Utilidades
 {
     public class MoverRevisiones
     {
+        public List<(int, string)> pastas;
+        public RepositorioCarpetas repPasta;
+        public MoverRevisiones()
+        {
+            pastas = new List<(int, string)>();
+            repPasta = new RepositorioCarpetas();
+        }
         public void TrasladarAntiguas(Oferta Oferta, bool moverOferta)
         {
             if (!(Oferta.Rev != 0 || !String.IsNullOrEmpty(Oferta.Rev.ToString())))
@@ -19,9 +26,8 @@ namespace Servicios.Utilidades
             {
                 if (i == Convert.ToInt64(Oferta.Rev)) { continue; };
 
-                List<(int, string)> pastas = new List<(int, string)>() 
-                { (Oferta.IdBU, "comercial"), (Oferta.IdBU, "comercialOferta"), (Oferta.IdBU, "comercialPricing") };
-                RepositorioCarpetas repPasta = new RepositorioCarpetas();
+                (int, string)[] pastasATraer =  { (Oferta.IdBU, "comercial"), (Oferta.IdBU, "comercialOferta"), (Oferta.IdBU, "comercialPricing") };
+                pastas.AddRange(pastasATraer);
                 List<string> rutaPastas = repPasta.GetPathsAsync(pastas).Result;
 
                 string rutaCarpeta = rutaPastas[0];

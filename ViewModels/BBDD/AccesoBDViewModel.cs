@@ -3,14 +3,13 @@ using Model;
 using Model.ReadModel;
 using Prism.Mvvm;
 using Prism.Regions;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace HCHLView.ViewModels
 {
-    class AccesoBDViewModel : BindableBase, INavigationAware
+    class AccesoBDViewModel : BindableBase, INavigationAware 
     {
         private TablasBD _seleccion;
         public TablasBD Seleccion
@@ -26,6 +25,20 @@ namespace HCHLView.ViewModels
                     _seleccion = value;
                     ListViewAMostrar(_seleccion.NombreEnBD);
                     LoadData(_seleccion.NombreEnBD);
+            }
+        }
+
+        private Usuario _objSeleccionado;
+        public Usuario ObjSeleccionado
+        {
+            get
+            {
+                return _objSeleccionado;
+            }
+            set
+            {
+                if (value != null)
+                    _objSeleccionado = value;
             }
         }
 

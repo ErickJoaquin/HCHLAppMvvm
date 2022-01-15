@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using Data.Interfaces;
 using Model.ReadModel;
 
 namespace Data
 {
-    public class RepositorioTablasBD
+    public class RepositorioTablasBD : IRepositorioTablasBD
     {
         public List<TablasBD> GetAll()
         {

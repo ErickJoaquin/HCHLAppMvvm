@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using Data;
+using Data.Interfaces;
 using Model;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -9,16 +9,18 @@ namespace Servicios.Pricing.Utilidades
 {
     public class Guardar
     {
-        private readonly RepositorioCarpetas _repPasta;
-        public Guardar(RepositorioCarpetas repPasta)
+        private readonly IRepositorioCarpetas _repPasta;
+        public List<(int, string)> carpetas;
+        public Guardar(IRepositorioCarpetas repPasta)
         {
             this._repPasta = repPasta;
+            carpetas = new List<(int, string)>();
         }
 
         public void ExcelPDF(Oferta Oferta, Excel.Workbook Prcg, bool Consolidando)
         {
-            List<(int, string)> carpetas = new List<(int, string)>()
-            { (Oferta.IdBU, CarpetasEnum.comercialPricing.ToString()), (Oferta.IdBU, CarpetasEnum.comercialPricing.ToString()) };
+            (int, string)[] intCarpetas = { (Oferta.IdBU, CarpetasEnum.comercialPricing.ToString()), (Oferta.IdBU, CarpetasEnum.comercialPricing.ToString()) };
+            carpetas.AddRange(intCarpetas);
             List<string> rutas = _repPasta.GetPathsAsync(carpetas).Result;
             string rutapricing = rutas[0];
             string rutapricingsr = rutas[1];

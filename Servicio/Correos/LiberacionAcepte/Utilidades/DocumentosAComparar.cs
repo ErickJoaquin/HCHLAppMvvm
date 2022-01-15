@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Windows.Forms;
 using Data;
 using Model;
-using Outlook = Microsoft.Office.Interop.Outlook;
-using Servicios.Utilidades;
-using Servicios.Hedge;
 
 namespace Servicios.Correos.LiberacionAcepte
 {
     public class DocumentosAComparar
     {
         private readonly RepositorioCarpetas _repPasta;
+
+        public List<(int, string)> _pastasATraer;
         public DocumentosAComparar(RepositorioCarpetas repPasta)
         {
             this._repPasta = repPasta;
+
+            _pastasATraer = new List<(int, string)>();
         }
         public void Abrir(Oferta Oferta, OC OC)
         {
-            List<(int, string)> _pastasATraer = new List<(int, string)>() { (Oferta.IdBU, "comercialOferta"), (Oferta.IdBU, "ventas") };
+            (int, string)[] aTraer = { (Oferta.IdBU, "comercialOferta"), (Oferta.IdBU, "ventas") };
+            _pastasATraer.AddRange(aTraer);
 
             List<string> rutas = _repPasta.GetPathsAsync(_pastasATraer).Result;
             string rutaoferta = rutas[0];

@@ -14,12 +14,18 @@ namespace HCHLView
     {
         protected override Window CreateShell()
         {
-            var w = Container.Resolve<AccesoBD>();
+            var w = Container.Resolve<DMOfertas>();
             return w;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<RepositorioCarpetas>();
+            containerRegistry.Register<RepositorioContactos>();
+            containerRegistry.Register<RepositorioEquiposLinkeados>();
+            containerRegistry.Register<RepositorioItem>();
+            containerRegistry.Register<RepositorioMarca>();
+            containerRegistry.Register<RepositorioPais>();
             containerRegistry.Register<RepositorioTablasBD>();
             containerRegistry.Register<IRepositorioBase<Usuario>, RepositorioBase<Usuario>>();
             containerRegistry.Register<IRepositorioBase<BaseInstalada>, RepositorioBase<BaseInstalada>>();
@@ -29,7 +35,8 @@ namespace HCHLView
             containerRegistry.Register<IRepositorioBase<EndUser>, RepositorioBase<EndUser>>();
             containerRegistry.Register<IRepositorioBase<Pago>, RepositorioBase<Pago>>();
             containerRegistry.Register<IRepositorioBase<Vendor>, RepositorioBase<Vendor>>();
-        }
 
+            //containerRegistry.Register<RepositorioPorOferta<>>();        
+        }
     }
 }

@@ -4,10 +4,11 @@ using Dapper;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Linq;
+using Data.Interfaces;
 
 namespace Data
 {
-    public class RepositorioItem
+    public class RepositorioItem : IRepositorioItem
     {
         public List<Item> GetByOffer(int Id)
         {
@@ -22,6 +23,6 @@ namespace Data
             items.AddRange(svList);
 
             return items;
-        }        
+        }
     }
 }

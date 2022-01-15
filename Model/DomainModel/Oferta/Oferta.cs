@@ -39,8 +39,7 @@ namespace Model
         public string CalculoGM { get; set; }
         public string Idioma { get; set; }
         public DateTime FechaEdicion { get; set; }
-        public string TipoOferta { get; set; } 
-        
+        public string TipoOferta { get; set; }         
     }
 }
 

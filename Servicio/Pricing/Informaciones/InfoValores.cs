@@ -2,7 +2,7 @@
 using System.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 using Model;
-using Data;
+using Data.Interfaces;
 
 namespace Servicios.Pricing.Informaciones
 {

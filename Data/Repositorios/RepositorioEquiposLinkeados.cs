@@ -1,15 +1,15 @@
 ﻿using Dapper;
 using Model;
 using Model.ReadModel;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Data.Interfaces;
 
 namespace Data
 {
-    public class RepositorioEquiposLinkeados
+    public class RepositorioEquiposLinkeados : IRepositorioEquiposLinkeados
     {
         private readonly string RutaBBDD = @"Server=LCLSCLW10X0059\SQLEXPRESS; Database=BDHCHLApp; Integrated Security=True;";
 

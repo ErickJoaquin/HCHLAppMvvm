@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Model;
-using Data;
 using Word = Microsoft.Office.Interop.Word;
 using Servicios.Utilidades;
 using Servicios.OfertaComercial.Utilidades;
-
+using Data.Interfaces;
 
 namespace Servicios.OfertaComercial.Informacion
 {

@@ -7,7 +7,7 @@ using Model;
 
 namespace Data
 {
-    class RepositorioMarca
+    public class RepositorioMarca
     {
         public static List<Marca> ListadoMarcas { get; set; }
 
