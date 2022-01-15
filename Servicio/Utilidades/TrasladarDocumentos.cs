@@ -10,6 +10,12 @@ namespace Servicios.Utilidades
 {
     public class TrasladarDocumentos
     {
+        private readonly RepositorioCarpetas _repPasta;
+        public TrasladarDocumentos(RepositorioCarpetas repPasta)
+        {
+            this._repPasta = repPasta;
+        }
+
         public void deOfertaAVentas(Oferta Oferta)
         {
             if (Oferta == null) {
@@ -27,8 +33,7 @@ namespace Servicios.Utilidades
                 (Oferta.IdBU, "comercial"),
                 (Oferta.IdBU, "ventas")
             };
-
-            RepositorioCarpetas _repPasta = new RepositorioCarpetas();
+                        
             List<string> rutas = _repPasta.GetPathsAsync(aObtener).Result;
 
             string rtoafm = rutas[0];
@@ -55,9 +60,9 @@ namespace Servicios.Utilidades
 
 
             /// Mover otizacion proveedor, correos y otros archivos
-            Docs += copiarArchivos(Oferta, Docs, "cotizaciones", rutas[4], rutas[5]);
-            Docs += copiarArchivos(Oferta, Docs, "correos", rutas[4], rutas[5]);
-            Docs += copiarArchivos(Oferta, Docs, "otros", rutas[4], rutas[5]);
+            Docs += CopiarArchivos(Oferta, Docs, "cotizaciones", rutas[4], rutas[5]);
+            Docs += CopiarArchivos(Oferta, Docs, "correos", rutas[4], rutas[5]);
+            Docs += CopiarArchivos(Oferta, Docs, "otros", rutas[4], rutas[5]);
 
             MessageBox.Show(Docs);
         }
@@ -69,7 +74,7 @@ namespace Servicios.Utilidades
         /// <param name="Docs"></param>
         /// <param name="que"></param>
         /// <returns></returns>
-        private string copiarArchivos(Oferta Oferta, string Docs, string que, string rutaComercial, string rutaVentas)
+        private string CopiarArchivos(Oferta Oferta, string Docs, string que, string rutaComercial, string rutaVentas)
         {
             String directoryName = rutaVentas;
             String mensaje = "";

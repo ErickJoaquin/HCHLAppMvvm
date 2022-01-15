@@ -10,11 +10,16 @@ namespace Servicios.Utilidades
 {
     public class CrearDirectorio
     {
-        public static void Crear(Oferta Oferta)
+        private readonly RepositorioCarpetas _repPasta;
+        public CrearDirectorio(RepositorioCarpetas repPasta)
+        {
+            this._repPasta = repPasta;
+        }
+
+        public void Crear(Oferta Oferta)
         {
             List<(int, string)> pastas = new List<(int, string)>() { (Oferta.IdBU, "comercial") };
-            RepositorioCarpetas repPasta = new RepositorioCarpetas();
-            List<string> rutaPastas = repPasta.GetPathsAsync(pastas).Result;
+            List<string> rutaPastas = _repPasta.GetPathsAsync(pastas).Result;
             string rutacarpeta = rutaPastas[0];
 
             try

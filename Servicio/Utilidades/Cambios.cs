@@ -5,7 +5,7 @@ namespace Servicios.Utilidades
     /// <summary>
     /// Clase para trabajar con conversiones de monedas
     /// </summary>
-    class Cambios
+    public class Cambios
     {
         /// <summary>
         /// Convertir valor
@@ -16,7 +16,7 @@ namespace Servicios.Utilidades
         /// <param name="cambioAntiguo">Cambio moneda actual vs dolar</param>
         /// <param name="cambioNuevo">Cambio moneda nueva vs dolar</param>
         /// <returns></returns>
-        public static double convertir(double valor, string currAntiguo, string currNuevo, double cambioAntiguo, double cambioNuevo)
+        public double Convertir(double valor, string currAntiguo, string currNuevo, double cambioAntiguo, double cambioNuevo)
         {
             if (currAntiguo != currNuevo)
             {

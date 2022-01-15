@@ -4,7 +4,6 @@ using Prism.Unity;
 using HCHLView.Views;
 using Data;
 using Model;
-using HCHLView.Views.CalculoNomina;
 
 namespace HCHLView
 {
@@ -23,6 +22,13 @@ namespace HCHLView
         {
             containerRegistry.Register<RepositorioTablasBD>();
             containerRegistry.Register<IRepositorioBase<Usuario>, RepositorioBase<Usuario>>();
+            containerRegistry.Register<IRepositorioBase<BaseInstalada>, RepositorioBase<BaseInstalada>>();
+            containerRegistry.Register<IRepositorioBase<BU>, RepositorioBase<BU>>();
+            containerRegistry.Register<IRepositorioBase<ContactoCliente>, RepositorioBase<ContactoCliente>>();
+            containerRegistry.Register<IRepositorioBase<ContactoBU>, RepositorioBase<ContactoBU>>();
+            containerRegistry.Register<IRepositorioBase<EndUser>, RepositorioBase<EndUser>>();
+            containerRegistry.Register<IRepositorioBase<Pago>, RepositorioBase<Pago>>();
+            containerRegistry.Register<IRepositorioBase<Vendor>, RepositorioBase<Vendor>>();
         }
 
     }

@@ -6,21 +6,26 @@ namespace Servicios.Utilidades
 {
     public class InformacionCliente
     {
-        public Cliente obtener(Oferta Oferta)
+        private readonly IRepositorioBase<EndUser> _repEU;
+        private readonly IRepositorioBase<Vendor> _repVendor;
+        public InformacionCliente(IRepositorioBase<EndUser> repEU, IRepositorioBase<Vendor> repVendor)
+        {
+            this._repEU = repEU;
+            this._repVendor = repVendor;
+        }
+
+        public Cliente Obtener(OfertaClientes ofCliente)
         {
             Cliente Cliente = new Cliente();
-            OfertaClientes ofCliente = new OfertaClientes();
-            RepositorioBase<EndUser> repEU = new RepositorioBase<EndUser>();
-            RepositorioBase<Vendor> repVendor = new RepositorioBase<Vendor>();
 
             if (String.IsNullOrEmpty(ofCliente.IdVendor.ToString()))
             {
-                Cliente = repEU.GetByIdAsync(ofCliente.IdEndUser).Result;
+                Cliente = _repEU.GetByIdAsync(ofCliente.IdEndUser).Result;
                 Cliente.IdTipoCliente = (int)VendorEUEnum.EU;
             }
             else 
             { 
-                Cliente = repVendor.GetByIdAsync(ofCliente.IdVendor).Result; 
+                Cliente = _repVendor.GetByIdAsync(ofCliente.IdVendor).Result; 
                 Cliente.IdTipoCliente = (int)VendorEUEnum.Vendor;
             }
 

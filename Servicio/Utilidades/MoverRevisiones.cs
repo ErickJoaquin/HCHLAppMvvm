@@ -8,7 +8,7 @@ namespace Servicios.Utilidades
 {
     public class MoverRevisiones
     {
-        public static void trasladarAntiguas(Oferta Oferta, bool moverOferta)
+        public void TrasladarAntiguas(Oferta Oferta, bool moverOferta)
         {
             if (!(Oferta.Rev != 0 || !String.IsNullOrEmpty(Oferta.Rev.ToString())))
             {
@@ -84,7 +84,6 @@ namespace Servicios.Utilidades
                     }
                 }
             }
-        }
-        
+        }        
     }
 }

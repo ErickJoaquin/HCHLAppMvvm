@@ -45,16 +45,14 @@ namespace Data
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await Task.Run(() => new List<T> { new T() });
+            using (var connection = new SqlConnection(RutaBBDD))
+            {
+                connection.Open();
 
-            //using (var connection = new SqlConnection(RutaBBDD))
-            //{
-            //    connection.Open();
+                IEnumerable<T> value = await connection.QueryAsync<T>($"SELECT * FROM {_typeOfProperty.Name}");
 
-            //    IEnumerable<T> value = await connection.QueryAsync<T>($"SELECT * FROM {_typeOfProperty.Name}");
-
-            //    return (List<T>)value;
-            //}
+                return await Task.Run(() => (List<T>)value);
+            }
         }
 
         public async Task<int> AddAsync(T modelToInsert)
