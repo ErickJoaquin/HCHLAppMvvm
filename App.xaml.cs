@@ -4,6 +4,7 @@ using Prism.Unity;
 using HCHLView.Views;
 using Data;
 using Model;
+using Data.Interfaces;
 
 namespace HCHLView
 {
@@ -14,7 +15,7 @@ namespace HCHLView
     {
         protected override Window CreateShell()
         {
-            var w = Container.Resolve<DMOfertas>();
+            var w = Container.Resolve<MenuInicio>();
             return w;
         }
 

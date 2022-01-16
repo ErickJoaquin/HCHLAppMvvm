@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       Title="Howden South America Internal" SizeToContent="WidthAndHeight" MinWidth="200"  WindowStartupLocation="CenterOwner">
 
-    <Border Padding="5 10" BorderBrush="#FF00648C" BorderThickness="3" Margin="0,0,0,0">
+    <Border Padding="5 10" BorderBrush="#FF00648C" Background="#FF00648C" Margin="0,0,0,0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="180"/>
@@ -15,7 +15,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Margin="10 0 10 0">
-                <Button x:Name="BtBbii" Content="Base Instalada" Height="50" Background="White" Foreground="#FF00648C" FontFamily="Arial" FontSize="14" 
+                <Button x:Name="BtBbii" Content="Base Instalada" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
                         FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C" TabIndex="0" Click="BtBbii_Click">
                     <Button.ToolTip>
                         <StackPanel>
@@ -24,7 +24,7 @@
                         </StackPanel>
                     </Button.ToolTip>
                 </Button>
-                <ToggleButton x:Name="TbApp" Content="Aplicación" Height="50" Background="White" Foreground="#FF00648C" FontFamily="Arial" FontSize="14" 
+                <ToggleButton x:Name="TbApp" Content="Aplicación" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
                         FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C" TabIndex="1" Margin="0,5" Click="TbApp_Click" >
                     <ToggleButton.ToolTip>
                         <StackPanel>
@@ -33,7 +33,7 @@
                         </StackPanel>
                     </ToggleButton.ToolTip>
                 </ToggleButton>
-                <Button x:Name="BtBbdd" Content="Base de Datos" Height="50" Background="White" Foreground="#FF00648C" FontFamily="Arial" FontSize="14" 
+                <Button x:Name="BtBbdd" Content="Base de Datos" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
                         FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C"  TabIndex="2" Click="BtBbdd_Click">
                     <Button.ToolTip>
                         <StackPanel>
@@ -44,9 +44,9 @@
                 </Button>
             </StackPanel>
             <StackPanel x:Name="SpAplicacion" Grid.Column="1" Orientation="Horizontal" Visibility="Collapsed">
-                <Border x:Name="BrApp" BorderBrush="#FF00648C" BorderThickness="1"/>
+                <Border x:Name="BrApp" BorderBrush="White" BorderThickness="1"/>
                 <StackPanel Orientation="Vertical"  Margin="10 0 10 0" MinWidth="170">
-                    <Button x:Name="BtOfertas" Content="Ofertas" Height="50" Background="White" Foreground="#FF00648C" FontFamily="Arial" FontSize="14" 
+                    <Button x:Name="BtOfertas" Content="Ofertas" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
                         FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C"  Click="BtOfertas_Click">
                         <Button.ToolTip>
                             <StackPanel>
@@ -55,7 +55,7 @@
                             </StackPanel>
                         </Button.ToolTip>
                     </Button>
-                    <Button x:Name="BtNueva" Content="Oferta Nueva" Height="50" Background="White" Foreground="#FF00648C" FontFamily="Arial" FontSize="14" 
+                    <Button x:Name="BtNueva" Content="Oferta Nueva" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
                         FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C"  Margin="0,5" Click="BtNueva_Click" >
                         <Button.ToolTip>
                             <StackPanel>
@@ -64,7 +64,7 @@
                             </StackPanel>
                         </Button.ToolTip>
                     </Button>
-                    <Button x:Name="BtCotizar" Content="Cotizar" Height="50" Background="White" Foreground="#FF00648C" FontFamily="Arial" FontSize="14" 
+                    <Button x:Name="BtCotizar" Content="Cotizar" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
                         FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C" Click="BtCotizar_Click" >
                         <Button.ToolTip>
                             <StackPanel>

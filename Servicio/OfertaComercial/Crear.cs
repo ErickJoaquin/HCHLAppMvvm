@@ -7,6 +7,7 @@ using Servicios.Utilidades;
 using System.Windows.Forms;
 using Servicios.OfertaComercial.Utilidades;
 using Servicios.OfertaComercial.Informacion;
+using Data.Interfaces;
 
 namespace Servicios.OfertaComercial
 {

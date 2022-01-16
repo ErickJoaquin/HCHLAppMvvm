@@ -31,7 +31,7 @@ namespace Servicios.Correos.SolicitarNoPV
             mailSelected = new Outlook.MailItem();
             mailReply = new Outlook.MailItem();
             app = new Microsoft.Office.Interop.Outlook.Application();
-    }
+        }
 
         public void Nuevo(Oferta Oferta, Pago Pago, OfertaClientes ofertaClientes, OfertaValores ofValores, OfertaMonedas Moneda, OC OC, Mercado Mercado)
         {
