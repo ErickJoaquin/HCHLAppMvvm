@@ -15,6 +15,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*" />
                 <ColumnDefinition Width="1.5*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -22,15 +23,16 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+            <Button x:Name="BtnVolver" Content="Volver" Height="30" Margin="5" Background="#FF00648B" Foreground="White" BorderBrush="White" Width="80" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                 <TextBlock VerticalAlignment="Center" Margin="10 0 10 0">Tabla a visualizar:</TextBlock>
                 <ComboBox x:Name="CbTabla" VerticalAlignment="Center" Width="150" Height="23"
                           ItemsSource="{Binding ListaOpciones}" SelectedItem="{Binding Seleccion,  Mode=TwoWay}" 
                           SelectedValuePath="NombreEnBD" DisplayMemberPath="NombreAMostrar" SelectionChanged="Cbx_SelectionChaned"/>
             </StackPanel>
-            <TextBox x:Name="TbBuscador" Grid.Column="1" Margin="5" Width="210" Height="23" HorizontalAlignment="Center" 
+            <TextBox x:Name="TbBuscador" Grid.Column="2" Margin="5" Width="180" Height="23" HorizontalAlignment="Center" 
                      Text="{Binding Buscador, UpdateSourceTrigger=PropertyChanged}"/>
-            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 30 0">
+            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 30 0">
                 <Button Content="Agregar" x:Name="BtAgregar" Height="20" Margin="5" Background="#FF00648B" Foreground="White" BorderBrush="White" Width="65"/>
                 <Button Content="Eliminar" x:Name="BtEliminar" IsEnabled="False" Height="20" Margin="5" Background="#FF00648B" Foreground="White" BorderBrush="White" Width="65"/>
                 <!--<Button Content="Cambiar" x:Name="BtEditar" Height="20" Margin="5 0 70 0" Click="BtEditar_Click" Background="#FF00648B" Foreground="White" BorderBrush="White" Width="65"/>-->

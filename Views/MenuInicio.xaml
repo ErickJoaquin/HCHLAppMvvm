@@ -10,16 +10,16 @@
         Title="Howden South America Internal" WindowStartupLocation="CenterOwner">
 
     <DockPanel LastChildFill="True">
-        <Border Padding="5 10" Visibility="{Binding Hide}" BorderBrush="#FF00648C" Background="#FF00648C" Margin="0,0,0,0">
+        <Border Padding="5 10" DockPanel.Dock="Top" BorderBrush="#FF00648C" Background="#FF00648C" Margin="0,0,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="180"/>
+                    <ColumnDefinition Width="350"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Margin="10 0 10 0">
+                <StackPanel Margin="10 0" Orientation="Horizontal">
                     <Button x:Name="BtBbii" Content="Base Instalada" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
-                        FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C" TabIndex="0" Click="BtBbii_Click">
+                        FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C" TabIndex="0" Visibility="{Binding Hide}" Click="BtBbii_Click">
                         <Button.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" FontSize="12" Margin="0,0,0,5" Foreground="#FF00648C">Ver Equipos Instalados</TextBlock>
@@ -28,7 +28,7 @@
                         </Button.ToolTip>
                     </Button>
                     <ToggleButton x:Name="TbApp" Content="Aplicación" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
-                        FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C" TabIndex="1" Margin="0,5" Click="TbApp_Click" >
+                        FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C" TabIndex="1" Margin="15 0" Click="TbApp_Click" >
                         <ToggleButton.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" FontSize="12" Margin="0,0,0,5">Área de trabajo Aplicación</TextBlock>
@@ -37,7 +37,7 @@
                         </ToggleButton.ToolTip>
                     </ToggleButton>
                     <Button x:Name="BtBbdd" Content="Base de Datos" Height="50" Background="#FF00648C" Foreground="White" FontFamily="Arial" FontSize="14" 
-                        FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C"  TabIndex="2" Command="{Binding Navigate}">
+                        FontWeight="Bold" BorderThickness="2" BorderBrush="#FF00648C"  TabIndex="2" Visibility="{Binding Hide}" Command="{Binding Navigate}">
                         <Button.ToolTip>
                             <StackPanel>
                                 <TextBlock FontWeight="Bold" FontSize="12" Margin="0,0,0,5">Ver Base de Datos</TextBlock>
@@ -80,6 +80,6 @@
                 </StackPanel>
             </Grid>
         </Border>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="5" />
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="5"/>
     </DockPanel>
 </Window>
