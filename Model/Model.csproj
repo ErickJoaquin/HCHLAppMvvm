@@ -103,6 +103,7 @@
     <Compile Include="DomainModel\Venta.cs" />
     <Compile Include="Enumeraciones\BUEnum.cs" />
     <Compile Include="Enumeraciones\CarpetasEnum.cs" />
+    <Compile Include="Enumeraciones\EstadosOferta.cs" />
     <Compile Include="Enumeraciones\MonedasEnum.cs" />
     <Compile Include="Enumeraciones\TipoClienteEnum.cs" />
     <Compile Include="Enumeraciones\TipoContactoEnum.cs" />

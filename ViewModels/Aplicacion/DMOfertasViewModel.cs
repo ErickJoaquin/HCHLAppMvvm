@@ -5,6 +5,7 @@ using System.Windows;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using Prism.Regions;
+using Model;
 
 namespace HCHLView.ViewModels.Aplicacion
 {
@@ -19,7 +20,7 @@ namespace HCHLView.ViewModels.Aplicacion
 
             this._repOferta = repOferta;
 
-            Seleccion = "Editando";
+            Seleccion = EstadosOferta.Editando.ToString();
         }
 
         private string _seleccion;
