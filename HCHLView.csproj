@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\Aplicacion\DMOfertasViewModel.cs" />
     <Compile Include="ViewModels\BBDD\AccesoBDViewModel.cs" />
+    <Compile Include="ViewModels\MenuIncioViewModel.cs" />
     <Compile Include="Views\Aplicacion\DMOfertas.xaml.cs">
       <DependentUpon>DMOfertas.xaml</DependentUpon>
     </Compile>

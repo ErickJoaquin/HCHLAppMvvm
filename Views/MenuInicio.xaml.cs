@@ -14,25 +14,6 @@ namespace HCHLView.Views
             InitializeComponent();
         }
 
-        private void TbApp_Click(object sender, RoutedEventArgs e)
-        {
-            if (TbApp.IsChecked == true)
-            {
-                BtBbdd.IsEnabled = false;
-                BtBbii.IsEnabled = false;
-
-                SpAplicacion.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                BtBbdd.IsEnabled = true;
-                BtBbii.IsEnabled = true;
-
-                SpAplicacion.Visibility = Visibility.Collapsed;
-
-            }
-        }
-
         private void BtBbii_Click(object sender, RoutedEventArgs e)
         {
            

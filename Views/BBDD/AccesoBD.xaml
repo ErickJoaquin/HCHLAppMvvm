@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         xmlns:local="clr-namespace:HCHLView.Views.BBDD"
         xmlns:viewmodels="clr-namespace:HCHLView.ViewModels.BBDD"
+        DataContext="{Binding AccesoBDViewModel}"
         mc:Ignorable="d"
         Title="Acceso Base de Datos" Height="450" Width="800" Background="#FF00648B" Foreground="White" WindowStartupLocation="CenterScreen">
 
