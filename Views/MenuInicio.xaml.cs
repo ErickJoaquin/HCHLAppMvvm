@@ -38,12 +38,12 @@ namespace HCHLView.Views
            
         }
 
-        private void BtBbdd_Click(object sender, RoutedEventArgs e)
-        {
-            Window wdw = new AccesoBD();
-            wdw.Show();
-            this.WindowState = WindowState.Minimized;
-        }
+        //private void BtBbdd_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Window wdw = new AccesoBD();
+        //    wdw.Show();
+        //    this.WindowState = WindowState.Minimized;
+        //}
 
         private void BtNueva_Click(object sender, RoutedEventArgs e)
         {

@@ -6,7 +6,7 @@ namespace HCHLView.Views.BBDD
     /// <summary>
     /// Lógica de interacción para AccesoBD.xaml
     /// </summary>
-    public partial class AccesoBD : Window
+    public partial class AccesoBD : UserControl
     {
         public AccesoBD()
         {

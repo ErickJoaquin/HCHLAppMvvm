@@ -5,6 +5,7 @@ using HCHLView.Views;
 using Data;
 using Model;
 using Data.Interfaces;
+using HCHLView.Views.BBDD;
 
 namespace HCHLView
 {
@@ -21,6 +22,8 @@ namespace HCHLView
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<AccesoBD>();
+
             containerRegistry.Register<RepositorioCarpetas>();
             containerRegistry.Register<RepositorioContactos>();
             containerRegistry.Register<RepositorioEquiposLinkeados>();

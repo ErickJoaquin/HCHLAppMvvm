@@ -1,4 +1,4 @@
-﻿<Window x:Class="HCHLView.Views.BBDD.AccesoBD"
+﻿<UserControl x:Class="HCHLView.Views.BBDD.AccesoBD"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HCHLView.Views.BBDD"
         xmlns:viewmodels="clr-namespace:HCHLView.ViewModels.BBDD"
         mc:Ignorable="d"
-        Title="Acceso Base de Datos" Height="450" Width="800" Background="#FF00648B" Foreground="White" WindowStartupLocation="CenterScreen">
+        Height="450" Width="800" Background="#FF00648B" Foreground="White">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -189,4 +189,4 @@
             </ListView.ContextMenu>
         </ListView>
     </Grid>
-</Window>
+</UserControl>
