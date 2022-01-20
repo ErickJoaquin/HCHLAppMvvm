@@ -80,12 +80,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\DMOfertasViewModel.cs" />
+    <Compile Include="ViewModels\Aplicacion\DMOfertasViewModel.cs" />
     <Compile Include="ViewModels\BBDD\AccesoBDViewModel.cs" />
-    <Compile Include="Views\DMOfertas.xaml.cs">
+    <Compile Include="Views\Aplicacion\DMOfertas.xaml.cs">
       <DependentUpon>DMOfertas.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AccesoBD.xaml.cs">
+    <Compile Include="Views\BBDD\AccesoBD.xaml.cs">
       <DependentUpon>AccesoBD.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MenuInicio.xaml.cs">
@@ -103,11 +103,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\DMOfertas.xaml">
+    <Page Include="Views\Aplicacion\DMOfertas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AccesoBD.xaml">
+    <Page Include="Views\BBDD\AccesoBD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -158,10 +158,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\Aplicacion\" />
-    <Folder Include="Views\Aplicacion\" />
+    <Folder Include="ViewModels\BaseInstalada\" />
     <Folder Include="Views\BaseInstalada\" />
-    <Folder Include="Views\BBDD\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
