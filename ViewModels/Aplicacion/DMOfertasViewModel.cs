@@ -6,7 +6,7 @@ using Prism.Mvvm;
 using System.Collections.Generic;
 using Prism.Regions;
 
-namespace HCHLView.ViewModels
+namespace HCHLView.ViewModels.Aplicacion
 {
     public class DMOfertasViewModel : BindableBase, INavigationAware
     {

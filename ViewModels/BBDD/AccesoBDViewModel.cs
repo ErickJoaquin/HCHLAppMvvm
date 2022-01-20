@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace HCHLView.ViewModels
+namespace HCHLView.ViewModels.BBDD
 {
     class AccesoBDViewModel : BindableBase, INavigationAware 
     {

@@ -1,4 +1,5 @@
-﻿using HCHLView.Views;
+﻿using HCHLView.Views.BBDD;
+using HCHLView.Views.Aplicacion;
 using System.Windows;
 
 namespace HCHLView.Views

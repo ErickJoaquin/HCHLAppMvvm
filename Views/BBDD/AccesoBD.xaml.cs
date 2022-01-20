@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace HCHLView.Views
+namespace HCHLView.Views.BBDD
 {
     /// <summary>
     /// Lógica de interacción para AccesoBD.xaml
