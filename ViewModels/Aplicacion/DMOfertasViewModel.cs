@@ -18,6 +18,8 @@ namespace HCHLView.ViewModels.Aplicacion
             ListaOfertas = new ObservableCollection<OfertaCompleta>();
 
             this._repOferta = repOferta;
+
+            _seleccion = "Editando";
         }
 
         private string _seleccion;
