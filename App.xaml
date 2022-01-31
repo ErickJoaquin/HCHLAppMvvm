@@ -5,6 +5,29 @@
     xmlns:local="clr-namespace:HCHLView"
     xmlns:prism="http://prismlibrary.com/">
     <Application.Resources>
-
+        <Style TargetType="UserControl" x:Key="MainViews">
+            <Setter Property="Background" Value="#FF00648B"/>
+            <Setter Property="Foreground" Value="White" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#FF00648B"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+        </Style>
+        <Style TargetType="ToggleButton" x:Key="MainTgButton">
+            <Setter Property="Background" Value="#FF00648B"/>
+            <Setter Property="BorderBrush"  Value="#FF00648B"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="2"/>
+        </Style>
     </Application.Resources>
 </prism:PrismApplication>
