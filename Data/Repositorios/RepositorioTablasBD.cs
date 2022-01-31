@@ -2,7 +2,7 @@
 using Data.Interfaces;
 using Model.ReadModel;
 
-namespace Data
+namespace Data.Repositorios
 {
     public class RepositorioTablasBD : IRepositorioTablasBD
     {
