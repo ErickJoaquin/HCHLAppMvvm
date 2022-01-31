@@ -32,11 +32,11 @@ namespace Servicios.Utilidades
 
                 string rutaCarpeta = rutaPastas[0];
                 string rutaOferta = rutaPastas[1];
-                string ofertaWD = rutaOferta + "-R" + (i).ToString() + ".docx";
-                string ofertaPDF = rutaOferta + "-R" + (i).ToString() + ".pdf";
+                string ofertaWD = $"{rutaOferta}-R{(i).ToString()}.docx";
+                string ofertaPDF = $"{rutaOferta}-R{(i).ToString()}..pdf";
                 string rutaPricing = rutaPastas[2];
-                string pricingXL = rutaPricing + "-R" + (i).ToString() + ".xlsm";
-                string pricingPDF = rutaPricing + "-R" + (i).ToString() + ".pdf";
+                string pricingXL = $"{rutaPricing}-R{(i).ToString()}.xlsm";
+                string pricingPDF = $"{rutaPricing}-R{(i).ToString()}.pdf";
 
                 if (moverOferta)
                 {
@@ -62,33 +62,32 @@ namespace Servicios.Utilidades
                             File.Move(ofertaPDF, $"{rutaCarpeta}\\PROPOSTA\\0_Revisões_Anteriores\\P_{Oferta.NCRM}-R{i}.pdf");
                         }
                     }
-
-                    else
+                }
+                else
+                {
+                    if (File.Exists(pricingXL))
                     {
-                        if (File.Exists(pricingXL))
+                        if (Oferta.IdBU == (int)BUEnum.HCHL || Oferta.IdBU == (int)BUEnum.HPU)
                         {
-                            if (Oferta.IdBU == (int)BUEnum.HCHL || Oferta.IdBU == (int)BUEnum.HPU)
-                            {
-                                File.Move(pricingXL, $"{rutaCarpeta}\\COSTO_&_PRICING\\00 Revisiones Anteriores\\R_{Oferta.NCRM}-R{i}.xlsm");
-                            }
-                            else if (Oferta.IdBU == (int)BUEnum.HSA)
-                            {
-                                File.Move(pricingXL, $"{rutaCarpeta}\\CUSTO_&_PRICING\\0_Revisões_Anteriores\\R_{Oferta.NCRM}-R{i}.xlsm");
-                            }
+                            File.Move(pricingXL, $"{rutaCarpeta}\\COSTO_&_PRICING\\00 Revisiones Anteriores\\R_{Oferta.NCRM}-R{i}.xlsm");
                         }
-                        if (File.Exists(pricingPDF))
+                        else if (Oferta.IdBU == (int)BUEnum.HSA)
                         {
-                            if (Oferta.IdBU == (int)BUEnum.HCHL || Oferta.IdBU == (int)BUEnum.HPU)
-                            {
-                                File.Move(pricingPDF, $"{rutaCarpeta}\\COSTO_&_PRICING\\00 Revisiones Anteriores\\R_{Oferta.NCRM}-R{i}.pdf");
-                            }
-                            else if (Oferta.IdBU == (int)BUEnum.HSA)
-                            {
-                                File.Move(pricingPDF, $"{rutaCarpeta}\\CUSTO_&_PRICING\\0_Revisões_Anteriores\\R_{Oferta.NCRM}-R{i}.pdf");
-                            }
+                            File.Move(pricingXL, $"{rutaCarpeta}\\CUSTO_&_PRICING\\0_Revisões_Anteriores\\R_{Oferta.NCRM}-R{i}.xlsm");
                         }
                     }
-                }
+                    if (File.Exists(pricingPDF))
+                    {
+                        if (Oferta.IdBU == (int)BUEnum.HCHL || Oferta.IdBU == (int)BUEnum.HPU)
+                        {
+                            File.Move(pricingPDF, $"{rutaCarpeta}\\COSTO_&_PRICING\\00 Revisiones Anteriores\\R_{Oferta.NCRM}-R{i}.pdf");
+                        }
+                        else if (Oferta.IdBU == (int)BUEnum.HSA)
+                        {
+                            File.Move(pricingPDF, $"{rutaCarpeta}\\CUSTO_&_PRICING\\0_Revisões_Anteriores\\R_{Oferta.NCRM}-R{i}.pdf");
+                        }
+                    }
+                }                
             }
         }        
     }
