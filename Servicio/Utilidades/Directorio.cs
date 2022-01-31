@@ -8,30 +8,30 @@ using System.Windows.Forms;
 
 namespace Servicios.Utilidades
 {
-    public class CrearDirectorio
+    public class Directorio
     {
         private readonly RepositorioCarpetas _repPasta;
         public List<(int, string)> pastas;
         
-        public CrearDirectorio(RepositorioCarpetas repPasta)
+        public Directorio(RepositorioCarpetas repPasta)
         {
             this._repPasta = repPasta;
 
             pastas = new List<(int, string)>();
         }
 
-        public void Crear(Oferta Oferta)
+        public async void Abrir(int IdBU, string NCRM)
         {
-            pastas.Add((Oferta.IdBU, "comercial"));
-            List<string> rutaPastas = _repPasta.GetPathsAsync(pastas).Result;
-            string rutacarpeta = rutaPastas[0];
+            pastas.Add((IdBU, "comercial"));
+            List<string> rutaPastas = await _repPasta.GetPathsAsync(pastas);
+            string rutacarpeta = $@"{rutaPastas[0]}\{NCRM}";
 
             try
             {
                 if (Directory.Exists(rutacarpeta)) { Process.Start(rutacarpeta); }
                 else if (!Directory.Exists(rutacarpeta))
                 {
-                    if (Oferta.IdBU == (int)BUEnum.HCHL || Oferta.IdBU == (int)BUEnum.HPU)
+                    if (IdBU == (int)BUEnum.HCHL || IdBU == (int)BUEnum.HPU)
                     {
                         Directory.CreateDirectory(rutacarpeta);
                         Directory.CreateDirectory(rutacarpeta + @"\ANÁLISIS_DE_CRÉDITO");
@@ -57,7 +57,7 @@ namespace Servicios.Utilidades
                         Directory.CreateDirectory(rutacarpeta + @"\CLIENTE\Fotos");
                         Directory.CreateDirectory(rutacarpeta + @"\CLIENTE\Solicitud de Cotización");
                     }
-                    else if (Oferta.IdBU == (int)BUEnum.HSA)
+                    else if (IdBU == (int)BUEnum.HSA)
                     {
                         Directory.CreateDirectory(rutacarpeta);
                         Directory.CreateDirectory(rutacarpeta + @"\ANÁLISE_DE_CRÉDITO");
@@ -84,7 +84,7 @@ namespace Servicios.Utilidades
                         Directory.CreateDirectory(rutacarpeta + @"\CLIENTE\Solicitação_de_Cotação");
                     }
 
-                    MessageBox.Show($"La carpeta {Oferta.NCRM} ha sido creada en {rutacarpeta}");
+                    MessageBox.Show($"La carpeta {NCRM} ha sido creada en {rutacarpeta}");
                     Process.Start(rutacarpeta);
                 }
             }

@@ -16,7 +16,7 @@ namespace Servicios.Utilidades
             this._repPasta = repPasta;
         }
 
-        public void deOfertaAVentas(Oferta Oferta)
+        public void DeOfertaAVentas(Oferta Oferta)
         {
             if (Oferta == null) {
                 MessageBox.Show("Se debe seleccionar un ítem para continuar con esta acción. Si continúa con problemas, " +

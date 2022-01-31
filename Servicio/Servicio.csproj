@@ -119,7 +119,7 @@
     <Compile Include="Pricing\Crear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilidades\Cambios.cs" />
-    <Compile Include="Utilidades\CrearDirectorio.cs" />
+    <Compile Include="Utilidades\Directorio.cs" />
     <Compile Include="Utilidades\InformacionCliente.cs" />
     <Compile Include="Utilidades\MoverRevisiones.cs" />
     <Compile Include="Utilidades\TrasladarDocumentos.cs" />

@@ -80,17 +80,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\BBDD\AccesoBDCommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\MenuInicioCommand.cs" />
     <Compile Include="ViewModels\Aplicacion\DMOfertasViewModel.cs" />
+    <Compile Include="ViewModels\BBII\AccesoBIViewModel.cs" />
     <Compile Include="ViewModels\BBDD\AccesoBDViewModel.cs" />
-    <Compile Include="ViewModels\MenuIncioViewModel.cs" />
-    <Compile Include="Views\Aplicacion\DMOfertas.xaml.cs">
-      <DependentUpon>DMOfertas.xaml</DependentUpon>
+    <Compile Include="ViewModels\MenuInicioViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\Aplicacion\DMOfertasView.xaml.cs">
+      <DependentUpon>DMOfertasView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BBDD\AccesoBD.xaml.cs">
-      <DependentUpon>AccesoBD.xaml</DependentUpon>
+    <Compile Include="Views\BBII\AccesoBIView.xaml.cs">
+      <DependentUpon>AccesoBIView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MenuInicio.xaml.cs">
-      <DependentUpon>MenuInicio.xaml</DependentUpon>
+    <Compile Include="Views\BBDD\AccesoBDView.xaml.cs">
+      <DependentUpon>AccesoBDView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuInicioView.xaml.cs">
+      <DependentUpon>MenuInicioView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -104,15 +112,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Aplicacion\DMOfertas.xaml">
+    <Page Include="Views\Aplicacion\DMOfertasView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BBDD\AccesoBD.xaml">
+    <Page Include="Views\BBII\AccesoBIView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MenuInicio.xaml">
+    <Page Include="Views\BBDD\AccesoBDView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MenuInicioView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,8 +171,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\BaseInstalada\" />
-    <Folder Include="Views\BaseInstalada\" />
+    <Folder Include="Commands\Aplicacion\" />
+    <Folder Include="Commands\BBII\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,7 +2,7 @@
 {
     public enum TipoEntregaEnum
     {
-        DDP = 1, //6
+        DDP = 1,
         ExW = 2,
         CIF = 3,
         FCA = 4,

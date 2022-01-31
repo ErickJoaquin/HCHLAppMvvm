@@ -5,6 +5,10 @@ using HCHLView.Views;
 using Data;
 using Model;
 using Data.Interfaces;
+using Data.Repositorios;
+using HCHLView.Views.BBDD;
+using HCHLView.Views.BBII;
+using HCHLView.Views.Aplicacion;
 
 namespace HCHLView
 {
@@ -15,19 +19,25 @@ namespace HCHLView
     {
         protected override Window CreateShell()
         {
-            var w = Container.Resolve<MenuInicio>();
+            var w = Container.Resolve<MenuInicioView>();
             return w;
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<RepositorioCarpetas>();
-            containerRegistry.Register<RepositorioContactos>();
-            containerRegistry.Register<RepositorioEquiposLinkeados>();
-            containerRegistry.Register<RepositorioItem>();
+            containerRegistry.RegisterForNavigation<AccesoBDView>();
+            containerRegistry.RegisterForNavigation<AccesoBIView>();
+            containerRegistry.RegisterForNavigation<DMOfertasView>();
+
+            containerRegistry.Register<IRepositorioRevisiones, RepositorioRevisiones>();
+            containerRegistry.Register<IRepositorioCarpetas, RepositorioCarpetas>();
+            containerRegistry.Register<IRepositorioContactos, RepositorioContactos>();
+            containerRegistry.Register<IRepositorioEquiposLinkeados, RepositorioEquiposLinkeados>();
+            containerRegistry.Register<IRepositorioItem, RepositorioItem>();
             containerRegistry.Register<RepositorioMarca>();
             containerRegistry.Register<RepositorioPais>();
-            containerRegistry.Register<RepositorioTablasBD>();
+            containerRegistry.Register<IRepositorioTablasBD, RepositorioTablasBD>();
+            containerRegistry.Register<IRepositorioOferta, RepositorioOferta>();
             containerRegistry.Register<IRepositorioBase<Usuario>, RepositorioBase<Usuario>>();
             containerRegistry.Register<IRepositorioBase<BaseInstalada>, RepositorioBase<BaseInstalada>>();
             containerRegistry.Register<IRepositorioBase<BU>, RepositorioBase<BU>>();
