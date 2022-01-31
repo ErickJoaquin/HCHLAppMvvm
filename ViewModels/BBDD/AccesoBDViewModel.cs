@@ -1,51 +1,63 @@
-﻿using Data;
-using Data.Interfaces;
+﻿using Data.Interfaces;
 using Model;
 using Model.ReadModel;
 using Prism.Mvvm;
 using Prism.Regions;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Linq;
+using System.Collections.Generic;
+using Data.Repositorios;
 
 namespace HCHLView.ViewModels.BBDD
 {
-    class AccesoBDViewModel : BindableBase, INavigationAware 
+    public class AccesoBDViewModel : ViewModelBase, INavigationAware
     {
-        private TablasBD _seleccion;
-        public TablasBD Seleccion
+        private TablasBD _tablaSeleccionada;
+        public TablasBD TablaSeleccionada
         {
             get
             {
-                return _seleccion;
+                return _tablaSeleccionada;
             }
 
             set
             {
                 if (value != null)
-                    _seleccion = value;
-                    ListViewAMostrar(_seleccion.NombreEnBD);
-                    LoadData(_seleccion.NombreEnBD);
+                {
+                    _tablaSeleccionada = value;
+                    LoadData(_tablaSeleccionada.NombreEnBD);
+                }
             }
         }
 
-        private Usuario _objSeleccionado;
-        public Usuario ObjSeleccionado
+        private string _buscador;
+        public string Buscador 
         {
             get
             {
-                return _objSeleccionado;
+                return _buscador;
             }
+
             set
             {
                 if (value != null)
-                    _objSeleccionado = value;
+                {
+                    _buscador = value;
+                    FilterData(_buscador, _tablaSeleccionada.NombreEnBD);
+                }
             }
         }
-
-
-        public string Buscador { get; set; }
-        public List<TablasBD> ListaOpciones { get; }
+                
+        public Visibility IsLvUsuariosVisible { get; set; }
+        public Visibility IsLvBaseInstaladaVisible { get; set; }
+        public Visibility IsLvEndUserVisible { get; set; }
+        public Visibility IsLvCctoClienteVisible { get; set; }
+        public Visibility IsLvCctoBUVisible { get; set; }
+        public Visibility IsLvBUsVisible { get; set; }
+        public Visibility IsLvVendorVisible { get; set; }
+        public Visibility IsLvPagosVisible { get; set; }
+        public List<TablasBD> ListaTablas { get; }
         public ObservableCollection<Usuario> ListUsuarios { get; private set; }
         public ObservableCollection<BaseInstalada> ListBaseInstalada { get; private set; }
         public ObservableCollection<BU> ListBUs { get; private set; }
@@ -63,12 +75,13 @@ namespace HCHLView.ViewModels.BBDD
         private readonly IRepositorioBase<EndUser> _repoEndUser;
         private readonly IRepositorioBase<Pago> _repoPago;
         private readonly IRepositorioBase<Vendor> _repoVendor;
+                
 
         public AccesoBDViewModel(IRepositorioBase<Usuario> repoUsuario, IRepositorioBase<BaseInstalada> repoBaseInstalada, IRepositorioBase<BU> repoBU,
             IRepositorioBase<ContactoCliente> repoCctoCliente, IRepositorioBase<ContactoBU> repoCctoBU, IRepositorioBase<EndUser> repoEndUser,
             IRepositorioBase<Pago> repoPago, IRepositorioBase<Vendor> repoVendor, RepositorioTablasBD repositorioTablasBD)
         {
-            ListaOpciones = new List<TablasBD>(repositorioTablasBD.GetAll());
+            ListaTablas = new List<TablasBD>(repositorioTablasBD.GetAll());
 
             ListUsuarios = new ObservableCollection<Usuario>();
             ListBaseInstalada = new ObservableCollection<BaseInstalada>();
@@ -87,12 +100,153 @@ namespace HCHLView.ViewModels.BBDD
             this._repoEndUser = repoEndUser;
             this._repoPago = repoPago;
             this._repoVendor = repoVendor;
+
+            IsLvUsuariosVisible = Visibility.Collapsed;
+            IsLvBaseInstaladaVisible = Visibility.Collapsed;
+            IsLvEndUserVisible = Visibility.Collapsed;
+            IsLvCctoClienteVisible = Visibility.Collapsed;
+            IsLvCctoBUVisible = Visibility.Collapsed;
+            IsLvBUsVisible = Visibility.Collapsed;
+            IsLvVendorVisible = Visibility.Collapsed;
+            IsLvPagosVisible = Visibility.Collapsed;
         }
+
+
+
+        private async void LoadData(string tablaAMostrar)
+        {
+            IsLvUsuariosVisible = Visibility.Collapsed;
+            IsLvBaseInstaladaVisible = Visibility.Collapsed;
+            IsLvEndUserVisible = Visibility.Collapsed;
+            IsLvCctoClienteVisible = Visibility.Collapsed;
+            IsLvCctoBUVisible = Visibility.Collapsed;
+            IsLvBUsVisible = Visibility.Collapsed;
+            IsLvVendorVisible = Visibility.Collapsed;
+            IsLvPagosVisible = Visibility.Collapsed;
+
+            switch (tablaAMostrar)
+            {
+                case "Usuario":
+                    IsLvUsuariosVisible = Visibility.Visible;
+                    var usuarios = await _repoUsuario.GetAllAsync();
+                    ListUsuarios.Clear();
+                    ListUsuarios.AddRange(usuarios);
+                    break;
+                case "BaseInstalada":
+                    IsLvBaseInstaladaVisible = Visibility.Visible;
+                    var bis = await _repoBaseInstalada.GetAllAsync();
+                    ListBaseInstalada.Clear();
+                    ListBaseInstalada.AddRange(bis);
+                    break;
+                case "BU":
+                    IsLvBUsVisible = Visibility.Visible;
+                    var bus = await _repoBU.GetAllAsync();
+                    ListBUs.Clear();
+                    ListBUs.AddRange(bus);
+                    break;
+                case "ContactoCliente":
+                    IsLvCctoClienteVisible = Visibility.Visible;
+                    var cctocls = await _repoCctoCliente.GetAllAsync();
+                    ListCctoCliente.Clear();
+                    ListCctoCliente.AddRange(cctocls);
+                    break;
+                case "ContactoBU":
+                    IsLvCctoBUVisible = Visibility.Visible;
+                    var cctobu = await _repoCctoBU.GetAllAsync();
+                    ListCctoBU.Clear();
+                    ListCctoBU.AddRange(cctobu);
+                    break;
+                case "EndUser":
+                    IsLvEndUserVisible = Visibility.Visible;
+                    var eus = await _repoEndUser.GetAllAsync();
+                    ListEndUser.Clear();
+                    ListEndUser.AddRange(eus);
+                    break;
+                case "Pago":
+                    IsLvPagosVisible = Visibility.Visible;
+                    var pagos = await _repoPago.GetAllAsync();
+                    ListPago.Clear();
+                    ListPago.AddRange(pagos);
+                    break;
+                case "Vendor":
+                    IsLvVendorVisible = Visibility.Visible;
+                    var vendors = await _repoVendor.GetAllAsync();
+                    ListVendor.Clear();
+                    ListVendor.AddRange(vendors);
+                    break;
+                default:
+                    MessageBox.Show("");
+                    break;
+            }
+
+            RaisePropertyChanged(nameof(IsLvUsuariosVisible));
+            RaisePropertyChanged(nameof(IsLvVendorVisible));
+            RaisePropertyChanged(nameof(IsLvPagosVisible));
+            RaisePropertyChanged(nameof(IsLvEndUserVisible));
+            RaisePropertyChanged(nameof(IsLvCctoClienteVisible));
+            RaisePropertyChanged(nameof(IsLvBUsVisible));
+            RaisePropertyChanged(nameof(IsLvBaseInstaladaVisible));
+            RaisePropertyChanged(nameof(IsLvCctoBUVisible));
+            RaisePropertyChanged(nameof(ListUsuarios));
+            RaisePropertyChanged(nameof(ListBaseInstalada));
+            RaisePropertyChanged(nameof(ListBUs));
+            RaisePropertyChanged(nameof(ListCctoCliente));
+            RaisePropertyChanged(nameof(ListCctoBU));
+            RaisePropertyChanged(nameof(ListEndUser));
+            RaisePropertyChanged(nameof(ListPago));
+            RaisePropertyChanged(nameof(ListVendor));
+        }
+
+        private void FilterData(string buscador, string tablaAMostrar)
+        {
+            switch (tablaAMostrar)
+            {
+                case "Usuario":
+                    ListUsuarios.Where(x => x.Apellidos.Contains(buscador)).ToList();
+                    break;
+                case "BaseInstalada":
+                    break;
+                case "BU":
+                    ListBUs.Where(x => x.Acronimo.Contains(buscador)).ToList();
+                    break;
+                case "ContactoCliente":
+
+                    break;
+                case "ContactoBU":
+                   
+                    break;
+                case "EndUser":
+                  
+                    break;
+                case "Pago":
+
+                    break;
+                case "Vendor":
+      
+                    break;
+                default:
+
+                    break;
+            }
+
+            RaisePropertyChanged(nameof(ListUsuarios));
+            RaisePropertyChanged(nameof(ListBaseInstalada));
+            RaisePropertyChanged(nameof(ListBUs));
+            RaisePropertyChanged(nameof(ListCctoCliente));
+            RaisePropertyChanged(nameof(ListCctoBU));
+            RaisePropertyChanged(nameof(ListEndUser));
+            RaisePropertyChanged(nameof(ListPago));
+            RaisePropertyChanged(nameof(ListVendor));
+        }
+
 
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            //
+            //Seleccion = (TablasBD)navigationContext.Parameters["AMostrar"];
+            //Buscador = (string)navigationContext.Parameters["Filtro"];
+            //RaisePropertyChanged(nameof(Seleccion));
+            //RaisePropertyChanged(nameof(Buscador));
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -105,82 +259,5 @@ namespace HCHLView.ViewModels.BBDD
             //
         }
 
-        private async void LoadData(string TablaAMostrar)
-        {
-            switch (TablaAMostrar)
-            {
-                case "Usuario":
-                    var usuarios = await _repoUsuario.GetAllAsync();
-                    ListUsuarios.AddRange(usuarios);
-                    break;
-                case "BaseInstalada":
-                    var bis = await _repoBaseInstalada.GetAllAsync();
-                    ListBaseInstalada.AddRange(bis);
-                    break;
-                case "BU":
-                    var bus = await _repoBU.GetAllAsync();
-                    ListBUs.AddRange(bus); 
-                    break;
-                case "ContactoCliente":
-                    var cctocls = await _repoCctoCliente.GetAllAsync();
-                    ListCctoCliente.AddRange(cctocls); 
-                    break;
-                case "ContactoBU":
-                    var cctobu = await _repoCctoBU.GetAllAsync();
-                    ListCctoBU.AddRange(cctobu);
-                    break;
-                case "EndUser":
-                    var eus = await _repoEndUser.GetAllAsync();
-                    ListEndUser.AddRange(eus);
-                    break;
-                case "Pago":
-                    var pagos = await _repoPago.GetAllAsync();
-                    ListPago.AddRange(pagos);
-                    break;
-                case "Vendor":
-                    var vendors = await _repoVendor.GetAllAsync();
-                    ListVendor.AddRange(vendors);
-                    break;
-                default:
-                    MessageBox.Show("");
-                    break;
-            }
-        }
-
-        public Visibility userVis { get; set; }
-        public Visibility bisVis { get; set; }
-        public Visibility buVis { get; set; }
-        public Visibility cctosClienteVis { get; set; }
-        public Visibility cctosBusVis { get; set; }
-        public Visibility euVis { get; set; }
-        public Visibility pagoVis { get; set; }
-        public Visibility vendorVis { get; set; }
-
-        private void ListViewAMostrar(string TablaAMostrar)
-        {
-            if (TablaAMostrar == "Usuario") { userVis = Visibility.Visible; }
-            else { userVis = Visibility.Collapsed; }
-
-            if (TablaAMostrar == "BaseInstalada") { bisVis = Visibility.Visible; }
-            else { bisVis = Visibility.Collapsed; }
-
-            if (TablaAMostrar == "BU") {buVis = Visibility.Visible; }
-            else { buVis = Visibility.Collapsed; }
-
-            if (TablaAMostrar == "ContactoCliente") { cctosClienteVis = Visibility.Visible; }
-            else { cctosClienteVis = Visibility.Collapsed; }
-
-            if (TablaAMostrar == "ContactoBU") { cctosBusVis = Visibility.Visible; }
-            else { cctosBusVis = Visibility.Collapsed; }
-
-            if (TablaAMostrar == "EndUser") { euVis = Visibility.Visible; }
-            else { euVis = Visibility.Collapsed; }
-
-            if (TablaAMostrar == "Pago") { pagoVis = Visibility.Visible; }
-            else { pagoVis = Visibility.Collapsed; }
-
-            if (TablaAMostrar == "Vendor") { vendorVis = Visibility.Visible; }
-            else { vendorVis = Visibility.Collapsed; }
-        }
     }
 }
