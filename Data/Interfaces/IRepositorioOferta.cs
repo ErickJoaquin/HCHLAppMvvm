@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Data.Repositorios
+namespace Data.Interfaces
 {
     public interface IRepositorioOferta
     {
-        Task<List<OfertaCompleta>> GetAllAsync();
+        Task<List<OfertaCompleta>> GetAllByStateAsync(string estadoOfertasATraer);
     }
 }
