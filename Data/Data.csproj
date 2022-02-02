@@ -78,11 +78,11 @@
   <ItemGroup>
     <Compile Include="aBorrar.cs" />
     <Compile Include="Interfaces\IRepositorioBase.cs" />
+    <Compile Include="Interfaces\IRepositorioEquipos.cs" />
     <Compile Include="Interfaces\IRepositorioRevisiones.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IRepositorioCarpetas.cs" />
     <Compile Include="Interfaces\IRepositorioContactos.cs" />
-    <Compile Include="Interfaces\IRepositorioEquipos.cs" />
     <Compile Include="Interfaces\IRepositorioItem.cs" />
     <Compile Include="Interfaces\IRepositorioOferta.cs" />
     <Compile Include="Interfaces\IRepositorioPorOferta.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\RepositorioCarpetas.cs" />
     <Compile Include="Repositorios\RepositorioContactos.cs" />
-    <Compile Include="Repositorios\RepositorioEquipos.cs" />
+    <Compile Include="Repositorios\RepositorioEquipos1.cs" />
     <Compile Include="Repositorios\RepositorioItem.cs" />
     <Compile Include="Repositorios\RepositorioMarca.cs" />
     <Compile Include="Repositorios\RepositorioOferta.cs" />
