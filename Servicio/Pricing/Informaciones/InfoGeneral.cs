@@ -50,7 +50,7 @@ namespace Servicios.Pricing.Informaciones
 
             ContactoCliente CtoCliente = _repCtos.GetByIdAsync(ofClientes.IdContacto).Result;
             Pago Pago = _repPagos.GetByIdAsync(Oferta.IdTipoPago).Result;
-            List<EquiposLinkeadosCRM> EquiposLinkeados = _repBILinkes.GetEquiposConInfoCRMByOfferIdAsync(Oferta.Id).Result;
+            List<EquiposLinkeadosCRM> EquiposLinkeados = _repBILinkes.GetWithCRMInfoByOfferIdAsync(Oferta.Id).Result;
             Usuario User = _repUser.GetByIdAsync(Oferta.IdAplicador).Result;
                         
             if (incluyeRep)

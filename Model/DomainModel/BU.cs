@@ -11,8 +11,6 @@ namespace Model
         public int Id { get; set; }
         public string Acronimo { get; set; }
         public string Nombre { get; set; }
-        [Computed]
-        public string NombreCompleto { get { return $"{Acronimo} - {Nombre}"; } }
         public string Pais { get; set; }
         public string Direccion { get; set; }
         public string Ciudad { get; set; }
@@ -28,6 +26,11 @@ namespace Model
         public string DocumentoInfo { get { 
                 return String.IsNullOrEmpty(Documento) ? "N/A" : $"{Documento}, {(MonedasEnum)IdMonedaDocumento} {ValorDocumento}"; 
             } }
+
+        public override string ToString()
+        {
+            return $"{Acronimo} - {Nombre}"
+        }
     }
 }
 

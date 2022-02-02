@@ -8,14 +8,17 @@ namespace Model
         public int Id { get; set; }
         public string Apellidos { get; set; }
         public string Nombres { get; set; }
-        [Computed]
-        public string NombreCompleto { get { return Nombres + " " + Apellidos; } }
         public string Telefono { get; set; }
         public string Celular { get; set; }
         public string Mail { get; set; }
         public string Sexo { get; set; }
         public string Departamento { get; set; }
         public string Cargo { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Nombres} {Apellidos}";
+        }
     }
 
     [Table("Usuario")]
