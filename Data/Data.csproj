@@ -82,7 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IRepositorioCarpetas.cs" />
     <Compile Include="Interfaces\IRepositorioContactos.cs" />
-    <Compile Include="Interfaces\IRepositorioEquiposLinkeados.cs" />
+    <Compile Include="Interfaces\IRepositorioEquipos.cs" />
     <Compile Include="Interfaces\IRepositorioItem.cs" />
     <Compile Include="Interfaces\IRepositorioOferta.cs" />
     <Compile Include="Interfaces\IRepositorioPorOferta.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\RepositorioCarpetas.cs" />
     <Compile Include="Repositorios\RepositorioContactos.cs" />
-    <Compile Include="Repositorios\RepositorioEquiposLinkeados.cs" />
+    <Compile Include="Repositorios\RepositorioEquipos.cs" />
     <Compile Include="Repositorios\RepositorioItem.cs" />
     <Compile Include="Repositorios\RepositorioMarca.cs" />
     <Compile Include="Repositorios\RepositorioOferta.cs" />

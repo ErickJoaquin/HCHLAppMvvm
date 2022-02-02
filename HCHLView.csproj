@@ -173,6 +173,7 @@
   <ItemGroup>
     <Folder Include="Commands\Aplicacion\" />
     <Folder Include="Commands\BBII\" />
+    <Folder Include="Styles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -112,6 +112,7 @@
     <Compile Include="Enumeraciones\TipoOfertaEnum.cs" />
     <Compile Include="Enumeraciones\VendorEUEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadModel\AccesoBIModel.cs" />
     <Compile Include="ReadModel\EquiposLinkeadosCRM.cs" />
     <Compile Include="ReadModel\OfertaCompleta.cs" />
     <Compile Include="ReadModel\TablasBD.cs" />
