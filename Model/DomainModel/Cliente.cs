@@ -38,16 +38,26 @@ namespace Model
     {
         public string IdCRMPlanta { get; set; }
         public string Planta { get; set; }
+        [Computed]
+        public string NombreCompleto
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(Planta))
+                {
+                    return Nombre;
+                }
+                else
+                {
+                    return Nombre + " - " + Planta;
+                }
+            }
+        }
         public string DireccionOf { get; set; }
 
         public EndUser()
         {
             IdTipoCliente = (int)VendorEUEnum.EU;
-        }
-
-        public override string ToString()
-        {
-            return String.IsNullOrEmpty(Planta) ? $"{Nombre}" : $"{Nombre} - {Planta}";
         }
     }
 
