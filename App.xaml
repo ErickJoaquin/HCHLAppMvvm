@@ -5,6 +5,14 @@
     xmlns:local="clr-namespace:HCHLView"
     xmlns:prism="http://prismlibrary.com/">
     <Application.Resources>
+        
+        <!--Colors-->
+        <Color x:Key="PrimaryGreen">#FF00648B</Color>
+        <Color x:Key="PrimaryBlue">#FF001E64</Color>
+        <Color x:Key="SecondaryOrange">#FFE57200</Color>
+        <Color x:Key="SecondaryGrey">#FF425563</Color>
+                
+        <!--Controls-->
         <Style TargetType="UserControl" x:Key="MainViews">
             <Setter Property="Background" Value="#FF00648B"/>
             <Setter Property="Foreground" Value="White" />
