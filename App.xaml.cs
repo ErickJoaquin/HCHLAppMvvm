@@ -32,7 +32,7 @@ namespace HCHLView
             containerRegistry.Register<IRepositorioRevisiones, RepositorioRevisiones>();
             containerRegistry.Register<IRepositorioCarpetas, RepositorioCarpetas>();
             containerRegistry.Register<IRepositorioContactos, RepositorioContactos>();
-            containerRegistry.Register<IRepositorioEquiposLinkeados, RepositorioEquiposLinkeados>();
+            containerRegistry.Register<IRepositorioEquipos, RepositorioEquipos>();
             containerRegistry.Register<IRepositorioItem, RepositorioItem>();
             containerRegistry.Register<RepositorioMarca>();
             containerRegistry.Register<RepositorioPais>();
