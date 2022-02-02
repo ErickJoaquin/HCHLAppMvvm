@@ -74,7 +74,7 @@ namespace Servicios.Hedge.Utilidades
 
             User = _repUser.GetByIdAsync(Oferta.IdAplicador).Result;
 
-            HojaHedge.Range["B58"].Value = $"{User} - {DateTime.Now.ToString("dd-MM-yyyy")}";
+            HojaHedge.Range["B58"].Value = $"{User.NombreCompleto} - {DateTime.Now.ToString("dd-MM-yyyy")}";
         }
     }
 }

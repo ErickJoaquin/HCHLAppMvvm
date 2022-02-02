@@ -10,7 +10,7 @@ namespace Servicios.Correos.EnvioOferta.Utilidades
             int count = 0;
             foreach(Persona vendedor in vendedoresOferta)
             {
-                body += $"<b> {vendedor}:</b> {vendedor.Telefono} / {vendedor.Celular} - {vendedor.Mail}.<br/>";
+                body += $"<b> {vendedor.NombreCompleto}:</b> {vendedor.Telefono} / {vendedor.Celular} - {vendedor.Mail}.<br/>";
                 count++;
             }
             

@@ -26,7 +26,7 @@ namespace Servicios.Correos.EnvioOferta.Utilidades
             {
                 if (i == 0)
                 {
-                    nombrerep = (CctosRepresentantes[i].Telefono.ToString() != null && CctosRepresentantes[i].ToString() != "") ? CctosRepresentantes[i].ToString() : "";
+                    nombrerep = (CctosRepresentantes[i].Telefono.ToString() != null && CctosRepresentantes[i].NombreCompleto.ToString() != "") ? CctosRepresentantes[i].NombreCompleto : "";
                     telefonorep = (CctosRepresentantes[i].Telefono.ToString() != null && CctosRepresentantes[i].Telefono.ToString() != "") ? CctosRepresentantes[i].Telefono : "";
                     celularrep = (CctosRepresentantes[i].Celular != null) ? CctosRepresentantes[i].Celular : "";
                     mailrep = (CctosRepresentantes[i].Mail != null) ? CctosRepresentantes[i].Mail : "";
@@ -34,8 +34,8 @@ namespace Servicios.Correos.EnvioOferta.Utilidades
                 }
                 else
                 {
-                    if (nombrerep == "") { nombrerep += (CctosRepresentantes[i].ToString() != null && CctosRepresentantes[i].ToString() != "") ? CctosRepresentantes[i].ToString() : ""; }
-                    else { nombrerep += (CctosRepresentantes[i].ToString() != null && CctosRepresentantes[i].ToString() != "") ? "/" + CctosRepresentantes[i].ToString() : ""; }
+                    if (nombrerep == "") { nombrerep += (CctosRepresentantes[i].NombreCompleto.ToString() != null && CctosRepresentantes[i].NombreCompleto.ToString() != "") ? CctosRepresentantes[i].NombreCompleto : ""; }
+                    else { nombrerep += (CctosRepresentantes[i].NombreCompleto.ToString() != null && CctosRepresentantes[i].NombreCompleto.ToString() != "") ? "/" + CctosRepresentantes[i].NombreCompleto : ""; }
                     if (telefonorep == "") { telefonorep += (CctosRepresentantes[i].Telefono.ToString() != null && CctosRepresentantes[i].Telefono.ToString() != "") ? CctosRepresentantes[i].Telefono : ""; }
                     else if (CctosRepresentantes[i].Telefono != CctosRepresentantes[i - 1].Telefono) { telefonorep += (CctosRepresentantes[i].Telefono.ToString() != null && CctosRepresentantes[i].Telefono.ToString() != "") ? "/" + CctosRepresentantes[i].Telefono : ""; }
                     if (celularrep == "") { celularrep += (CctosRepresentantes[i].Celular.ToString() != null && CctosRepresentantes[i].Celular.ToString() != "") ? CctosRepresentantes[i].Celular : ""; }
