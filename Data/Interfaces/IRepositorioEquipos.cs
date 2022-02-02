@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
-    public interface IRepositorioEquiposLinkeados
+    public interface IRepositorioEquipos
     {
         Task<List<BaseInstalada>> GetByOfferIdAsync(int id);
-        Task<List<EquiposLinkeadosCRM>> GetEquiposConInfoCRMByOfferIdAsync(int id);
+        Task<List<EquiposLinkeadosCRM>> GetWithCRMInfoByOfferIdAsync(int id);
     }
 }

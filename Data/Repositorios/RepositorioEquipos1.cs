@@ -9,7 +9,7 @@ using Data.Interfaces;
 
 namespace Data
 {
-    public class RepositorioEquiposLinkeados : IRepositorioEquiposLinkeados
+    public class RepositorioEquipos : IRepositorioEquipos
     {
         private readonly string RutaBBDD = @"Server=LCLSCLW10X0059\SQLEXPRESS; Database=BDHCHLApp; Integrated Security=True;";
 
@@ -29,7 +29,7 @@ namespace Data
             }
         }
 
-        public async Task<List<EquiposLinkeadosCRM>> GetEquiposConInfoCRMByOfferIdAsync(int id)
+        public async Task<List<EquiposLinkeadosCRM>> GetWithCRMInfoByOfferIdAsync(int id)
         {
             string sqlQuery = $"SELECT BI.Id, BI.Modelo, BI.NSerie, IdProceso, BI.RefCliente, CRM.IdEquiposCRM, CRM.TipoEquipo, CRM.Producto, CRM.Maquina " +
                 $"FROM OfertaBaseInstalada as oBI " +
