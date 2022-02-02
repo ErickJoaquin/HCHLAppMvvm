@@ -18,13 +18,13 @@ namespace Servicios.Pricing.Informaciones
         private readonly IRepositorioBase<Usuario> _repUser;
         private readonly IRepositorioBase<Vendor> _repRep;
         private readonly RepositorioBase<Pago> _repPagos;
-        private readonly RepositorioEquiposLinkeados _repBILinkes;
+        private readonly RepositorioEquipos _repBILinkes;
 
         public EndUser EU;
         public Vendor Representante;
 
         public InfoGeneral(IRepositorioBase<BU> repBU, IRepositorioBase<EndUser> repEU, IRepositorioBase<ContactoCliente> repCtos, RepositorioBase<Pago> repPagos,
-            IRepositorioBase<Usuario> repUser, IRepositorioBase<Vendor> repRep, InformacionCliente infoCliente, RepositorioEquiposLinkeados repBILinkes)
+            IRepositorioBase<Usuario> repUser, IRepositorioBase<Vendor> repRep, InformacionCliente infoCliente, RepositorioEquipos repBILinkes)
         {
             this._repBU = repBU;
             this._repEU = repEU;
@@ -63,7 +63,7 @@ namespace Servicios.Pricing.Informaciones
 
             HojaPricing.Range["B1"].Value = (!String.IsNullOrEmpty(BU.Acronimo)) ? "PRICING " + BU.Acronimo : "PRICING";
             HojaPricing.Range["E4"].Value = (Cliente != null) ? Cliente.Nombre : "";
-            HojaPricing.Range["E5"].Value = (CtoCliente != null) ? CtoCliente.NombreCompleto : "";
+            HojaPricing.Range["E5"].Value = (CtoCliente != null) ? CtoCliente.ToString() : "";
             HojaPricing.Range["E6"].Value = (Oferta.Estado == "Consolidando" || Oferta.Estado == "Vendida") ? Oferta.NPV : "";
             HojaPricing.Range["E7"].Value = (EquiposLinkeados.Count > 0) ? EquiposLinkeados[0].TipoEquipo : "";
             HojaPricing.Range["E8"].Value = (EquiposLinkeados.Count > 0) ? EquiposLinkeados[0].Producto : "";
@@ -82,7 +82,7 @@ namespace Servicios.Pricing.Informaciones
             HojaPricing.Range["O7"].Value = (Oferta.IdMoneda > 0) ? _moneda.ToString() : "";
             HojaPricing.Range["L32"].Value = (incluyeRep) ? Representante.Nombre : "N/A";
             HojaPricing.Range["L33"].Value = (incluyeRep) ? Representante.Comision : 0;
-            HojaPricing.Range["O9"].Value = (User != null) ? User.NombreCompleto : "";
+            HojaPricing.Range["O9"].Value = (User != null) ? User.ToString() : "";
             HojaPersonal.Range["B4"].Value = (User != null) ? User.IdUsuario : "";
         }
     }

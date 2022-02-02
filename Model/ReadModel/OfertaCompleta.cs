@@ -54,6 +54,7 @@ namespace Model.ReadModel
         public double VentaTotal { get; set; }
         public double GM { get; set; }
         public int IdProveedor { get; set; }
+        //public BU Proveedor { get; set; }
         public string ProveedorAcronimo { get; set; }
         public string ProveedorNombre { get; set; }
         [Computed]
@@ -76,6 +77,7 @@ namespace Model.ReadModel
         }
         public string DireccionEntrega { get; set; }
         public int IdAplicador { get; set; }
+        //public Usuario Aplicador { get; set; }
         public string AplicadorNombre { get; set; }
         public string AplicadorApellido { get; set; }
         [Computed]
@@ -93,6 +95,7 @@ namespace Model.ReadModel
         public string Segmento { get; set; }
         public string Referencia { get; set; }
         public int IdKAM { get; set; }
+        //public Usuario Vendedor { get; set; }  // aplicar esto y eliminar el resto de las propieades asociadas
         public string VendedorNombre { get; set; }
         public string VendedorApellido { get; set; }
         [Computed]

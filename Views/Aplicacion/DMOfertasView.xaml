@@ -74,8 +74,8 @@
                     <GridViewColumn Header="Tipo de Maquina" DisplayMemberBinding="{Binding TipoMaquina}" Width="Auto"/>
                     <GridViewColumn Header="Proveedor" DisplayMemberBinding="{Binding ProveedorAcronimo}" Width="Auto"/>
                     <GridViewColumn Header="Moneda" DisplayMemberBinding="{Binding Moneda}" Width="Auto"/>
-                    <GridViewColumn x:Name="ColVenta" Header="Venta" DisplayMemberBinding="{Binding VentaTotal, StringFormat=C2}" Width="Auto"/>
-                    <GridViewColumn Header="GM" DisplayMemberBinding="{Binding GM, StringFormat=P2}" Width="Auto"/>
+                    <!--<GridViewColumn x:Name="ColVenta" Header="Venta" DisplayMemberBinding="{Binding VentaTotal, StringFormat=C2}" Width="Auto"/>
+                    <GridViewColumn Header="GM" DisplayMemberBinding="{Binding GM, StringFormat=P2}" Width="Auto"/>-->
                     <GridViewColumn Header="Segmento" DisplayMemberBinding="{Binding Segmento}" Width="Auto"/>
                     <GridViewColumn Header="Entrega" DisplayMemberBinding="{Binding TipoEntrega}" Width="Auto"/>
                     <GridViewColumn Header="Responsable" DisplayMemberBinding="{Binding Aplicador}" Width="Auto"/>
@@ -206,8 +206,8 @@
                     <GridViewColumn Header="Tipo de Maquina" DisplayMemberBinding="{Binding TipoMaquina}" Width="Auto"/>
                     <GridViewColumn Header="Proveedor" DisplayMemberBinding="{Binding ProveedorAcronimo}" Width="Auto"/>
                     <GridViewColumn Header="Moneda" DisplayMemberBinding="{Binding Moneda}" Width="Auto"/>
-                    <GridViewColumn Header="Venta" DisplayMemberBinding="{Binding VentaTotal, StringFormat=C2}" Width="Auto"/>
-                    <GridViewColumn Header="GM" DisplayMemberBinding="{Binding GM, StringFormat=P2}" Width="Auto"/>
+                    <!--<GridViewColumn Header="Venta" DisplayMemberBinding="{Binding VentaTotal, StringFormat=C2}" Width="Auto"/>
+                    <GridViewColumn Header="GM" DisplayMemberBinding="{Binding GM, StringFormat=P2}" Width="Auto"/>-->
                     <GridViewColumn Header="Fecha OC" DisplayMemberBinding="{Binding FechaRecepcion, StringFormat='dd/MM/yyyy'}" Width="Auto"/>
                     <GridViewColumn Header="Entrega" DisplayMemberBinding="{Binding FechaEntrega, StringFormat='dd/MM/yyyy'}" Width="Auto"/>
                     <GridViewColumn Header="OC" DisplayMemberBinding="{Binding NombreOC}" Width="Auto"/>

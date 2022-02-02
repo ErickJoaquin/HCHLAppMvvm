@@ -38,8 +38,8 @@ namespace Servicios.OfertaComercial.Informacion
             _reemplazar.TextoGeneral("Cliente", Cliente.Nombre, docof);
             _reemplazar.TextoGeneral("Proyecto", Oferta.ReferenciaCliente.ToString(), docof);
             _reemplazar.TextoGeneral("Proyecto2", Oferta.ReferenciaCliente.ToString(), docof);
-            _reemplazar.TextoGeneral("De_quien", User.NombreCompleto, docof);
-            _reemplazar.TextoGeneral("Para_quien", ccto.NombreCompleto, docof);
+            _reemplazar.TextoGeneral("De_quien", User.ToString(), docof);
+            _reemplazar.TextoGeneral("Para_quien", ccto.ToString(), docof);
             _reemplazar.TextoGeneral("Pago", pago.Descripcion, docof);
             _reemplazar.TextoGeneral("Validez", Oferta.Validez.ToString(), docof, strPosterior: " días");
             

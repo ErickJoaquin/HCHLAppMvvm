@@ -112,7 +112,6 @@ namespace HCHLView.ViewModels.BBDD
         }
 
 
-
         private async void LoadData(string tablaAMostrar)
         {
             IsLvUsuariosVisible = Visibility.Collapsed;

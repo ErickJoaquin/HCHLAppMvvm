@@ -17,7 +17,7 @@ namespace Servicios.OfertaComercial.Utilidades
         public void Vendedores(int NVendedor, Usuario Usuario, Word.Document docof, string strPrevio = "", string strPosterior = "")
         {
             if (Usuario == null) { return; }
-            TextoGeneral("Vendedor" + NVendedor, Usuario.NombreCompleto, docof);
+            TextoGeneral("Vendedor" + NVendedor, Usuario.ToString(), docof);
             TextoGeneral("TelefonoVendedor" + NVendedor, Usuario.Telefono, docof);
             TextoGeneral("CelularVendedor" + NVendedor, Usuario.Celular, docof);
             TextoGeneral("EmailVendedor" + NVendedor, Usuario.Mail, docof);

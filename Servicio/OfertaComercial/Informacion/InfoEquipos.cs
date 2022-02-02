@@ -11,8 +11,8 @@ namespace Servicios.OfertaComercial.Informacion
     public class InfoEquipos
     {
         private readonly ReemplazarEnWord _reemplazar;
-        private readonly RepositorioEquiposLinkeados _repEq;
-        public InfoEquipos(RepositorioEquiposLinkeados repEq, ReemplazarEnWord reemplazar)
+        private readonly RepositorioEquipos _repEq;
+        public InfoEquipos(RepositorioEquipos repEq, ReemplazarEnWord reemplazar)
         {
             this._repEq = repEq;
             this._reemplazar = reemplazar;

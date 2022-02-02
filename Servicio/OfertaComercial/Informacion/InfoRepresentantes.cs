@@ -53,8 +53,8 @@ namespace Servicios.OfertaComercial.Informacion
 
                 foreach (ContactoCliente rep in ListaCctos)
                 {
-                    if (nombres == "") { nombres += (rep.NombreCompleto.ToString() != null && rep.NombreCompleto.ToString() != "") ? rep.NombreCompleto.Trim() : ""; }
-                    else if (!nombres.Contains(rep.NombreCompleto)) { nombres += (rep.NombreCompleto.ToString() != null && rep.NombreCompleto.ToString() != "") ? "/" + rep.NombreCompleto.Trim() : ""; }
+                    if (nombres == "") { nombres += (rep.ToString() != null && rep.ToString() != "") ? rep.ToString().Trim() : ""; }
+                    else if (!nombres.Contains(rep.ToString())) { nombres += (rep.ToString() != null && rep.ToString() != "") ? "/" + rep.ToString().Trim() : ""; }
                     if (telefono == "") { telefono += (rep.Telefono.ToString() != null && rep.Telefono.ToString() != "") ? rep.Telefono : ""; }
                     else if (!telefono.Contains(rep.Telefono)) { telefono += (rep.Telefono.ToString() != null && rep.Telefono.ToString() != "") ? "/" + rep.Telefono : ""; }
                     if (celular == "") { celular += (rep.Celular.ToString() != null && rep.Celular.ToString() != "") ? rep.Celular : ""; }

@@ -18,7 +18,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="45"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <Grid VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" Margin="10 5 10 5">
@@ -62,12 +62,13 @@
         </Grid>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
             <ListView Name="LvEquipos" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" 
-                      ScrollViewer.VerticalScrollBarVisibility="Auto" Width="Auto" MinWidth="300" ItemsSource="{Binding ListaBaseInstalada}">
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" Width="Auto" MinWidth="300" 
+                      SelectedItem="{Binding EquipoSeleccionado}" ItemsSource="{Binding ListaBaseInstalada}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="NSerie" Width="Auto" DisplayMemberBinding="{Binding NSerie}" />
                         <GridViewColumn Header="Modelo" Width="Auto" DisplayMemberBinding="{Binding Modelo}" />
-                        <GridViewColumn Header="Equipo" Width="Auto" DisplayMemberBinding="{Binding Producto}"/>
+                        <GridViewColumn Header="Referencia Cliente" Width="Auto" DisplayMemberBinding="{Binding RefCiente}"/>
                     </GridView>
                 </ListView.View>
                 <ListView.GroupStyle>
@@ -101,13 +102,19 @@
             </ListView>
             <ScrollViewer Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}"  Width="Auto" MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}" Margin="10 5 5 5">
                 <StackPanel Visibility="{Binding InfoEquiposVisibility}">
-                    <TextBlock Foreground="White">Informaciones:</TextBlock>
-                    <Expander Name="ExpEquipo" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Equipo" 
-                              ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
-                        <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3">
-                            <StackPanel>
-                                <TextBlock x:Name="TbkModeloSerie" Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                <Grid Width="Auto" MinWidth="350" Margin="5">
+                    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" Padding="2">
+                        <Expander Foreground="White" HorizontalAlignment="Left" Header="Detalles Equipo" ExpandDirection="Down" IsExpanded="True" IsEnabled="False">
+                            <StackPanel DataContext="{Binding EquipoSeleccionado}">
+                                <TextBlock Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" 
+                                           Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} - {1}">
+                                            <Binding Path="Modelo" />
+                                            <Binding Path="NSerie" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <Grid Width="Auto" MinWidth="350" Margin="5" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1.4*"/>
                                         <ColumnDefinition Width="2.5*"/>
@@ -123,25 +130,35 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="1" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">CRM:</TextBlock>
-                                    <TextBlock Grid.Row="2" Foreground="White" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Familia:</TextBlock>
-                                    <TextBlock Grid.Row="2" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Modelo:</TextBlock>
-                                    <TextBlock Grid.Row="3" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Proceso:</TextBlock>
-                                    <TextBlock Grid.Row="3" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">N° contrato:</TextBlock>
-                                    <TextBlock Grid.Row="5" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Ref. Cliente:</TextBlock>
-                                    <TextBlock x:Name="TbkCRM" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock x:Name="TbkFamilia" Grid.Row="2" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock x:Name="TbkModelo" Grid.Row="2" Grid.Column="3" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock x:Name="TbkProceso" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock x:Name="TbkNContrato" Grid.Row="3" Grid.Column="3" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock x:Name="TbkRefCliente" Grid.Row="5" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Grid.Row="2" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">TAG:</TextBlock>
+                                    <TextBlock Grid.Row="3" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Modelo:</TextBlock>
+                                    <TextBlock Grid.Row="3" Foreground="White" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Familia:</TextBlock>
+                                    <TextBlock Grid.Row="4" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Proceso:</TextBlock>
+                                    <TextBlock Grid.Row="4" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">N° contrato:</TextBlock>
+                                    <TextBlock Text="{Binding IdEquiposCRM}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding RefCliente}" Grid.Row="2" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding Familia}" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock  Grid.Row="3" Grid.Column="4" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Modelo"/>
+                                            <Binding Path="DetallesModelo"/>
+                                        </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding IdProceso}" Grid.Row="4" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding NContrato}" Grid.Row="4" Grid.Column="3" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
                                 </Grid>
                             </StackPanel>
-                        </Border>
-                    </Expander>
-                    <Expander Name="ExpCliente" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Cliente" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
-                        <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3">
-                            <StackPanel>
-                                <TextBlock x:Name="TbkClientePlanta" Grid.ColumnSpan="4"  Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" Height="25" Width="Auto" Margin="5 5 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        </Expander>
+                    </Border>
+
+                    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3">
+                        <Expander Name="ExpCliente" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Detalles Cliente" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
+                            <StackPanel DataContext="{Binding EquipoSeleccionado.EndUser}">
+                                <TextBlock Text="{Binding NombreCompleto}" Grid.ColumnSpan="4"  Foreground="White" FontWeight="Bold" FontSize="14" 
+                                           TextDecorations="Underline" Height="25" Width="Auto" Margin="5 5 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                           TextWrapping="Wrap"/>
                                 <Grid Width="Auto" MinWidth="350" Margin="5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1.2*"/>
@@ -161,32 +178,25 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="1" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Industria:</TextBlock>
-                                    <TextBlock Grid.Row="2" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">País:</TextBlock>
-                                    <TextBlock x:Name="TbkIEstadoEU" Grid.Row="2" Grid.Column="2" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3"/>
-                                    <TextBlock Grid.Row="4" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Dirección:</TextBlock>
-                                    <TextBlock Grid.Row="3" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Ciudad:</TextBlock>
-                                    <TextBlock Grid.Row="3" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">CPostal:</TextBlock>
+                                    <TextBlock Grid.Row="5" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Dirección:</TextBlock>
                                     <TextBlock Grid.Row="6" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Página Web:</TextBlock>
                                     <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Teléfono:</TextBlock>
-                                    <TextBlock x:Name="TbkIdTributarioEU" Grid.Row="5" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding TipoIdTributario}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding IdSubIndustria}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding DireccionCompleta}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Telefono}" Grid.Row="6" Grid.Column="3" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding PaginaWeb}" Grid.Row="6" Grid.Column="1" Foreground="White" Margin="3" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <TextBlock Text="{Binding IdTributario}" Grid.Row="4" Grid.Column="1" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     <Button x:Name="BtCctsclienteEU" Grid.Row="8" Grid.ColumnSpan="4" Foreground="White" Background="#FF00648B" BorderBrush="White" Margin="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center">Contactos</Button>
-                                    <TextBlock x:Name="TbkIndustria" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkDireccionEU" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkTelefonoEU" Grid.Row="6" Grid.Column="3" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkPaisEU" Grid.Row="2" Grid.Column="1" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkCiudadEU" Grid.Row="3" Grid.Column="1" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkEstadoEU" Grid.Row="2" Grid.Column="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkCPEU" Grid.Row="3" Grid.Column="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkPaginaWeb" Grid.Row="6" Grid.Column="1" Foreground="White" Margin="3" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <TextBlock x:Name="TbkNIdTributarioEU" Grid.Row="5" Grid.Column="1" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                 </Grid>
                             </StackPanel>
-                        </Border>
-                    </Expander>
-                    <Expander Name="ExpBU" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Proveedor" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
-                        <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                            <StackPanel>
-                                <TextBlock x:Name="TbkProveedor" Grid.ColumnSpan="4" Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                     </Expander>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                        <Expander Name="ExpBU" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Detalles Proveedor" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
+                            <StackPanel DataContext="{Binding EquipoSeleccionado.Proveedor}">
+                                <TextBlock Text="{Binding NombreCompleto}"  Grid.ColumnSpan="4" Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" 
+                                           Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                 <Grid Width="Auto" MinWidth="350" Margin="5">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1.2*"/>
@@ -201,137 +211,141 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Row="1" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">País:</TextBlock>
-                                    <TextBlock Grid.Row="1" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Ciudad:</TextBlock>
+                                    <TextBlock Grid.Row="1" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Documento:</TextBlock>
                                     <TextBlock Grid.Row="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Dirección:</TextBlock>
                                     <TextBlock Grid.Row="3" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Teléfono:</TextBlock>
+                                    <TextBlock Text="{Binding DocumentoInfo}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding DireccionCompleta}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Telefono}" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
                                     <Button x:Name="BtCctsBU" Grid.Row="4" Grid.ColumnSpan="4" Foreground="White" Background="#FF00648B" BorderBrush="White" Margin="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" >Contactos</Button>
-                                    <TextBlock x:Name="TbkPaisBU" Grid.Row="1" Grid.Column="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkCiudadBU" Grid.Row="1" Grid.Column="3" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkDireccionBU" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
-                                    <TextBlock x:Name="TbkTelefonoBU" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
                                 </Grid>
                             </StackPanel>
-                        </Border>
-                    </Expander>
-                    <Expander Name="ExpVentas" Header="Ventas" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" Visibility="Collapsed">
-                        <StackPanel Width="Auto" HorizontalAlignment="Stretch">
-                            <ListView x:Name="LvVentas" Height="Auto" MaxHeight="150" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
-                                <!---->
-                                <ListView.Resources>
-                                    <Style TargetType="{x:Type ListViewItem}">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="Foreground" Value="#E58C00"/>
-                                            </Trigger>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="#E58C00"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ListView.Resources>
-                                <ListView.View>
-                                    <GridView>
-                                        <GridView.Columns>
-                                            <GridViewColumn Header="NCRM" Width="Auto" DisplayMemberBinding="{Binding NCRM}" />
-                                            <GridViewColumn Header="NVenta" Width="Auto" DisplayMemberBinding="{Binding IdVSP}"/>
-                                            <GridViewColumn Header="Moneda" Width="Auto" DisplayMemberBinding="{Binding Curr}"/>
-                                            <GridViewColumn Header="Venta" Width="Auto" DisplayMemberBinding="{Binding VentaTotal, StringFormat=C2}"/>
-                                            <GridViewColumn Header="Entrega" Width="Auto" DisplayMemberBinding="{Binding TipoEntrega}"/>
-                                            <GridViewColumn Header="Fecha OC" Width="Auto" DisplayMemberBinding="{Binding FechaOC, StringFormat='dd-MM-yyyy'}"/>
-                                            <GridViewColumn Header="Fecha entrega" Width="Auto" DisplayMemberBinding="{Binding FechaEntrega, StringFormat='dd-MM-yyyy'}"/>
-                                            <GridViewColumn Header="Resumen/Comentarios" Width="Auto" DisplayMemberBinding="{Binding ComentariosSP}"/>
-                                        </GridView.Columns>
-                                    </GridView>
-                                </ListView.View>
-                                <ListView.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Abrir Carpeta de Venta" x:Name="MiVACV"/>
-                                        <MenuItem Header="Abrir Carpeta de Oferta"  x:Name="MiVACO"/>
-                                    </ContextMenu>
-                                </ListView.ContextMenu>
+                        </Expander>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                        <Expander Name="ExpVentas" Header="Ventas relacionadas" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" >
+                            <StackPanel Width="Auto" HorizontalAlignment="Stretch">
+                                <ListView x:Name="LvVentas" Height="Auto" MaxHeight="150" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
+                                    <!---->
+                                    <ListView.Resources>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListView.Resources>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridView.Columns>
+                                                <GridViewColumn Header="NCRM" Width="Auto" DisplayMemberBinding="{Binding NCRM}" />
+                                                <GridViewColumn Header="NVenta" Width="Auto" DisplayMemberBinding="{Binding IdVSP}"/>
+                                                <GridViewColumn Header="Moneda" Width="Auto" DisplayMemberBinding="{Binding Curr}"/>
+                                                <GridViewColumn Header="Venta" Width="Auto" DisplayMemberBinding="{Binding VentaTotal, StringFormat=C2}"/>
+                                                <GridViewColumn Header="Entrega" Width="Auto" DisplayMemberBinding="{Binding TipoEntrega}"/>
+                                                <GridViewColumn Header="Fecha OC" Width="Auto" DisplayMemberBinding="{Binding FechaOC, StringFormat='dd-MM-yyyy'}"/>
+                                                <GridViewColumn Header="Fecha entrega" Width="Auto" DisplayMemberBinding="{Binding FechaEntrega, StringFormat='dd-MM-yyyy'}"/>
+                                                <GridViewColumn Header="Resumen/Comentarios" Width="Auto" DisplayMemberBinding="{Binding ComentariosSP}"/>
+                                            </GridView.Columns>
+                                        </GridView>
+                                    </ListView.View>
+                                    <ListView.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Abrir Carpeta de Venta" x:Name="MiVACV"/>
+                                            <MenuItem Header="Abrir Carpeta de Oferta"  x:Name="MiVACO"/>
+                                        </ContextMenu>
+                                    </ListView.ContextMenu>
 
-                            </ListView>
-                        </StackPanel>
-                    </Expander>
-                    <Expander Name="ExpServicios" Header="Servicios" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" Visibility="Collapsed">
-                        <StackPanel Width="Auto" HorizontalAlignment="Stretch" MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
-                            <ListView x:Name="LvServicios" Height="Auto" MaxHeight="100" Width="Auto"  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
-                                <ListView.Resources>
-                                    <Style TargetType="{x:Type ListViewItem}">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="Foreground" Value="#E58C00"/>
-                                            </Trigger>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="#E58C00"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ListView.Resources>
-                                <ListView.View>
-                                    <GridView>
-                                        <GridView.Columns>
+                                </ListView>
+                            </StackPanel>
+                        </Expander>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                        <Expander Name="ExpServicios" Header="Servicios realizados" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False">
+                            <StackPanel Width="Auto" HorizontalAlignment="Stretch" MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
+                                <ListView x:Name="LvServicios" Height="Auto" MaxHeight="100" Width="Auto"  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
+                                    <ListView.Resources>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListView.Resources>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridView.Columns>
+                                                <GridViewColumn Header="NCRM" Width="Auto" DisplayMemberBinding="{Binding NCRM}" />
+                                                <GridViewColumn Header="NVenta" Width="Auto" DisplayMemberBinding="{Binding IdVSV}"/>
+                                                <GridViewColumn Header="Moneda" Width="Auto" DisplayMemberBinding="{Binding Curr}"/>
+                                                <GridViewColumn Header="Venta" Width="Auto" DisplayMemberBinding="{Binding VentaTotal, StringFormat=C2}"/>
+                                                <GridViewColumn Header="GM" Width="Auto" DisplayMemberBinding="{Binding GM, StringFormat=P2}"/>
+                                                <GridViewColumn Header="Tipo Servicio" Width="Auto" DisplayMemberBinding="{Binding TipoMant}"/>
+                                                <GridViewColumn Header="Dias" Width="Auto" DisplayMemberBinding="{Binding DiasSV}"/>
+                                                <GridViewColumn Header="Fecha OC" Width="Auto" DisplayMemberBinding="{Binding FechaOC, StringFormat='dd-MM-yyyy'}"/>
+                                                <GridViewColumn Header="Fecha Servicio" Width="Auto" DisplayMemberBinding="{Binding FechaSV, StringFormat='dd-MM-yyyy'}"/>
+                                                <GridViewColumn Header="Informe" Width="Auto" DisplayMemberBinding="{Binding Informe}"/>
+                                                <GridViewColumn Header="Comentarios" Width="Auto" DisplayMemberBinding="{Binding DetallesSV}"/>
+                                                <GridViewColumn Header="Recomendaciones" Width="Auto" DisplayMemberBinding="{Binding RecomendacionesSV}"/>
+                                            </GridView.Columns>
+                                        </GridView>
+                                    </ListView.View>
+                                    <ListView.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Abrir Carpeta de Venta" x:Name="MiSSCV"/>
+                                            <MenuItem Header="Abrir Carpeta de Informe"  x:Name="MiSACI"/>
+                                            <MenuItem Header="Abrir Carpeta de Oferta"  x:Name="MiSACO"/>
+                                        </ContextMenu>
+                                    </ListView.ContextMenu>
+                                </ListView>
+                            </StackPanel>
+                        </Expander>
+                    </Border>
+                    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                        <Expander x:Name="ExpOfertas" Header="Ofertas activas" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" >
+                            <StackPanel Width="Auto" HorizontalAlignment="Stretch" MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
+                                <ListView x:Name="LvOfertas" Height="Auto" MaxHeight="150" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
+                                    <ListView.Resources>
+                                        <Style TargetType="{x:Type ListViewItem}">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListView.Resources>
+                                    <ListView.View>
+                                        <GridView>
                                             <GridViewColumn Header="NCRM" Width="Auto" DisplayMemberBinding="{Binding NCRM}" />
-                                            <GridViewColumn Header="NVenta" Width="Auto" DisplayMemberBinding="{Binding IdVSV}"/>
+                                            <GridViewColumn Header="Tipo Oferta" Width="Auto" DisplayMemberBinding="{Binding TipoOferta}"/>
+                                            <GridViewColumn Header="RefCliente" Width="Auto" DisplayMemberBinding="{Binding RefCliente}"/>
                                             <GridViewColumn Header="Moneda" Width="Auto" DisplayMemberBinding="{Binding Curr}"/>
-                                            <GridViewColumn Header="Venta" Width="Auto" DisplayMemberBinding="{Binding VentaTotal, StringFormat=C2}"/>
+                                            <GridViewColumn Header="Venta" Width="Auto" DisplayMemberBinding="{Binding VentaTotal,StringFormat=C2}"/>
                                             <GridViewColumn Header="GM" Width="Auto" DisplayMemberBinding="{Binding GM, StringFormat=P2}"/>
-                                            <GridViewColumn Header="Tipo Servicio" Width="Auto" DisplayMemberBinding="{Binding TipoMant}"/>
-                                            <GridViewColumn Header="Dias" Width="Auto" DisplayMemberBinding="{Binding DiasSV}"/>
-                                            <GridViewColumn Header="Fecha OC" Width="Auto" DisplayMemberBinding="{Binding FechaOC, StringFormat='dd-MM-yyyy'}"/>
-                                            <GridViewColumn Header="Fecha Servicio" Width="Auto" DisplayMemberBinding="{Binding FechaSV, StringFormat='dd-MM-yyyy'}"/>
-                                            <GridViewColumn Header="Informe" Width="Auto" DisplayMemberBinding="{Binding Informe}"/>
-                                            <GridViewColumn Header="Comentarios" Width="Auto" DisplayMemberBinding="{Binding DetallesSV}"/>
-                                            <GridViewColumn Header="Recomendaciones" Width="Auto" DisplayMemberBinding="{Binding RecomendacionesSV}"/>
-                                        </GridView.Columns>
-                                    </GridView>
-                                </ListView.View>
-                                <ListView.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Abrir Carpeta de Venta" x:Name="MiSSCV"/>
-                                        <MenuItem Header="Abrir Carpeta de Informe"  x:Name="MiSACI"/>
-                                        <MenuItem Header="Abrir Carpeta de Oferta"  x:Name="MiSACO"/>
-                                    </ContextMenu>
-                                </ListView.ContextMenu>
-                            </ListView>
-                        </StackPanel>
-                    </Expander>
-                    <Expander x:Name="ExpOfertas" Header="Ofertas" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" Visibility="Collapsed">
-                        <StackPanel Width="Auto" HorizontalAlignment="Stretch" MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
-                            <ListView x:Name="LvOfertas" Height="Auto" MaxHeight="150" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
-                                <ListView.Resources>
-                                    <Style TargetType="{x:Type ListViewItem}">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="Foreground" Value="#E58C00"/>
-                                            </Trigger>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Foreground" Value="#E58C00"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ListView.Resources>
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn Header="NCRM" Width="Auto" DisplayMemberBinding="{Binding NCRM}" />
-                                        <GridViewColumn Header="Tipo Oferta" Width="Auto" DisplayMemberBinding="{Binding TipoOferta}"/>
-                                        <GridViewColumn Header="RefCliente" Width="Auto" DisplayMemberBinding="{Binding RefCliente}"/>
-                                        <GridViewColumn Header="Moneda" Width="Auto" DisplayMemberBinding="{Binding Curr}"/>
-                                        <GridViewColumn Header="Venta" Width="Auto" DisplayMemberBinding="{Binding VentaTotal,StringFormat=C2}"/>
-                                        <GridViewColumn Header="GM" Width="Auto" DisplayMemberBinding="{Binding GM, StringFormat=P2}"/>
-                                        <GridViewColumn Header="Pago" Width="Auto" DisplayMemberBinding="{Binding TipoPago}"/>
-                                        <GridViewColumn Header="Descripcion" Width="Auto" DisplayMemberBinding="{Binding Descripcion}"/>
-                                    </GridView>
-                                </ListView.View>
-                                <ListView.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Abrir Carpeta" x:Name="MiOSCV"/>
-                                    </ContextMenu>
-                                </ListView.ContextMenu>
-                            </ListView>
-                        </StackPanel>
-                    </Expander>
+                                            <GridViewColumn Header="Pago" Width="Auto" DisplayMemberBinding="{Binding TipoPago}"/>
+                                            <GridViewColumn Header="Descripcion" Width="Auto" DisplayMemberBinding="{Binding Descripcion}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                    <ListView.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Abrir Carpeta" x:Name="MiOSCV"/>
+                                        </ContextMenu>
+                                    </ListView.ContextMenu>
+                                </ListView>
+                            </StackPanel>
+                        </Expander>
+                    </Border>
                     <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Button x:Name="BtnServicios" Content="Servicios" Foreground="White" Background="#FF00648B" BorderBrush="White" Width="80" Height="25" Margin="5" IsEnabled="False" Click="BtnServicios_Click"/>
                         <Button x:Name="BtnOfertas" Content="Ofertas" Foreground="White" Background="#FF00648B" BorderBrush="White" Width="80" Height="25" Margin="5" IsEnabled="False" Click="BtnOfertas_Click"/>

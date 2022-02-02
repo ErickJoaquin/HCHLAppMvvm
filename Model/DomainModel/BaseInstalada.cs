@@ -25,6 +25,11 @@ namespace Model
         public string InformacionExtra { get; set; }
         [Computed]
         public bool seleccion { get; set; } // Para ver si esta incluido o no en la oferta
+
+        public override string ToString()
+        {
+            return $"{Modelo} - {NSerie}";
+        }
     }
 }
 
