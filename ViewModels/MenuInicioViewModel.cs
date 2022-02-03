@@ -94,18 +94,15 @@ namespace HCHLView.ViewModels
                 {
                     IsAppVisible = Visibility.Collapsed;
                     IsBIVisible = Visibility.Collapsed;
-                    IsGvBDVisible = Visibility.Visible;
                 }
                 else
                 {
                     IsAppVisible = Visibility.Visible;
                     IsBIVisible = Visibility.Visible;
-                    IsGvBDVisible = Visibility.Collapsed;
                 }
 
                 RaisePropertyChanged(nameof(IsAppVisible));
                 RaisePropertyChanged(nameof(IsBIVisible));
-                RaisePropertyChanged(nameof(IsGvBDVisible));
             }
         }
 

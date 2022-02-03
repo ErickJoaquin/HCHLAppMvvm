@@ -104,7 +104,7 @@
                 <StackPanel Visibility="{Binding InfoEquiposVisibility}">
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" Padding="2">
                         <Expander Foreground="White" HorizontalAlignment="Left" Header="Detalles Equipo" ExpandDirection="Down" IsExpanded="True" IsEnabled="False">
-                            <StackPanel DataContext="{Binding EquipoSeleccionado}">
+                            <StackPanel DataContext="{Binding EquipoSeleccionado.Equipo}">
                                 <TextBlock Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" 
                                            Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">
                                     <TextBlock.Text>

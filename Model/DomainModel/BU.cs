@@ -29,7 +29,7 @@ namespace Model
 
         public override string ToString()
         {
-            return $"{Acronimo} - {Nombre}"
+            return $"{Acronimo} - {Nombre}";
         }
     }
 }
