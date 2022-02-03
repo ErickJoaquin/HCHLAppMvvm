@@ -74,12 +74,15 @@ namespace HCHLView.ViewModels.BBII
             BUs.AddRange(bus);
 
             ListaBaseInstalada = from equipo in Equipos
-                                 join enduser in EndUsers
-                                 on equipo.IdEU equals enduser.Id
+                                 join enduser in EndUsers on equipo.IdEU equals enduser.Id
+                                 join proveedor in BUs on equipo.IdBU equals proveedor.Id
+                                 join proceso in Procesos on equipo.IdSubIndustria equals proceso.Id
                                  select new AccesoBIModel
                                  {
                                      EndUser = enduser,
                                      Equipo = equipo,
+                                     Proveedor = proveedor,
+                                     Proceso = proceso,
                                      Nombre = enduser.Nombre,
                                      Planta = enduser.Planta,
                                      NSerie = equipo.NSerie,

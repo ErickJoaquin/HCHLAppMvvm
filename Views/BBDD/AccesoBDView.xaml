@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         xmlns:local="clr-namespace:HCHLView.Views.BBDD"
-        xmlns:viewmodels="clr-namespace:HCHLView.ViewModels.BBDD"  d:DataContext="{d:DesignInstance Type=viewmodels:AccesoBDViewModel}"
+        xmlns:viewmodels="clr-namespace:HCHLView.ViewModels.BBDD"  
+             d:DataContext="{d:DesignInstance Type=viewmodels:AccesoBDViewModel}"
         mc:Ignorable="d"
         Height="Auto" Width="Auto"  Style="{DynamicResource MainViews}">
 
@@ -32,7 +33,7 @@
             <Button Grid.Column="3" Content="Editar" Command="" Margin="5 12 20 12"/>
         </Grid>
         
-        <ListView Grid.Row="1" x:Name="LvUsuarios" ItemsSource="{Binding ListUsuarios}"  Visibility="{Binding IsLvUsuariosVisible}">
+        <ListView Grid.Row="1" x:Name="LvUsuarios" ItemsSource="{Binding ListUsuarios}" Visibility="{Binding IsLvUsuariosVisible}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>

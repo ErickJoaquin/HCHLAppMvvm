@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HCHLView.Views.BBII"
+        xmlns:local="clr-namespace:HCHLView.Views.BBII"        
         xmlns:viewmodels="clr-namespace:HCHLView.ViewModels.BBII"  
              d:DataContext="{d:DesignInstance Type=viewmodels:AccesoBIViewModel}"
         mc:Ignorable="d"
-        Height="Auto" Width="Auto" Style="{DynamicResource MainViews}" >
+        Height="Auto" Width="Auto" Style="{DynamicResource MainViews}">
     
     <UserControl.Resources>
         <Style x:Key="HeaderStyle" TargetType="TextBlock">
@@ -78,8 +78,8 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type GroupItem}">
-                                            <Expander IsExpanded="False"  ExpandDirection="Down" Padding="1, 1" FlowDirection="LeftToRight">
-                                                <!-- BorderThickness="1" BorderBrush="#FF00648B"-->
+                                            <Expander IsExpanded="False"  ExpandDirection="Down" Padding="1, 1" FlowDirection="LeftToRight"
+                                                BorderThickness="1" BorderBrush="#FF00648B">
                                                 <Expander.Header>
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
@@ -155,8 +155,8 @@
 
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3">
                         <Expander Name="ExpCliente" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Detalles Cliente" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
-                            <StackPanel DataContext="{Binding EquipoSeleccionado.EndUser}">
-                                <TextBlock Text="{Binding NombreCompleto}" Grid.ColumnSpan="4"  Foreground="White" FontWeight="Bold" FontSize="14" 
+                            <StackPanel DataContext="{Binding EquipoSeleccionado}">
+                                <TextBlock Text="{Binding EndUser}" Grid.ColumnSpan="4"  Foreground="White" FontWeight="Bold" FontSize="14" 
                                            TextDecorations="Underline" Height="25" Width="Auto" Margin="5 5 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
                                            TextWrapping="Wrap"/>
                                 <Grid Width="Auto" MinWidth="350" Margin="5">
@@ -182,11 +182,11 @@
                                     <TextBlock Grid.Row="6" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Página Web:</TextBlock>
                                     <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Teléfono:</TextBlock>
                                     <TextBlock Text="{Binding TipoIdTributario}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock Text="{Binding IdSubIndustria}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding DireccionCompleta}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Telefono}" Grid.Row="6" Grid.Column="3" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding PaginaWeb}" Grid.Row="6" Grid.Column="1" Foreground="White" Margin="3" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <TextBlock Text="{Binding IdTributario}" Grid.Row="4" Grid.Column="1" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding EndUser.IdSubIndustria}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding EndUser.DireccionCompleta}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding EndUser.Telefono}" Grid.Row="6" Grid.Column="3" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding EndUser.PaginaWeb}" Grid.Row="6" Grid.Column="1" Foreground="White" Margin="3" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <TextBlock Text="{Binding EndUser.IdTributario}" Grid.Row="4" Grid.Column="1" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     <Button x:Name="BtCctsclienteEU" Grid.Row="8" Grid.ColumnSpan="4" Foreground="White" Background="#FF00648B" BorderBrush="White" Margin="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center">Contactos</Button>
                                 </Grid>
                             </StackPanel>
@@ -194,8 +194,8 @@
                     </Border>
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                         <Expander Name="ExpBU" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Detalles Proveedor" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
-                            <StackPanel DataContext="{Binding EquipoSeleccionado.Proveedor}">
-                                <TextBlock Text="{Binding NombreCompleto}"  Grid.ColumnSpan="4" Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" 
+                            <StackPanel DataContext="{Binding EquipoSeleccionado}">
+                                <TextBlock Text="{Binding Proveedor}" Grid.ColumnSpan="4" Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" 
                                            Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                 <Grid Width="Auto" MinWidth="350" Margin="5">
                                     <Grid.ColumnDefinitions>
@@ -214,9 +214,9 @@
                                     <TextBlock Grid.Row="1" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Documento:</TextBlock>
                                     <TextBlock Grid.Row="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Dirección:</TextBlock>
                                     <TextBlock Grid.Row="3" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Teléfono:</TextBlock>
-                                    <TextBlock Text="{Binding DocumentoInfo}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding DireccionCompleta}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Telefono}" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Proveedor.DocumentoInfo}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Proveedor.DireccionCompleta}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Proveedor.Telefono}" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
                                     <Button x:Name="BtCctsBU" Grid.Row="4" Grid.ColumnSpan="4" Foreground="White" Background="#FF00648B" BorderBrush="White" Margin="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" >Contactos</Button>
                                 </Grid>
                             </StackPanel>
@@ -226,7 +226,7 @@
                         <Expander Name="ExpVentas" Header="Ventas relacionadas" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" >
                             <StackPanel Width="Auto" HorizontalAlignment="Stretch">
                                 <ListView x:Name="LvVentas" Height="Auto" MaxHeight="150" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
-                                    <!---->
+                                    
                                     <ListView.Resources>
                                         <Style TargetType="{x:Type ListViewItem}">
                                             <Style.Triggers>
@@ -346,11 +346,6 @@
                             </StackPanel>
                         </Expander>
                     </Border>
-                    <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button x:Name="BtnServicios" Content="Servicios" Foreground="White" Background="#FF00648B" BorderBrush="White" Width="80" Height="25" Margin="5" IsEnabled="False" Click="BtnServicios_Click"/>
-                        <Button x:Name="BtnOfertas" Content="Ofertas" Foreground="White" Background="#FF00648B" BorderBrush="White" Width="80" Height="25" Margin="5" IsEnabled="False" Click="BtnOfertas_Click"/>
-                        <Button x:Name="BtnVentas" Content="Ventas" Foreground="White" Background="#FF00648B" BorderBrush="White" Width="80" Height="25" Margin="5" IsEnabled="False" Click="BtnVentas_Click"/>
-                    </StackPanel>-->
                 </StackPanel>
             </ScrollViewer>
         </StackPanel>

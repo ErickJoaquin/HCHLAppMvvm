@@ -42,6 +42,7 @@ namespace Model.ReadModel
         public BaseInstalada Equipo { get; set; }
         public EndUser EndUser { get; set; }
         public BU Proveedor { get; set; }
+        public Proceso Proceso { get; set; }
         public List<Oferta> Ofertas { get; set; }
         public List<Venta> Ventas { get; set; }
         public List<Servicio> Servicios { get; set; }
