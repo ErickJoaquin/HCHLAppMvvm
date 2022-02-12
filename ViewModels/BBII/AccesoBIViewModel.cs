@@ -1,6 +1,7 @@
 ﻿using Data.Interfaces;
 using Model;
 using Model.ReadModel;
+using Prism.Mvvm;
 using Prism.Regions;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ using System.Collections.Generic;
 
 namespace HCHLView.ViewModels.BBII
 {
-    public class AccesoBIViewModel : ViewModelBase, INavigationAware
+    public class AccesoBIViewModel : BindableBase, INavigationAware
     {
         public IEnumerable<AccesoBIModel> ListaBaseInstalada { get; private set; }
         public ObservableCollection<BaseInstalada> Equipos { get; private set; }

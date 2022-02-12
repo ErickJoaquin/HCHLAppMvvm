@@ -1,8 +1,8 @@
 ﻿using Data.Interfaces;
 using Model;
 using Model.ReadModel;
-using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Linq;
@@ -11,7 +11,7 @@ using Data.Repositorios;
 
 namespace HCHLView.ViewModels.BBDD
 {
-    public class AccesoBDViewModel : ViewModelBase, INavigationAware
+    public class AccesoBDViewModel : BindableBase, INavigationAware
     {
         private TablasBD _tablaSeleccionada;
         public TablasBD TablaSeleccionada

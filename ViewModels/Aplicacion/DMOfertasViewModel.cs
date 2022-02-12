@@ -13,7 +13,7 @@ using Servicios.Utilidades;
 
 namespace HCHLView.ViewModels.Aplicacion
 {
-    public class DMOfertasViewModel : ViewModelBase, INavigationAware
+    public class DMOfertasViewModel : BindableBase, INavigationAware
     {
         private List<string> _listaEstadosOferta;
         public List<string> ListaEstadosOferta
@@ -43,32 +43,33 @@ namespace HCHLView.ViewModels.Aplicacion
                     LoadData(_estadoSeleccionado);
             }
         }
-        private ObservableCollection<OfertaCompleta> _listaOfertas { get; set; }
+        private ObservableCollection<OfertaCompleta> listaOfertas { get; set; }
 
         public ObservableCollection<OfertaCompleta> ListaOfertas
         {
             get
             {
-                return _listaOfertas;
+                return listaOfertas;
             }
             private set
             {
                 if (value != null)
-                    _listaOfertas = value;
+                    listaOfertas = value;
             }
         }
-        private OfertaCompleta _ofertaSeleccionada { get; set; }
+
+        private OfertaCompleta ofertaSeleccionada { get; set; }
 
         public OfertaCompleta OfertaSeleccionada
         {
             get
             {
-                return _ofertaSeleccionada;
+                return ofertaSeleccionada;
             }
             set
             {
                 if (value != null)
-                    _ofertaSeleccionada = value;
+                    ofertaSeleccionada = value;
                     AdaptarDMOfertasContextMenu();
             }
         }
@@ -104,7 +105,8 @@ namespace HCHLView.ViewModels.Aplicacion
         public Visibility BtnMarcarComoPerdidaVisible { get; set; }
         public Visibility BtnCancelarOfertaVisible { get; set; }
         public Visibility BtnEliminarOfertaVisible { get; set; }
-        public DelegateCommand AbrirCarpetaCommand { get; private set; }
+        public DelegateCommand OpenDirectoryCommand { get; private set; }
+        public DelegateCommand GetRevisionsCommand { get; private set; }
 
         private readonly IRepositorioOferta _repOferta; 
         private readonly IRepositorioRevisiones _repRevisiones; 
@@ -112,7 +114,7 @@ namespace HCHLView.ViewModels.Aplicacion
 
         public DMOfertasViewModel(IRepositorioOferta repOferta, IRepositorioRevisiones repRevisiones, Directorio directorio)
         {
-            _listaOfertas = new ObservableCollection<OfertaCompleta>();
+            listaOfertas = new ObservableCollection<OfertaCompleta>();
             _listaEstadosOferta = new List<string>() { "Editando", "Enviadas", "Consolidando", "Vendidas" };
 
             this._repOferta = repOferta;
@@ -122,17 +124,32 @@ namespace HCHLView.ViewModels.Aplicacion
             IsLvDMVisible = Visibility.Visible;
             IsLvVentasVisible = Visibility.Collapsed;
 
-            AbrirCarpetaCommand = new DelegateCommand(AbrirCarpetaMethod);
+            OpenDirectoryCommand = new DelegateCommand(OpenDirectoryMethod);
+            GetRevisionsCommand = new DelegateCommand(GetRevisionMethod, HasRevisionMethod);
         }
 
-        private void AbrirCarpetaMethod()
+        private bool HasRevisionMethod()
         {
-            _directorio.Abrir(_ofertaSeleccionada.IdBU, _ofertaSeleccionada.NCRM);
+            if(ofertaSeleccionada.Rev > 1) { return true; }
+            else
+            {
+                return _repRevisiones.HasRevisions(ofertaSeleccionada.NCRM);
+            }
+        }
+
+        private void GetRevisionMethod()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OpenDirectoryMethod()
+        {
+            _directorio.Abrir(ofertaSeleccionada.IdBU, ofertaSeleccionada.NCRM);
         }
 
         private async void LoadData(string estadoAMostrar)
         {
-            _listaOfertas.Clear();
+            listaOfertas.Clear();
             IsLvDMVisible = Visibility.Collapsed;
             IsLvVentasVisible = Visibility.Collapsed;
 
@@ -141,22 +158,22 @@ namespace HCHLView.ViewModels.Aplicacion
             {
                 case "Editando":
                     var ofertasEdicion = await _repOferta.GetAllByStateAsync("Edicion");
-                    _listaOfertas.AddRange(ofertasEdicion);
+                    listaOfertas.AddRange(ofertasEdicion);
                     IsLvDMVisible = Visibility.Visible;
                     break;
                 case "Enviadas":
                     var ofertasEnviadas = await _repOferta.GetAllByStateAsync("Enviada");
-                    _listaOfertas.AddRange(ofertasEnviadas);
+                    listaOfertas.AddRange(ofertasEnviadas);
                     IsLvDMVisible = Visibility.Visible;
                     break;
                 case "Consolidando":
                     var ofertasConsolidando = await _repOferta.GetAllByStateAsync("Consolidando");
-                    _listaOfertas.AddRange(ofertasConsolidando);
+                    listaOfertas.AddRange(ofertasConsolidando);
                     IsLvVentasVisible = Visibility.Visible;
                     break;
                 case "Vendidas":
                     var ofertasVendidas = await _repOferta.GetAllByStateAsync("Vendida");
-                    _listaOfertas.AddRange(ofertasVendidas);
+                    listaOfertas.AddRange(ofertasVendidas);
                     IsLvVentasVisible = Visibility.Visible;
                     break;
                 default:
@@ -164,13 +181,13 @@ namespace HCHLView.ViewModels.Aplicacion
                     break;
             }
 
-            VentaTotalOfertasVisibles = (decimal)_listaOfertas.Sum(x => x.VentaTotal); // Falta convertir monedas
+            VentaTotalOfertasVisibles = (decimal)listaOfertas.Sum(x => x.VentaTotal); // Falta convertir monedas
 
-            ListaClientes = _listaOfertas.Select(x => x.Cliente).Distinct().OrderBy(x => x).ToList();
-            ListaProveedores = _listaOfertas.Select(x => x.Proveedor).Distinct().OrderBy(x => x).ToList();
-            ListaEquipos = _listaOfertas.Select(x => x.TipoEquipo).Distinct().OrderBy(x => x).ToList();
-            ListaMercados = _listaOfertas.Select(x => x.Segmento).Distinct().OrderBy(x => x).ToList();
-            ListaResponsables = _listaOfertas.Select(x => x.Aplicador).Distinct().OrderBy(x => x).ToList();
+            ListaClientes = listaOfertas.Select(x => x.Cliente).Distinct().OrderBy(x => x).ToList();
+            ListaProveedores = listaOfertas.Select(x => x.Proveedor).Distinct().OrderBy(x => x).ToList();
+            ListaEquipos = listaOfertas.Select(x => x.TipoEquipo).Distinct().OrderBy(x => x).ToList();
+            ListaMercados = listaOfertas.Select(x => x.Segmento).Distinct().OrderBy(x => x).ToList();
+            ListaResponsables = listaOfertas.Select(x => x.Aplicador).Distinct().OrderBy(x => x).ToList();
 
             RaisePropertyChanged(nameof(ListaOfertas));
             RaisePropertyChanged(nameof(VentaTotalOfertasVisibles));
@@ -183,9 +200,9 @@ namespace HCHLView.ViewModels.Aplicacion
             RaisePropertyChanged(nameof(ListaMercados));
             RaisePropertyChanged(nameof(ListaResponsables));
         }
-        private async void AdaptarDMOfertasContextMenu()
+        private void AdaptarDMOfertasContextMenu()
         {
-            List<int> revs = await _repRevisiones.GetRevisions(_ofertaSeleccionada.NCRM);
+            List<int> revs = _repRevisiones.GetRevisions(ofertaSeleccionada.NCRM);
 
             ContexMenuDMOfertasHeaders(revs.Count());
             ContexMenuDMOfertasVisibility(revs.Count());
@@ -193,21 +210,21 @@ namespace HCHLView.ViewModels.Aplicacion
 
         private void ContexMenuDMOfertasHeaders(int nRevs)
         {
-            BtnVerRevisionesHeader = $"Ver revisiones de {_ofertaSeleccionada.NCRM}";
-            BtnEditarRevisionHeader = $"Editar {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev}";
+            BtnVerRevisionesHeader = $"Ver revisiones de {ofertaSeleccionada.NCRM}";
+            BtnEditarRevisionHeader = $"Editar {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev}";
             if (_estadoSeleccionado == "Enviadas")
             {
-                BtnEditarRevisionHeader = $"Ver {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev}";
+                BtnEditarRevisionHeader = $"Ver {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev}";
             }
-            BtnCrearRevisionHeader = $"Crear revision {nRevs} a partir de {_ofertaSeleccionada.Rev}";
-            BtnConsolidarHeader = $"Consolidar {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev}";
-            BtnAbrirCarpetaHeader = $"Abrir carpeta {_ofertaSeleccionada.NCRM}";
-            BtnCopiarOfertaHeader = $"Copiar {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev}";
-            BtnEnviarAEdicionHeader = $"Enviar {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev} a edición";
-            BtnMarcarComoEnviadaHeader = $"Marcar {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev} como enviada";
-            BtnMarcarComoPerdidaHeader = $"Marcar {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev} como perdida";
-            BtnCancelarOfertaHeader = $"Cancelar {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev}";
-            BtnEliminarOfertaHeader = $"Eliminar {_ofertaSeleccionada.NCRM}-{_ofertaSeleccionada.Rev}";
+            BtnCrearRevisionHeader = $"Crear revision {nRevs} a partir de {ofertaSeleccionada.Rev}";
+            BtnConsolidarHeader = $"Consolidar {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev}";
+            BtnAbrirCarpetaHeader = $"Abrir carpeta {ofertaSeleccionada.NCRM}";
+            BtnCopiarOfertaHeader = $"Copiar {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev}";
+            BtnEnviarAEdicionHeader = $"Enviar {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev} a edición";
+            BtnMarcarComoEnviadaHeader = $"Marcar {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev} como enviada";
+            BtnMarcarComoPerdidaHeader = $"Marcar {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev} como perdida";
+            BtnCancelarOfertaHeader = $"Cancelar {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev}";
+            BtnEliminarOfertaHeader = $"Eliminar {ofertaSeleccionada.NCRM}-{ofertaSeleccionada.Rev}";
 
             RaisePropertyChanged(nameof(BtnVerRevisionesHeader));
             RaisePropertyChanged(nameof(BtnAbrirCarpetaHeader));
@@ -246,8 +263,7 @@ namespace HCHLView.ViewModels.Aplicacion
                 BtnMarcarComoEnviadaVisible = Visibility.Collapsed;
                 BtnMarcarComoPerdidaVisible = Visibility.Visible;
                 BtnCancelarOfertaVisible = Visibility.Visible;
-                BtnEliminarOfertaVisible = Visibility.Collapsed;
-                //BtnVerOfertaVisible = Visibility.Collapsed;
+                BtnEliminarOfertaVisible = Visibility.Collapsed; 
             }
             else
             {
