@@ -118,7 +118,7 @@
     <Compile Include="Pricing\Informaciones\InfoValores.cs" />
     <Compile Include="Pricing\Crear.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilidades\Cambios.cs" />
+    <Compile Include="Utilidades\Moneda.cs" />
     <Compile Include="Utilidades\Directorio.cs" />
     <Compile Include="Utilidades\InformacionCliente.cs" />
     <Compile Include="Utilidades\MoverRevisiones.cs" />

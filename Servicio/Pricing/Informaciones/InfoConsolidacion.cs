@@ -6,8 +6,8 @@ namespace Servicios.Pricing.Informaciones
 {
     public class InfoConsolidacion
     {
-        private readonly Cambios _cambios;
-        public InfoConsolidacion(Cambios cambios)
+        private readonly Moneda _cambios;
+        public InfoConsolidacion(Moneda cambios)
         {
             this._cambios = cambios;
         }
@@ -24,9 +24,9 @@ namespace Servicios.Pricing.Informaciones
                 var Curr = (MonedasEnum)Oferta.IdMoneda;
 
                 double vLiquidaConsolidada = (Oferta.IdMoneda != (int)MonedasEnum.CLP) ?
-                    _cambios.Convertir(Oferta.VLiquida, Curr.ToString(), MonedasEnum.CLP.ToString(), cambio, Monedas.CLP) :
+                    _cambios.Convert(Oferta.VLiquida, Curr.ToString(), MonedasEnum.CLP.ToString(), cambio, Monedas.CLP) :
                     (Oferta.IdBU == (int)BUEnum.HPU) ?
-                    _cambios.Convertir(Oferta.VLiquida, Curr.ToString(), MonedasEnum.PEN.ToString(), cambio, Monedas.SOL) : 0;
+                    _cambios.Convert(Oferta.VLiquida, Curr.ToString(), MonedasEnum.PEN.ToString(), cambio, Monedas.SOL) : 0;
 
                 HojaPricing.Range["P14"].Value = (Oferta.IdMoneda != (int)MonedasEnum.CLP) ? MonedasEnum.CLP.ToString() : 
                     (Oferta.IdBU == (int)BUEnum.HPU) ? MonedasEnum.PEN.ToString() : "";
