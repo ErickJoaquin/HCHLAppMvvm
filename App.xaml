@@ -7,22 +7,26 @@
     <Application.Resources>
         
         <!--Colors-->
-        <Color x:Key="PrimaryGreen">#FF00648B</Color>
-        <Color x:Key="PrimaryBlue">#FF001E64</Color>
-        <Color x:Key="SecondaryOrange">#FFE57200</Color>
-        <Color x:Key="SecondaryGrey">#FF425563</Color>
+        <SolidColorBrush x:Key="PrimaryGreen">#FF00648B</SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryBlue">#FF001E64</SolidColorBrush>
+        <SolidColorBrush x:Key="SecondaryOrange">#FFE57200</SolidColorBrush>
+        <SolidColorBrush x:Key="SecondaryGrey">#FF425563</SolidColorBrush>
                 
-        <!--Controls-->
+        <!--UserControls-->
         <Style TargetType="UserControl" x:Key="MainViews">
             <Setter Property="Background" Value="#FF00648B"/>
             <Setter Property="Foreground" Value="White" />
         </Style>
+
+        <!--Buttons-->
         <Style TargetType="Button">
             <Setter Property="Background" Value="#FF00648B"/>
             <Setter Property="Padding" Value="3"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="White"/>
         </Style>
+
+        <!--ToggleButton-->
         <Style TargetType="ToggleButton" x:Key="MainTgButton">
             <Setter Property="Background" Value="#FF00648B"/>
             <Setter Property="BorderBrush"  Value="#FF00648B"/>
@@ -34,6 +38,8 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="BorderThickness" Value="2"/>
         </Style>
+
+        <!--TextBox-->
         <Style TargetType="TextBox">
             <Setter Property="Padding" Value="2"/>
         </Style>
