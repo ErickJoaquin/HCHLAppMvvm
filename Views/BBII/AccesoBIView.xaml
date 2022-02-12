@@ -11,7 +11,7 @@
     
     <UserControl.Resources>
         <Style x:Key="HeaderStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#FF00648B" />
+            <Setter Property="Foreground" Value="{DynamicResource PrimaryGreen}" />
             <Setter Property="FontSize" Value="16" />
         </Style>
     </UserControl.Resources>
@@ -79,7 +79,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type GroupItem}">
                                             <Expander IsExpanded="False"  ExpandDirection="Down" Padding="1, 1" FlowDirection="LeftToRight"
-                                                BorderThickness="1" BorderBrush="#FF00648B">
+                                                BorderThickness="1" BorderBrush="{DynamicResource PrimaryGreen}">
                                                 <Expander.Header>
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
@@ -87,7 +87,7 @@
                                                             <ColumnDefinition Width="*"/>
                                                         </Grid.ColumnDefinitions>
                                                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Padding="5,1" Style="{StaticResource HeaderStyle}" />
-                                                        <TextBlock Text="{Binding ItemCount}" Foreground="#FF00648B" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+                                                        <TextBlock Text="{Binding ItemCount}" Foreground="{DynamicResource PrimaryGreen}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
                                                     </Grid>
                                                 </Expander.Header>
                                                 <ItemsPresenter Margin="10 0 0 0" />
@@ -154,7 +154,7 @@
                     </Border>
 
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3">
-                        <Expander Name="ExpCliente" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Detalles Cliente" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
+                        <Expander Name="ExpCliente" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Left" Header="Detalles Cliente" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
                             <StackPanel DataContext="{Binding EquipoSeleccionado}">
                                 <TextBlock Text="{Binding EndUser}" Grid.ColumnSpan="4"  Foreground="White" FontWeight="Bold" FontSize="14" 
                                            TextDecorations="Underline" Height="25" Width="Auto" Margin="5 5 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -193,7 +193,7 @@
                      </Expander>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                        <Expander Name="ExpBU" Background="#FF00648B" Foreground="White" HorizontalAlignment="Left" Header="Detalles Proveedor" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
+                        <Expander Name="ExpBU" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Left" Header="Detalles Proveedor" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
                             <StackPanel DataContext="{Binding EquipoSeleccionado}">
                                 <TextBlock Text="{Binding Proveedor}" Grid.ColumnSpan="4" Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" 
                                            Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
@@ -217,13 +217,13 @@
                                     <TextBlock Text="{Binding Proveedor.DocumentoInfo}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding Proveedor.DireccionCompleta}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding Proveedor.Telefono}" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" TextWrapping="Wrap"/>
-                                    <Button x:Name="BtCctsBU" Grid.Row="4" Grid.ColumnSpan="4" Foreground="White" Background="#FF00648B" BorderBrush="White" Margin="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" >Contactos</Button>
+                                    <Button x:Name="BtCctsBU" Grid.Row="4" Grid.ColumnSpan="4" Foreground="White" Background="{DynamicResource PrimaryGreen}" BorderBrush="White" Margin="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" >Contactos</Button>
                                 </Grid>
                             </StackPanel>
                         </Expander>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
-                        <Expander Name="ExpVentas" Header="Ventas relacionadas" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" >
+                        <Expander Name="ExpVentas" Header="Ventas relacionadas" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" >
                             <StackPanel Width="Auto" HorizontalAlignment="Stretch">
                                 <ListView x:Name="LvVentas" Height="Auto" MaxHeight="150" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
                                     
@@ -231,10 +231,10 @@
                                         <Style TargetType="{x:Type ListViewItem}">
                                             <Style.Triggers>
                                                 <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource SecondaryOrange}"/>
                                                 </Trigger>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource SecondaryOrange}"/>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -265,17 +265,17 @@
                         </Expander>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
-                        <Expander Name="ExpServicios" Header="Servicios realizados" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False">
+                        <Expander Name="ExpServicios" Header="Servicios realizados" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False">
                             <StackPanel Width="Auto" HorizontalAlignment="Stretch" MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
                                 <ListView x:Name="LvServicios" Height="Auto" MaxHeight="100" Width="Auto"  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
                                     <ListView.Resources>
                                         <Style TargetType="{x:Type ListViewItem}">
                                             <Style.Triggers>
                                                 <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource SecondaryOrange}"/>
                                                 </Trigger>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource SecondaryOrange}"/>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
@@ -310,17 +310,17 @@
                         </Expander>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
-                        <Expander x:Name="ExpOfertas" Header="Ofertas activas" Background="#FF00648B" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" >
+                        <Expander x:Name="ExpOfertas" Header="Ofertas activas" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Stretch" Width="Auto" ExpandDirection="Down" IsExpanded="False" >
                             <StackPanel Width="Auto" HorizontalAlignment="Stretch" MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
                                 <ListView x:Name="LvOfertas" Height="Auto" MaxHeight="150" Width="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,5" Background="#FF00648B" Foreground="White">
                                     <ListView.Resources>
                                         <Style TargetType="{x:Type ListViewItem}">
                                             <Style.Triggers>
                                                 <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource SecondaryOrange}"/>
                                                 </Trigger>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Foreground" Value="#E58C00"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource SecondaryOrange}"/>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>

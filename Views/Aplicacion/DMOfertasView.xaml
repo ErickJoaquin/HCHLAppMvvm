@@ -50,8 +50,8 @@
                 <ComboBox x:Name="CbxResponsable" Margin="5" IsEditable="True" ItemsSource="{Binding ListaResponsables}" SelectedItem="{Binding ResponsableSeleccionado,  Mode=TwoWay}"/>
             </StackPanel>            
         </Grid>
-        <ListView Grid.Row="1" x:Name="LvDM" ItemsSource="{Binding ListaOfertas}"  Visibility="{Binding IsLvDMVisible}" SelectedItem="{Binding OfertaSeleccionada}"
-                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3 0">
+        <ListView Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3 0"
+                  ItemsSource="{Binding ListaOfertas}"  Visibility="{Binding IsLvDMVisible}" SelectedItem="{Binding OfertaSeleccionada}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="BU" DisplayMemberBinding="{Binding BU}" Width="Auto"/>
@@ -84,7 +84,8 @@
             </ListView.View>
             <ListView.ContextMenu>
                 <ContextMenu x:Name="ctxMenuDM">
-                    <MenuItem x:Name="BtnRevisiones" Header="{Binding BtnVerRevisionesHeader}" IsEnabled="{Binding BtnVerRevisionesEnable}">
+                    <MenuItem x:Name="BtnRevisiones" Header="{Binding BtnVerRevisionesHeader}" IsEnabled="{Binding BtnVerRevisionesEnable}"
+                              Command="{Binding VerRevisionesCommand}">
                         <MenuItem.ToolTip>
                             <StackPanel>
                                 <TextBlock> Haga click para ver otras revisiones de esta oferta</TextBlock>
@@ -106,8 +107,8 @@
                         </MenuItem.ToolTip>
                     </MenuItem>
                     <Separator />
-                    
-                    <MenuItem x:Name="BtnAbrirCarpeta"  Header="{Binding BtnAbrirCarpetaHeader}" Command="{Binding AbrirCarpetaCommand}">
+
+                    <MenuItem x:Name="BtnAbrirCarpeta"  Header="{Binding BtnAbrirCarpetaHeader}" Command="{Binding OpenDirectoryCommand}">
                         <MenuItem.ToolTip>
                             <StackPanel>
                                 <TextBlock> Haga click para abrir carpeta contenedora de la oferta</TextBlock>
