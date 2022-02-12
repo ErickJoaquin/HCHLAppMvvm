@@ -1,18 +1,15 @@
-﻿using Data;
-using Data.Repositorios;
+﻿using Data.Repositorios;
 using HCHLView.Views.Aplicacion;
 using HCHLView.Views.BBDD;
 using HCHLView.Views.BBII;
-using Model.ReadModel;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using System.Collections.Generic;
 using System.Windows;
 
 namespace HCHLView.ViewModels
 {
-    public class MenuInicioViewModel : BindableBase
+    public class MainWindowViewModel : BindableBase
     {
         private bool _isAppSelected { get; set; }
         public bool IsAppSelected
@@ -40,7 +37,7 @@ namespace HCHLView.ViewModels
                     IsBDVisible = Visibility.Visible;
                     IsSpAplicacionVisible = Visibility.Collapsed;
                     IsBorderVisible = Visibility.Collapsed;
-                
+
                     TbAppContent = "Aplicación";
                 }
 
@@ -148,7 +145,7 @@ namespace HCHLView.ViewModels
 
         private readonly IRegionManager regionManager;
 
-        public MenuInicioViewModel(IRegionManager regionManager, RepositorioTablasBD repositorioTablasBD)
+        public MainWindowViewModel(IRegionManager regionManager, RepositorioTablasBD repositorioTablasBD)
         {
             IsBIVisible = Visibility.Visible;
             IsAppVisible = Visibility.Visible;
