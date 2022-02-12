@@ -90,7 +90,7 @@
     <Compile Include="Repositorios\RepositorioBase.cs" />
     <Compile Include="Repositorios\RepositorioCarpetas.cs" />
     <Compile Include="Repositorios\RepositorioContactos.cs" />
-    <Compile Include="Repositorios\RepositorioEquipos1.cs" />
+    <Compile Include="Repositorios\RepositorioEquipos.cs" />
     <Compile Include="Repositorios\RepositorioItem.cs" />
     <Compile Include="Repositorios\RepositorioMarca.cs" />
     <Compile Include="Repositorios\RepositorioOferta.cs" />
