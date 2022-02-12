@@ -12,7 +12,7 @@ namespace Data.Repositorios
     {
         private readonly string RutaBBDD = @"Server=LCLSCLW10X0059\SQLEXPRESS; Database=BDHCHLApp; Integrated Security=True;";
 
-        public async Task<List<int>> GetRevisions(string ncrm)
+        public List<int> GetRevisions(string ncrm)
         {
             string sqlQuery = $"SELECT Id " +
                 $"FROM Oferta " +
@@ -22,9 +22,25 @@ namespace Data.Repositorios
             {
                 connection.Open();
 
-                var value = await connection.QueryAsync<Oferta>(sqlQuery);
+                var value = connection.Query<Oferta>(sqlQuery);
 
                 return value.Select(x => x.Id).ToList();
+            }
+        }
+
+        public bool HasRevisions(string ncrm)
+        {
+            string sqlQuery = $"SELECT Id " +
+                $"FROM Oferta " +
+                $"WHERE NCRM LIKE '{ncrm}'";
+
+            using (var connection = new SqlConnection(RutaBBDD))
+            {
+                connection.Open();
+
+                var value = connection.Query<Oferta>(sqlQuery);
+
+                return value.Any();
             }
         }
     }

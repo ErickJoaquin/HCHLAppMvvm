@@ -8,7 +8,8 @@ namespace Data.Interfaces
 {
     public interface IRepositorioRevisiones
     {
-        Task<List<int>> GetRevisions(string ncrm);
+        List<int> GetRevisions(string ncrm);
+        bool HasRevisions(string ncrm);
     }
 }
 
