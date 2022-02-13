@@ -34,21 +34,6 @@ namespace HCHLView.ViewModels.BBII
             }
         }
 
-        private int _totalEquipos;
-
-        public int TotalEquipos
-        {
-            get
-            {
-                return _totalEquipos;
-            }
-            set
-            {
-                SetProperty(ref _totalEquipos, value);
-                RaisePropertyChanged(nameof(TotalEquipos));
-            }
-        }
-
         private ObservableCollection<AccesoBIModel> _listaBaseInstalada;
 
         public ObservableCollection<AccesoBIModel> ListaBaseInstalada
@@ -60,10 +45,6 @@ namespace HCHLView.ViewModels.BBII
             set
             {
                 SetProperty(ref _listaBaseInstalada, value);
-                if (_listaBaseInstalada.Count > 0)
-                    _totalEquipos = _listaBaseInstalada.Count();
-
-                RaisePropertyChanged(nameof(TotalEquipos));
             }
         }
         public ObservableCollection<BaseInstalada> Equipos { get; private set; }
@@ -72,6 +53,12 @@ namespace HCHLView.ViewModels.BBII
         public ObservableCollection<Mercado> Mercados { get; private set; }
         public ObservableCollection<EquiposCRM> EquiposCRM { get; private set; }
         public ObservableCollection<BU> BUs { get; private set; }
+        public List<string> ListaPaises { get; private set; }
+        public List<string> ListaProveedores { get; private set; }
+        public List<string> ListaModelos { get; private set; }
+        public List<string> ListaEquipos { get; private set; }
+        public List<string> ListaMercados { get; private set; }
+        public List<string> ListaIndustrias { get; private set; }
         public Visibility DetallesEquipoSeleccionado { get; set; }
         private readonly IRepositorioBase<EndUser> _repoEndUser;
         private readonly IRepositorioBase<BaseInstalada> _repoBaseInstalada;
@@ -103,6 +90,7 @@ namespace HCHLView.ViewModels.BBII
             DetallesEquipoSeleccionado = Visibility.Collapsed;
 
             CargarInfoAsync();
+            
         }
 
         
@@ -132,10 +120,17 @@ namespace HCHLView.ViewModels.BBII
             BUs.Clear();
             BUs.AddRange(bus);
 
+            CrearListaBaseInstalada();
+            Agrupar();
+            CargarCombobox();
+        }
+
+        private void CrearListaBaseInstalada()
+        {
             var joinList = from equipo in Equipos
                            join enduser in EndUsers on equipo.IdEU equals enduser.Id into eu
                            from enduseri in eu.DefaultIfEmpty()
-                           join proveedor in BUs on equipo.IdBU equals proveedor.Id into prov 
+                           join proveedor in BUs on equipo.IdBU equals proveedor.Id into prov
                            from proveedori in prov.DefaultIfEmpty()
                            join mercado in Mercados on equipo.IdSubIndustria equals mercado.Id into merc
                            from mercadoi in merc.DefaultIfEmpty()
@@ -145,7 +140,7 @@ namespace HCHLView.ViewModels.BBII
                            from crmi in ecrm.DefaultIfEmpty()
                            select new AccesoBIModel
                            {
-                               EndUser = enduseri,                               
+                               EndUser = enduseri,
                                Equipo = equipo,
                                Proveedor = proveedori,
                                Mercado = mercadoi,
@@ -160,12 +155,24 @@ namespace HCHLView.ViewModels.BBII
             ListaBaseInstalada.Clear();
             ListaBaseInstalada.AddRange(joinList);
 
-            _totalEquipos = _listaBaseInstalada.Count();
-
             RaisePropertyChanged(nameof(ListaBaseInstalada));
-            RaisePropertyChanged(nameof(TotalEquipos));
+        }
 
-            Agrupar();
+        private void CargarCombobox()
+        {
+            ListaPaises = _listaBaseInstalada.Select(x => x.EndUser.Pais).Distinct().OrderBy(x => x).ToList();
+            ListaProveedores = _listaBaseInstalada.Select(x => x.Proveedor.Acronimo).Distinct().OrderBy(x => x).ToList();
+            ListaModelos = _listaBaseInstalada.Select(x => x.Equipo.Modelo).Distinct().OrderBy(x => x).ToList();
+            ListaEquipos = _listaBaseInstalada.Select(x => x.CRM.Producto).Distinct().OrderBy(x => x).ToList();
+            ListaMercados = _listaBaseInstalada.Where(m => m.Mercado != null).Select(x => x.Mercado.Segmento).Distinct().OrderBy(x => x).ToList();
+            ListaIndustrias = _listaBaseInstalada.Where(m => m.Mercado != null).Select(x => x.Mercado.Referencia).Distinct().OrderBy(x => x).ToList();
+
+            RaisePropertyChanged(nameof(ListaPaises));
+            RaisePropertyChanged(nameof(ListaProveedores));
+            RaisePropertyChanged(nameof(ListaEquipos));
+            RaisePropertyChanged(nameof(ListaModelos));
+            RaisePropertyChanged(nameof(ListaMercados));
+            RaisePropertyChanged(nameof(ListaIndustrias));
         }
 
         private void Agrupar()
