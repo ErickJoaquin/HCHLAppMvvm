@@ -12,6 +12,7 @@ namespace Data
         private readonly MemoryCache _cache = MemoryCache.Default;
         private readonly string _baseCachePrefixKey = $"{typeof(T).Name}:Cache:";
 
+        
         public CacheRepositoryDecorator(IRepositorioBase<T> repositorioBase)
         {
             this.repositorioBase = repositorioBase;
