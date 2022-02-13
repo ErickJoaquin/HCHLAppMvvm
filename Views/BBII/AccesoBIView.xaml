@@ -188,15 +188,15 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Row="1" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Industria:</TextBlock>
-                                    <TextBlock Grid.Row="5" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Dirección:</TextBlock>
-                                    <TextBlock Grid.Row="6" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Página Web:</TextBlock>
-                                    <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Teléfono:</TextBlock>
-                                    <TextBlock Text="{Binding TipoIDTributario}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock Text="{Binding Mercado.Referencia}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding EndUser.DireccionCompleta}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding EndUser.Telefono}" Grid.Row="6" Grid.Column="3" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding EndUser.PaginaWeb}" Grid.Row="6" Grid.Column="1" Foreground="White" Margin="3" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <TextBlock Text="{Binding EndUser.IdTributario}" Grid.Row="4" Grid.Column="1" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="2" Text="{Binding TipoIDTributario}" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Grid.Row="3" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Página Web:</TextBlock>
+                                    <TextBlock Grid.Row="3" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Teléfono:</TextBlock>
+                                    <TextBlock Grid.Row="4" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Dirección:</TextBlock>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Mercado.Referencia}" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding EndUser.IdTributario}" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding EndUser.PaginaWeb}" Foreground="White" Margin="3" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding EndUser.Telefono}"  Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding EndUser.DireccionCompleta}" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     <Button x:Name="BtCctsclienteEU" Grid.Row="8" Grid.ColumnSpan="4" Foreground="White" Background="#FF00648B" BorderBrush="White" Margin="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center">Contactos</Button>
                                 </Grid>
                             </StackPanel>
