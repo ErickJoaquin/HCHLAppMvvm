@@ -7,38 +7,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
 
 namespace HCHLView.ViewModels.BBII
 {
     public class AccesoBIViewModel : BindableBase, INavigationAware
     {
-        public IEnumerable<AccesoBIModel> ListaBaseInstalada { get; private set; }
-        public ObservableCollection<BaseInstalada> Equipos { get; private set; }
-        public ObservableCollection<EndUser> EndUsers { get; private set; }
-        public ObservableCollection<Proceso> Procesos { get; private set; }
-        public ObservableCollection<BU> BUs { get; private set; }
-        private readonly IRepositorioBase<EndUser> _repoEndUser;
-        private readonly IRepositorioBase<BaseInstalada> _repoBaseInstalada;
-        private readonly IRepositorioBase<Proceso> _repoProceso;
-        private readonly IRepositorioBase<BU> _repoBU;
-
-        public AccesoBIViewModel(IRepositorioBase<BaseInstalada> repoBaseInstalada, IRepositorioBase<EndUser> repoEndUser,
-            IRepositorioBase<Proceso> repoProceso, IRepositorioBase<BU> repoBU)
-        {
-            this._repoBaseInstalada = repoBaseInstalada;
-            this._repoProceso = repoProceso;
-            this._repoBU = repoBU;
-            this._repoEndUser = repoEndUser;
-
-            Equipos = new ObservableCollection<BaseInstalada>();
-            EndUsers = new ObservableCollection<EndUser>();
-            Procesos = new ObservableCollection<Proceso>();
-            BUs = new ObservableCollection<BU>();
-
-            CargarInfoAsync();
-        }
-
         private AccesoBIModel _equipoSelecionado;
         public AccesoBIModel EquipoSeleccionado
         {
@@ -49,13 +24,88 @@ namespace HCHLView.ViewModels.BBII
 
             set
             {
+                DetallesEquipoSeleccionado = Visibility.Collapsed;
                 if (value != null)
-                    _equipoSelecionado = value;
+                    SetProperty(ref _equipoSelecionado, value);
+                DetallesEquipoSeleccionado = Visibility.Visible;
 
                 RaisePropertyChanged(nameof(EquipoSeleccionado));
+                RaisePropertyChanged(nameof(DetallesEquipoSeleccionado));
             }
         }
 
+        private int _totalEquipos;
+
+        public int TotalEquipos
+        {
+            get
+            {
+                return _totalEquipos;
+            }
+            set
+            {
+                SetProperty(ref _totalEquipos, value);
+                RaisePropertyChanged(nameof(TotalEquipos));
+            }
+        }
+
+        private ObservableCollection<AccesoBIModel> _listaBaseInstalada;
+
+        public ObservableCollection<AccesoBIModel> ListaBaseInstalada
+        {
+            get
+            {
+                return _listaBaseInstalada;
+            }
+            set
+            {
+                SetProperty(ref _listaBaseInstalada, value);
+                if (_listaBaseInstalada.Count > 0)
+                    _totalEquipos = _listaBaseInstalada.Count();
+
+                RaisePropertyChanged(nameof(TotalEquipos));
+            }
+        }
+        public ObservableCollection<BaseInstalada> Equipos { get; private set; }
+        public ObservableCollection<EndUser> EndUsers { get; private set; }
+        public ObservableCollection<Proceso> Procesos { get; private set; }
+        public ObservableCollection<Mercado> Mercados { get; private set; }
+        public ObservableCollection<EquiposCRM> EquiposCRM { get; private set; }
+        public ObservableCollection<BU> BUs { get; private set; }
+        public Visibility DetallesEquipoSeleccionado { get; set; }
+        private readonly IRepositorioBase<EndUser> _repoEndUser;
+        private readonly IRepositorioBase<BaseInstalada> _repoBaseInstalada;
+        private readonly IRepositorioEquipos _repoEquipos;
+        private readonly IRepositorioBase<Proceso> _repoProceso;
+        private readonly IRepositorioBase<Mercado> _repoMercado;
+        private readonly IRepositorioBase<EquiposCRM> _repoCRM;
+        private readonly IRepositorioBase<BU> _repoBU;
+
+        public AccesoBIViewModel(IRepositorioBase<BaseInstalada> repoBaseInstalada, IRepositorioBase<EndUser> repoEndUser, IRepositorioBase<Mercado> repoMercado,
+            IRepositorioBase<Proceso> repoProceso, IRepositorioBase<BU> repoBU, IRepositorioEquipos repoEquipos, IRepositorioBase<EquiposCRM> repoCRM)
+        {
+            this._repoBaseInstalada = repoBaseInstalada;
+            this._repoProceso = repoProceso;
+            this._repoBU = repoBU;
+            this._repoEndUser = repoEndUser;
+            this._repoEquipos = repoEquipos;
+            this._repoMercado = repoMercado;
+            this._repoCRM = repoCRM;
+
+            ListaBaseInstalada = new ObservableCollection<AccesoBIModel>();
+            Equipos = new ObservableCollection<BaseInstalada>();
+            EndUsers = new ObservableCollection<EndUser>();
+            Procesos = new ObservableCollection<Proceso>();
+            Mercados = new ObservableCollection<Mercado>();
+            EquiposCRM = new ObservableCollection<EquiposCRM>();
+            BUs = new ObservableCollection<BU>();
+
+            DetallesEquipoSeleccionado = Visibility.Collapsed;
+
+            CargarInfoAsync();
+        }
+
+        
         private async void CargarInfoAsync()
         {
             var equipos = await _repoBaseInstalada.GetAllAsync();
@@ -70,25 +120,50 @@ namespace HCHLView.ViewModels.BBII
             Procesos.Clear();
             Procesos.AddRange(procesos);
 
+            var mercados = await _repoMercado.GetAllAsync();
+            Mercados.Clear();
+            Mercados.AddRange(mercados);
+
+            var crm = await _repoCRM.GetAllAsync();
+            EquiposCRM.Clear();
+            EquiposCRM.AddRange(crm);
+
             var bus = await _repoBU.GetAllAsync();
             BUs.Clear();
             BUs.AddRange(bus);
 
-            ListaBaseInstalada = from equipo in Equipos
-                                 join enduser in EndUsers on equipo.IdEU equals enduser.Id
-                                 join proveedor in BUs on equipo.IdBU equals proveedor.Id
-                                 join proceso in Procesos on equipo.IdSubIndustria equals proceso.Id
-                                 select new AccesoBIModel
-                                 {
-                                     EndUser = enduser,
-                                     Equipo = equipo,
-                                     Proveedor = proveedor,
-                                     Proceso = proceso,
-                                     Nombre = enduser.Nombre,
-                                     Planta = enduser.Planta,
-                                     NSerie = equipo.NSerie,
-                                     Modelo = equipo.Modelo
-                                 };
+            var joinList = from equipo in Equipos
+                           join enduser in EndUsers on equipo.IdEU equals enduser.Id into eu
+                           from enduseri in eu.DefaultIfEmpty()
+                           join proveedor in BUs on equipo.IdBU equals proveedor.Id into prov 
+                           from proveedori in prov.DefaultIfEmpty()
+                           join mercado in Mercados on equipo.IdSubIndustria equals mercado.Id into merc
+                           from mercadoi in merc.DefaultIfEmpty()
+                           join proceso in Procesos on equipo.IdProceso equals proceso.Id into pro
+                           from procesoi in pro.DefaultIfEmpty()
+                           join eqcrm in EquiposCRM on equipo.IdEquiposCRM equals eqcrm.Id into ecrm
+                           from crmi in ecrm.DefaultIfEmpty()
+                           select new AccesoBIModel
+                           {
+                               EndUser = enduseri,                               
+                               Equipo = equipo,
+                               Proveedor = proveedori,
+                               Mercado = mercadoi,
+                               Proceso = procesoi,
+                               CRM = crmi,
+                               Nombre = enduseri.Nombre,
+                               Planta = enduseri.Planta,
+                               NSerie = equipo.NSerie,
+                               Modelo = equipo.Modelo
+                           };
+
+            ListaBaseInstalada.Clear();
+            ListaBaseInstalada.AddRange(joinList);
+
+            _totalEquipos = _listaBaseInstalada.Count();
+
+            RaisePropertyChanged(nameof(ListaBaseInstalada));
+            RaisePropertyChanged(nameof(TotalEquipos));
 
             Agrupar();
         }
