@@ -116,6 +116,7 @@
     <Compile Include="ReadModel\EquiposLinkeadosCRM.cs" />
     <Compile Include="ReadModel\OfertaCompleta.cs" />
     <Compile Include="ReadModel\TablasBD.cs" />
+    <Compile Include="Utilidades\IDTributario.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
