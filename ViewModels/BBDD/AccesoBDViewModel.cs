@@ -25,7 +25,7 @@ namespace HCHLView.ViewModels.BBDD
             {
                 if (value != null)
                 {
-                    _tablaSeleccionada = value;
+                    SetProperty(ref _tablaSeleccionada, value);
                     LoadData(_tablaSeleccionada.NombreEnBD);
                 }
             }
@@ -43,7 +43,7 @@ namespace HCHLView.ViewModels.BBDD
             {
                 if (value != null)
                 {
-                    _buscador = value;
+                    SetProperty(ref _buscador, value);
                     FilterData(_buscador, _tablaSeleccionada.NombreEnBD);
                 }
             }
@@ -58,7 +58,6 @@ namespace HCHLView.ViewModels.BBDD
         public Visibility IsLvVendorVisible { get; set; }
         public Visibility IsCctoBUVisible { get; set; }
         public Visibility IsLvPagosVisible { get; set; }
-
         public List<TablasBD> ListaTablas { get; }
         public ObservableCollection<Usuario> ListUsuarios { get; private set; }
         public ObservableCollection<BaseInstalada> ListBaseInstalada { get; private set; }
@@ -114,12 +113,6 @@ namespace HCHLView.ViewModels.BBDD
             IsLvPagosVisible = Visibility.Collapsed;
         }
 
-
-        class UsuarioDto
-        {
-            public int MyProperty { get; set; }
-        }
-
         private async void LoadData(string tablaAMostrar)
         {
             IsLvUsuariosVisible = Visibility.Collapsed;
@@ -132,13 +125,11 @@ namespace HCHLView.ViewModels.BBDD
             IsLvVendorVisible = Visibility.Collapsed;
             IsLvPagosVisible = Visibility.Collapsed;
 
-
             switch (tablaAMostrar)
             {
                 case "Usuario":
                     IsLvUsuariosVisible = Visibility.Visible;
                     List<Usuario> usuarios = await _repoUsuario.GetAllAsync();
-
                     ListUsuarios.Clear();
                     ListUsuarios.AddRange(usuarios);
                     break;
@@ -168,9 +159,9 @@ namespace HCHLView.ViewModels.BBDD
                     break;
                 case "EndUser":
                     IsLvEndUserVisible = Visibility.Visible;
-                    //var eus = await _repoEndUser.GetAllAsync();
+                    var eus = await _repoEndUser.GetAllAsync();
                     ListEndUser.Clear();
-                    ListEndUser.AddRange(new List<EndUser>() { new EndUser { Id = 1 } });
+                    ListEndUser.AddRange(eus);
                     break;
                 case "Pago":
                     IsLvPagosVisible = Visibility.Visible;
