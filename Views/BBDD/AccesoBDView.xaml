@@ -38,7 +38,7 @@
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="User Id" DisplayMemberBinding="{Binding IdUsuario}"/>
-                    <GridViewColumn Header="Nombre Completo" DisplayMemberBinding="{Binding NombreCompleto}"/>
+                    <GridViewColumn Header="Nombre Completo" DisplayMemberBinding="{Binding Nombres}"/>
                     <GridViewColumn Header="Celular" DisplayMemberBinding="{Binding Celular}"/>
                     <GridViewColumn Header="Telefono" DisplayMemberBinding="{Binding Telefono}"/>
                     <GridViewColumn Header="Mail" DisplayMemberBinding="{Binding Mail}" />

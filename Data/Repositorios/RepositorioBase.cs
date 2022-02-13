@@ -1,14 +1,16 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
+using Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Interfaces;
 
 namespace Data
 {
+
+
     public class RepositorioBase<T> : IRepositorioBase<T> where T : class, new()
     {
         private readonly string RutaBBDD = @"Server=LCLSCLW10X0059\SQLEXPRESS; Database=BDHCHLApp; Integrated Security=True;";
@@ -29,11 +31,11 @@ namespace Data
         public async Task<List<T>> GetMultiIdAsync(List<int> list)
         {
             string sqlQuery = $"SELECT * FROM {_typeOfProperty.Name} WHERE Id = ";
-            if(list.Count() > 1) 
+            if (list.Count() > 1)
             {
-                sqlQuery += string.Join($" OR Id = ", list); 
+                sqlQuery += string.Join($" OR Id = ", list);
             }
-                        
+
             using (var connection = new SqlConnection(RutaBBDD))
             {
                 connection.Open();

@@ -1,13 +1,13 @@
 ﻿using Data.Interfaces;
+using Data.Repositorios;
 using Model;
 using Model.ReadModel;
-using Prism.Regions;
 using Prism.Mvvm;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Linq;
+using Prism.Regions;
 using System.Collections.Generic;
-using Data.Repositorios;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 
 namespace HCHLView.ViewModels.BBDD
 {
@@ -32,7 +32,7 @@ namespace HCHLView.ViewModels.BBDD
         }
 
         private string _buscador;
-        public string Buscador 
+        public string Buscador
         {
             get
             {
@@ -48,7 +48,7 @@ namespace HCHLView.ViewModels.BBDD
                 }
             }
         }
-                
+
         public Visibility IsLvUsuariosVisible { get; set; }
         public Visibility IsLvBaseInstaladaVisible { get; set; }
         public Visibility IsLvEndUserVisible { get; set; }
@@ -56,7 +56,9 @@ namespace HCHLView.ViewModels.BBDD
         public Visibility IsLvCctoBUVisible { get; set; }
         public Visibility IsLvBUsVisible { get; set; }
         public Visibility IsLvVendorVisible { get; set; }
+        public Visibility IsCctoBUVisible { get; set; }
         public Visibility IsLvPagosVisible { get; set; }
+
         public List<TablasBD> ListaTablas { get; }
         public ObservableCollection<Usuario> ListUsuarios { get; private set; }
         public ObservableCollection<BaseInstalada> ListBaseInstalada { get; private set; }
@@ -75,7 +77,7 @@ namespace HCHLView.ViewModels.BBDD
         private readonly IRepositorioBase<EndUser> _repoEndUser;
         private readonly IRepositorioBase<Pago> _repoPago;
         private readonly IRepositorioBase<Vendor> _repoVendor;
-                
+
 
         public AccesoBDViewModel(IRepositorioBase<Usuario> repoUsuario, IRepositorioBase<BaseInstalada> repoBaseInstalada, IRepositorioBase<BU> repoBU,
             IRepositorioBase<ContactoCliente> repoCctoCliente, IRepositorioBase<ContactoBU> repoCctoBU, IRepositorioBase<EndUser> repoEndUser,
@@ -105,12 +107,18 @@ namespace HCHLView.ViewModels.BBDD
             IsLvBaseInstaladaVisible = Visibility.Collapsed;
             IsLvEndUserVisible = Visibility.Collapsed;
             IsLvCctoClienteVisible = Visibility.Collapsed;
+            IsCctoBUVisible = Visibility.Collapsed;
             IsLvCctoBUVisible = Visibility.Collapsed;
             IsLvBUsVisible = Visibility.Collapsed;
             IsLvVendorVisible = Visibility.Collapsed;
             IsLvPagosVisible = Visibility.Collapsed;
         }
 
+
+        class UsuarioDto
+        {
+            public int MyProperty { get; set; }
+        }
 
         private async void LoadData(string tablaAMostrar)
         {
@@ -119,15 +127,18 @@ namespace HCHLView.ViewModels.BBDD
             IsLvEndUserVisible = Visibility.Collapsed;
             IsLvCctoClienteVisible = Visibility.Collapsed;
             IsLvCctoBUVisible = Visibility.Collapsed;
+            IsCctoBUVisible = Visibility.Collapsed;
             IsLvBUsVisible = Visibility.Collapsed;
             IsLvVendorVisible = Visibility.Collapsed;
             IsLvPagosVisible = Visibility.Collapsed;
+
 
             switch (tablaAMostrar)
             {
                 case "Usuario":
                     IsLvUsuariosVisible = Visibility.Visible;
-                    var usuarios = await _repoUsuario.GetAllAsync();
+                    List<Usuario> usuarios = await _repoUsuario.GetAllAsync();
+
                     ListUsuarios.Clear();
                     ListUsuarios.AddRange(usuarios);
                     break;
@@ -157,9 +168,9 @@ namespace HCHLView.ViewModels.BBDD
                     break;
                 case "EndUser":
                     IsLvEndUserVisible = Visibility.Visible;
-                    var eus = await _repoEndUser.GetAllAsync();
+                    //var eus = await _repoEndUser.GetAllAsync();
                     ListEndUser.Clear();
-                    ListEndUser.AddRange(eus);
+                    ListEndUser.AddRange(new List<EndUser>() { new EndUser { Id = 1 } });
                     break;
                 case "Pago":
                     IsLvPagosVisible = Visibility.Visible;
@@ -183,6 +194,7 @@ namespace HCHLView.ViewModels.BBDD
             RaisePropertyChanged(nameof(IsLvPagosVisible));
             RaisePropertyChanged(nameof(IsLvEndUserVisible));
             RaisePropertyChanged(nameof(IsLvCctoClienteVisible));
+            RaisePropertyChanged(nameof(IsCctoBUVisible));
             RaisePropertyChanged(nameof(IsLvBUsVisible));
             RaisePropertyChanged(nameof(IsLvBaseInstaladaVisible));
             RaisePropertyChanged(nameof(IsLvCctoBUVisible));
@@ -212,16 +224,16 @@ namespace HCHLView.ViewModels.BBDD
 
                     break;
                 case "ContactoBU":
-                   
+
                     break;
                 case "EndUser":
-                  
+
                     break;
                 case "Pago":
 
                     break;
                 case "Vendor":
-      
+
                     break;
                 default:
 

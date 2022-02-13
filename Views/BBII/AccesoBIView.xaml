@@ -7,6 +7,8 @@
         xmlns:viewmodels="clr-namespace:HCHLView.ViewModels.BBII"  
              d:DataContext="{d:DesignInstance Type=viewmodels:AccesoBIViewModel}"
         mc:Ignorable="d"
+        xmlns:prism="http://prismlibrary.com/"  
+        prism:ViewModelLocator.AutoWireViewModel="True"
         Height="Auto" Width="Auto" Style="{DynamicResource MainViews}">
     
     <UserControl.Resources>

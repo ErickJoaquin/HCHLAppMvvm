@@ -3,11 +3,11 @@ using Model;
 using Model.ReadModel;
 using Prism.Mvvm;
 using Prism.Regions;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Data;
 using System.Linq;
-using System.Collections.Generic;
+using System.Windows.Data;
 
 namespace HCHLView.ViewModels.BBII
 {

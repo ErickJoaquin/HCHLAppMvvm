@@ -1,14 +1,14 @@
-﻿using System.Windows;
-using Prism.Ioc;
-using Prism.Unity;
-using HCHLView.Views;
-using Data;
-using Model;
+﻿using Data;
 using Data.Interfaces;
 using Data.Repositorios;
+using HCHLView.Views;
+using HCHLView.Views.Aplicacion;
 using HCHLView.Views.BBDD;
 using HCHLView.Views.BBII;
-using HCHLView.Views.Aplicacion;
+using Model;
+using Prism.Ioc;
+using Prism.Unity;
+using System.Windows;
 
 namespace HCHLView
 {
@@ -26,8 +26,15 @@ namespace HCHLView
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<AccesoBDView>();
-            containerRegistry.RegisterForNavigation<AccesoBIView>();
             containerRegistry.RegisterForNavigation<DMOfertasView>();
+            containerRegistry.RegisterForNavigation<AccesoBIView>(nameof(AccesoBIView));
+
+            containerRegistry.Register<RepositorioBase<Proceso>>();
+            containerRegistry.Register<IRepositorioBase<Proceso>>(provider =>
+            {
+                var procesoRepository = provider.Resolve<RepositorioBase<Proceso>>();
+                return new CacheRepositoryDecorator<Proceso>(procesoRepository);
+            });
 
             containerRegistry.Register<IRepositorioRevisiones, RepositorioRevisiones>();
             containerRegistry.Register<IRepositorioCarpetas, RepositorioCarpetas>();
