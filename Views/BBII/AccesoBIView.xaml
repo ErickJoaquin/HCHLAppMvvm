@@ -81,7 +81,7 @@
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type GroupItem}">
                                             <Expander IsExpanded="False"  ExpandDirection="Down" Padding="1, 1" FlowDirection="LeftToRight"
-                                                BorderThickness="1" BorderBrush="{DynamicResource PrimaryGreen}">
+                                                >
                                                 <Expander.Header>
                                                     <Grid>
                                                         <Grid.ColumnDefinitions>
@@ -103,10 +103,10 @@
                 </ListView.GroupStyle>
             </ListView>
             <ScrollViewer Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="Auto" MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}"  Width="Auto" MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}" Margin="10 5 5 5">
-                <StackPanel Visibility="{Binding InfoEquiposVisibility}">
+                <StackPanel Visibility="{Binding DetallesEquipoSeleccionado}">
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" Padding="2">
-                        <Expander Foreground="White" HorizontalAlignment="Left" Header="Detalles Equipo" ExpandDirection="Down" IsExpanded="True" IsEnabled="False">
-                            <StackPanel DataContext="{Binding EquipoSeleccionado.Equipo}">
+                        <Expander Foreground="White" HorizontalAlignment="Left" Header="Detalles Equipo" ExpandDirection="Down" IsExpanded="True">
+                            <StackPanel DataContext="{Binding EquipoSeleccionado}">
                                 <TextBlock Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" 
                                            Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">
                                     <TextBlock.Text>
@@ -137,26 +137,34 @@
                                     <TextBlock Grid.Row="3" Foreground="White" FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Familia:</TextBlock>
                                     <TextBlock Grid.Row="4" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Proceso:</TextBlock>
                                     <TextBlock Grid.Row="4" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">N° contrato:</TextBlock>
-                                    <TextBlock Text="{Binding IdEquiposCRM}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock Text="{Binding RefCliente}" Grid.Row="2" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock Text="{Binding Familia}" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} ({1} - {2})">
+                                                <Binding Path="CRM.IdEquiposCRM"/>
+                                                <Binding Path="CRM.TipoEquipo"/>
+                                                <Binding Path="CRM.Producto"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding Equipo.RefCliente}" Grid.Row="2" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding Equipo.Familia}" Grid.Row="3" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
                                     <TextBlock  Grid.Row="3" Grid.Column="4" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3">
                                         <TextBlock.Text>
                                             <MultiBinding StringFormat="{}{0} {1}">
-                                            <Binding Path="Modelo"/>
-                                            <Binding Path="DetallesModelo"/>
+                                            <Binding Path="Equipo.Modelo"/>
+                                            <Binding Path="Equipo.DetallesModelo"/>
                                         </MultiBinding>
                                         </TextBlock.Text>
                                     </TextBlock>
-                                    <TextBlock Text="{Binding IdProceso}" Grid.Row="4" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock Text="{Binding NContrato}" Grid.Row="4" Grid.Column="3" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding Proceso.Aplicacion}" Grid.Row="4" Grid.Column="1" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding Equipo.NContrato}" Grid.Row="4" Grid.Column="3" Foreground="White" VerticalAlignment="Center" TextWrapping="Wrap" Margin="3"/>
                                 </Grid>
                             </StackPanel>
                         </Expander>
                     </Border>
 
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3">
-                        <Expander Name="ExpCliente" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Left" Header="Detalles Cliente" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
+                        <Expander Name="ExpCliente" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Left" Header="Detalles Cliente" ExpandDirection="Down" IsExpanded="False">
                             <StackPanel DataContext="{Binding EquipoSeleccionado}">
                                 <TextBlock Text="{Binding EndUser}" Grid.ColumnSpan="4"  Foreground="White" FontWeight="Bold" FontSize="14" 
                                            TextDecorations="Underline" Height="25" Width="Auto" Margin="5 5 5 0" HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -183,8 +191,8 @@
                                     <TextBlock Grid.Row="5" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Dirección:</TextBlock>
                                     <TextBlock Grid.Row="6" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Página Web:</TextBlock>
                                     <TextBlock Grid.Row="6" Grid.Column="2" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">Teléfono:</TextBlock>
-                                    <TextBlock Text="{Binding TipoIdTributario}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="3"/>
-                                    <TextBlock Text="{Binding EndUser.IdSubIndustria}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding TipoIDTributario}" Grid.Row="4" Grid.Column="0" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="3"/>
+                                    <TextBlock Text="{Binding Mercado.Referencia}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding EndUser.DireccionCompleta}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding EndUser.Telefono}" Grid.Row="6" Grid.Column="3" Foreground="White" Margin="3" VerticalAlignment="Center" TextWrapping="Wrap"/>
                                     <TextBlock Text="{Binding EndUser.PaginaWeb}" Grid.Row="6" Grid.Column="1" Foreground="White" Margin="3" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left" />
@@ -195,7 +203,7 @@
                      </Expander>
                     </Border>
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Margin="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                        <Expander Name="ExpBU" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Left" Header="Detalles Proveedor" ExpandDirection="Down" IsExpanded="False" IsEnabled="False">
+                        <Expander Name="ExpBU" Background="{DynamicResource PrimaryGreen}" Foreground="White" HorizontalAlignment="Left" Header="Detalles Proveedor" ExpandDirection="Down" IsExpanded="False">
                             <StackPanel DataContext="{Binding EquipoSeleccionado}">
                                 <TextBlock Text="{Binding Proveedor}" Grid.ColumnSpan="4" Foreground="White" FontWeight="Bold" FontSize="14" TextDecorations="Underline" 
                                            Height="25" Width="Auto" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
@@ -353,7 +361,7 @@
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5 0 5 0" Grid.Column="0" Grid.ColumnSpan="2">
             <TextBlock Text="Cantidad de Equipos:" Foreground="White"/>
-            <TextBlock x:Name="TbkNEquipos" Margin="5 0 0 0" Foreground="White"/>
+            <TextBlock Text="{Binding TotalEquipos}" Margin="5 0 0 0" Foreground="White"/>
         </StackPanel>
     </Grid>
 </UserControl>
