@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{909F325D-3610-42A4-B368-BB35C04562BB}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>HCHLView</RootNamespace>
     <AssemblyName>HCHLView</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -33,6 +33,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -76,17 +79,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="Commands\BBDD\AccesoBDCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\MenuInicioCommand.cs" />
+    <Compile Include="HCHLViewModule.cs" />
     <Compile Include="ViewModels\Aplicacion\DMOfertasViewModel.cs" />
     <Compile Include="ViewModels\BBII\AccesoBIViewModel.cs" />
     <Compile Include="ViewModels\BBDD\AccesoBDViewModel.cs" />
-    <Compile Include="ViewModels\MenuInicioViewModel.cs" />
     <Compile Include="Views\Aplicacion\DMOfertasView.xaml.cs">
       <DependentUpon>DMOfertasView.xaml</DependentUpon>
     </Compile>
@@ -95,13 +94,6 @@
     </Compile>
     <Compile Include="Views\BBDD\AccesoBDView.xaml.cs">
       <DependentUpon>AccesoBDView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MenuInicioView.xaml.cs">
-      <DependentUpon>MenuInicioView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Aplicacion\DMOfertasView.xaml">
       <SubType>Designer</SubType>
@@ -112,10 +104,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BBDD\AccesoBDView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MenuInicioView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,9 +144,9 @@
       <Project>{abc579db-04f1-4bb2-9e13-584f5f75172c}</Project>
       <Name>Model</Name>
     </ProjectReference>
-    <ProjectReference Include="Servicio\Servicio.csproj">
+    <ProjectReference Include="Servicio\Sevice.csproj">
       <Project>{fa55d85e-5a78-4955-a9f6-01d5bc39ee42}</Project>
-      <Name>Servicio</Name>
+      <Name>Sevice</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
