@@ -1,15 +1,14 @@
 ﻿using System.Collections.ObjectModel;
-using Model.ReadModel;
-using Data.Repositorios;
 using System.Windows;
 using Prism.Mvvm;
 using System.Collections.Generic;
 using Prism.Regions;
-using Data.Interfaces;
 using System.Linq;
 using System;
 using Prism.Commands;
 using Servicios.Utilidades;
+using Model.ReadModel;
+using Data.Interfaces;
 
 namespace HCHLView.ViewModels.Aplicacion
 {

@@ -144,9 +144,9 @@
       <Project>{abc579db-04f1-4bb2-9e13-584f5f75172c}</Project>
       <Name>Model</Name>
     </ProjectReference>
-    <ProjectReference Include="Servicio\Sevice.csproj">
+    <ProjectReference Include="Servicio\Service.csproj">
       <Project>{fa55d85e-5a78-4955-a9f6-01d5bc39ee42}</Project>
-      <Name>Sevice</Name>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
